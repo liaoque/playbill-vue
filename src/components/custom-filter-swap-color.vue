@@ -1,7 +1,8 @@
 <template>
     <div>
-        <input type="color" id="colorSource" value="#00ff36">
-        <input type="color" id="colorDestination" value="#23278a">
+        <input type="color" id="colorSource" value="#00ff36">需要替换的颜色
+        <input type="color" id="colorDestination" value="#23278a">替换颜色
+        <p>建议使用#ffffff比较明显</p>
     </div>
 </template>
 
