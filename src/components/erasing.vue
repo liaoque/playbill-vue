@@ -36,7 +36,7 @@
 
 <script>
     export default {
-        name: "panel0",
+        name: "erasing",
         props: ['canvas'],
         methods: {
             changeAction(target) {
