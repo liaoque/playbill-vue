@@ -10,9 +10,11 @@
 
             fabric.Object.prototype.objectCaching = true;
             let canvas = this.canvas;
-            canvas.set('isDrawingMode', true);
-            canvas.set('freeDrawingBrush', new fabric.PencilBrush({ decimate: 8 }));
-            canvas.requestRenderAll();
+            // canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+            canvas.isDrawingMode = true;
+            // canvas.set('isDrawingMode', true);
+            // canvas.set('freeDrawingBrush', new fabric.PencilBrush({ decimate: 8 }));
+            // canvas.requestRenderAll();
 
             // var canvas = new fabric.Canvas('canvas', {
             //     isDrawingMode: true,
