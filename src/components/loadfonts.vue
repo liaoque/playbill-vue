@@ -38,7 +38,10 @@
 
             var canvas = this.canvas;
 // Define an array with all fonts
-            var fonts = ["Pacifico", "VT323", "Quicksand", "Inconsolata"];
+            var fonts = [
+                "observer-test1", "unknown", "observer-test3", "observer-test4","observer-test5",
+                "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular","Neue Frutiger 1450 W04"
+            ];
 
             var textbox = new fabric.Textbox('Lorum ipsum dolor sit amet', {
                 left: 50,
@@ -84,6 +87,69 @@
     }
 </script>
 
-<style scoped>
 
+<style scoped>
+    @font-face {
+        font-family: observer-test1;
+        src: url(@/assets/sourcesanspro-regular.woff) format('woff'),
+        url(@/assets/sourcesanspro-regular.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: unknown;
+        src: url(unknown.woff) format('woff'),
+        url(unknown.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: observer-test3;
+        src: url(@/assets/sourcesanspro-regular.woff) format('woff'),
+        url(@/assets/sourcesanspro-regular.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: observer-test4;
+        src: url(@/assets/subset.woff) format('woff'),
+        url(@/assets/subset.ttf) format('truetype');
+        unicode-range: u+0021;
+    }
+
+    @font-face {
+        font-family: observer-test5;
+        src: url(@/assets/subset.woff) format('woff'),
+        url(@/assets/subset.ttf) format('truetype');
+        unicode-range: u+4e2d,u+56fd;
+    }
+
+    @font-face {
+        font-family: observer-test6;
+        src: url(@/assets/subset.woff) format('woff'),
+        url(@/assets/subset.ttf) format('truetype');
+        unicode-range: u+10ffff;
+    }
+
+    @font-face {
+        font-family: observer-test7;
+        src: url(@/assets/subset.woff) format('woff'),
+        url(@/assets/subset.ttf) format('truetype');
+        unicode-range: u+23;
+    }
+
+    @font-face {
+        font-family: observer-test8;
+        src: url(@/assets/sourcesanspro-regular.woff) format('woff'),
+        url(@/assets/sourcesanspro-regular.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: Trebuchet W01 Regular;
+        src: url(@/assets/sourcesanspro-regular.woff) format('woff'),
+        url(@/assets/sourcesanspro-regular.ttf) format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Neue Frutiger 1450 W04';
+        src: url(@/assets/sourcesanspro-regular.woff) format('woff'),
+        url(@/assets/sourcesanspro-regular.ttf) format('truetype');
+    }
 </style>
