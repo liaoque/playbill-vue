@@ -21,11 +21,7 @@
                 <input id="b" type="checkbox" @change="setErasingRemovesErasedObjects(this)">
             </div>
         </div>
-        <div>
-            <button type="button" @click="toJSON()">toJSON</button>
-            <button type="button" @click="downloadImage()">to Image</button>
-            <button type="button" @click="downloadSVG()">toSVG</button>
-        </div>
+
         <div style="margin:0 1rem;">
             <code>erasing:end</code><br>
             <code id="output">N/A</code>
@@ -188,52 +184,7 @@
                 this.erasingRemovesErasedObjects = input.checked
             },
 
-            downloadImage() {
-                const ext = "png";
-                let canvas = this.canvas;
-                const base64 = canvas.toDataURL({
-                    format: ext,
-                    enableRetinaScaling: true
-                });
-                const link = document.createElement("a");
-                link.href = base64;
-                link.download = `eraser_example.${ext}`;
-                link.click();
-            },
 
-            downloadSVG() {
-                let canvas = this.canvas;
-                const svg = canvas.toSVG();
-                const a = document.createElement("a");
-                const blob = new Blob([svg], {type: "image/svg+xml"});
-                const blobURL = URL.createObjectURL(blob);
-                a.href = blobURL;
-                a.download = "eraser_example.svg";
-                a.click();
-                URL.revokeObjectURL(blobURL);
-            },
-
-            toJSON() {
-                let canvas = this.canvas;
-                const json = canvas.toDatalessJSON(["clipPath", "eraser"]);
-                const out = JSON.stringify(json, null, "\t");
-                const blob = new Blob([out], {type: "text/plain"});
-                const clipboardItemData = {[blob.type]: blob};
-                try {
-                    navigator.clipboard &&
-                    (navigator.clipboard.write([
-                        new ClipboardItem(clipboardItemData)
-                    ]));
-                } catch (error) {
-                    console.log(error);
-                }
-                const blobURL = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = blobURL;
-                a.download = "eraser_example.json";
-                a.click();
-                URL.revokeObjectURL(blobURL);
-            }
         },
         data: () => {
             return {

@@ -18,12 +18,17 @@
                 new fabric.Image.fromURL(e.path[0].currentSrc, function (image) {
                     // image.
                     image.set({
-                        width: 200,
-                        height: 100,
-                        // objectCaching: false,
+                        // width: 200,
+                        // height: 100,
+                        // radius: 200,
+                        //
+                        scaleX:0.5,
+                        scaleY:0.5,
+                        objectCaching: false,
                         stroke: 'lightgreen',
                         strokeWidth: 4,
                     })
+                    // image.scaleToWidth(200);
                     canvas.add(image);
 
                 })
