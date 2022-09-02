@@ -36,14 +36,14 @@
 
             */
 
-            var canvas = this.canvas;
+            let canvas = this.canvas;
 // Define an array with all fonts
-            var fonts = [
+            let fonts = [
                 "observer-test1", "unknown", "observer-test3", "observer-test4","observer-test5",
                 "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular","Neue Frutiger 1450 W04"
             ];
 
-            var textbox = new fabric.Textbox('Lorum ipsum dolor sit amet', {
+            let textbox = new fabric.Textbox('Lorum ipsum dolor sit amet', {
                 left: 50,
                 top: 50,
                 width: 150,
@@ -52,9 +52,9 @@
             canvas.add(textbox).setActiveObject(textbox);
             fonts.unshift('Times New Roman');
 // Populate the fontFamily select
-            var select = document.getElementById("font-family");
+            let select = document.getElementById("font-family");
             fonts.forEach(function (font) {
-                var option = document.createElement('option');
+                let option = document.createElement('option');
                 option.innerHTML = font;
                 option.value = font;
                 select.appendChild(option);
@@ -71,7 +71,7 @@
             };
 
             function loadAndUse(font) {
-                var myfont = new FontFaceObserver(font)
+                let myfont = new FontFaceObserver(font)
                 myfont.load().then(function () {
                     // when font is loaded, use it.
                     canvas.getActiveObject().set("fontFamily", font);

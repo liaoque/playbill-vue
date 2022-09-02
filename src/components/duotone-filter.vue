@@ -10,23 +10,23 @@
         name: "duotone-filter",
         props:['canvas'],
         mounted(){
-            var colorHandlerLight = function(evt) {
+            let colorHandlerLight = function(evt) {
                 duotoneFilter.subFilters[1].color = evt.target.value;
                 globalImage.applyFilters();
                 canvas.requestRenderAll();
             };
             document.getElementById('colorLight').addEventListener('change', colorHandlerLight);
-            var colorHandlerDark = function(evt) {
+            let colorHandlerDark = function(evt) {
                 duotoneFilter.subFilters[2].color = evt.target.value;
                 globalImage.applyFilters();
                 canvas.requestRenderAll();
             };
             document.getElementById('colorDark').addEventListener('change', colorHandlerDark);
-            var globalImage;
+            let globalImage;
 
 
-            var canvas = this.canvas;
-            var duotoneFilter = new fabric.Image.filters.Composed({
+            let canvas = this.canvas;
+            let duotoneFilter = new fabric.Image.filters.Composed({
                 subFilters: [
                     new fabric.Image.filters.Grayscale({ mode: 'luminosity' }), // make it black and white
                     new fabric.Image.filters.BlendColor({ color: '#00ff36' }), // apply light color

@@ -14,8 +14,8 @@
 
             fabric.Object.prototype.objectCaching = false;
 
-            var design = this.canvas;
-            var minimap = new fabric.Canvas('minimap',  { containerClass: 'minimap', selection: false });
+            let design = this.canvas;
+            let minimap = new fabric.Canvas('minimap',  { containerClass: 'minimap', selection: false });
 
             design.loadFromJSON({
                 "version":"3.6.3","objects":[
@@ -70,41 +70,41 @@
             });
 
             function createCanvasEl() {
-                var designSize = { width: 800, height: 600 };
-                var originalVPT = design.viewportTransform;
+                let designSize = { width: 800, height: 600 };
+                let originalVPT = design.viewportTransform;
                 // zoom to fit the design in the display canvas
-                var designRatio = fabric.util.findScaleToFit(designSize, design);
+                let designRatio = fabric.util.findScaleToFit(designSize, design);
 
                 // zoom to fit the display the design in the minimap.
-                var minimapRatio = fabric.util.findScaleToFit(design, minimap);
+                let minimapRatio = fabric.util.findScaleToFit(design, minimap);
 
-                var scaling = minimap.getRetinaScaling();
+                let scaling = minimap.getRetinaScaling();
 
-                var finalWidth =  designSize.width * designRatio;
-                var finalHeight =  designSize.height * designRatio;
+                let finalWidth =  designSize.width * designRatio;
+                let finalHeight =  designSize.height * designRatio;
 
                 design.viewportTransform = [
                     designRatio, 0, 0, designRatio,
                     (design.getWidth() - finalWidth) / 2,
                     (design.getHeight() - finalHeight) / 2
                 ];
-                var canvas = design.toCanvasElement(minimapRatio * scaling);
+                let canvas = design.toCanvasElement(minimapRatio * scaling);
                 design.viewportTransform = originalVPT;
                 return canvas;
             }
 
             function updateMiniMap() {
-                var canvas = createCanvasEl();
+                let canvas = createCanvasEl();
                 minimap.backgroundImage._element = canvas;
                 minimap.requestRenderAll();
             }
 
             function updateMiniMapVP() {
-                var designSize = { width: 800, height: 600 };
-                var rect = minimap.getObjects()[0];
-                var designRatio = fabric.util.findScaleToFit(designSize, design);
-                var totalRatio = fabric.util.findScaleToFit(designSize, minimap);
-                var finalRatio = designRatio / design.getZoom();
+                let designSize = { width: 800, height: 600 };
+                let rect = minimap.getObjects()[0];
+                let designRatio = fabric.util.findScaleToFit(designSize, design);
+                let totalRatio = fabric.util.findScaleToFit(designSize, minimap);
+                let finalRatio = designRatio / design.getZoom();
                 rect.scaleX = finalRatio;
                 rect.scaleY = finalRatio;
                 rect.top = minimap.backgroundImage.top - design.viewportTransform[5] * totalRatio / design.getZoom();
@@ -113,15 +113,15 @@
             }
 
             function initMinimap() {
-                var canvas = createCanvasEl();
-                var backgroundImage = new fabric.Image(canvas);
+                let canvas = createCanvasEl();
+                let backgroundImage = new fabric.Image(canvas);
                 backgroundImage.scaleX = 1 / design.getRetinaScaling();
                 backgroundImage.scaleY = 1 / design.getRetinaScaling();
                 minimap.centerObject(backgroundImage);
                 minimap.backgroundColor = 'white';
                 minimap.backgroundImage = backgroundImage;
                 minimap.requestRenderAll();
-                var minimapView = new fabric.Rect({
+                let minimapView = new fabric.Rect({
                     top: backgroundImage.top,
                     left: backgroundImage.left,
                     width: backgroundImage.width / design.getRetinaScaling(),
@@ -138,7 +138,7 @@
                 minimap.add(minimapView);
             }
 
-            // var debouncedMiniMap = _.debounce(updateMiniMap, 250);
+            // let debouncedMiniMap = _.debounce(updateMiniMap, 250);
 
             design.on('object:modified', function() {
                 updateMiniMap();
@@ -146,8 +146,8 @@
 
 // hook up the pan and zoom
             design.on('mouse:wheel', function(opt) {
-                var delta = opt.e.deltaY;
-                var zoom = design.getZoom();
+                let delta = opt.e.deltaY;
+                let zoom = design.getZoom();
                 zoom *= 0.999 ** delta;
                 if (zoom > 20) zoom = 20;
                 if (zoom < 0.01) zoom = 0.01;
@@ -158,7 +158,7 @@
             });
             // 鼠标 + alt键按下，
             design.on('mouse:down', function(opt) {
-                var evt = opt.e;
+                let evt = opt.e;
                 if (evt.altKey === true) {
                     this.isDragging = true;
                     this.selection = false;
@@ -169,8 +169,8 @@
             // 拖动鼠标
             design.on('mouse:move', function(opt) {
                 if (this.isDragging) {
-                    var e = opt.e;
-                    var vpt = this.viewportTransform;
+                    let e = opt.e;
+                    let vpt = this.viewportTransform;
                     vpt[4] += e.clientX - this.lastPosX;
                     vpt[5] += e.clientY - this.lastPosY;
                     this.requestRenderAll();

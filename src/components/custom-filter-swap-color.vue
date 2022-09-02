@@ -29,7 +29,7 @@
                  * @extends fabric.Image.filters.BaseFilter
                  * @see {@link fabric.Image.filters.SwapColor#initialize} for constructor definition
                  * @example
-                 * var filter = new fabric.Image.filters.SwapColor({
+                 * let filter = new fabric.Image.filters.SwapColor({
                  *   colorSource: 'orange',
                  *   colorDestination: 'rgb(232, 12, 11)',
                  * });
@@ -81,7 +81,7 @@
                      * @param {ImageData} options.imageData The Uint8ClampedArray to be filtered.
                      */
                     applyTo2d: function(options) {
-                        var imageData = options.imageData,
+                        let imageData = options.imageData,
                             data = imageData.data, i, len = data.length,
                             source = new fabric.Color(this.colorSource).getSource(),
                             destination = new fabric.Color(this.colorDestination).getSource();
@@ -114,7 +114,7 @@
                      * @param {Object} uniformLocations A map of string uniform names to WebGLUniformLocation objects
                      */
                     sendUniformData: function(gl, uniformLocations) {
-                        var source = new fabric.Color(this.colorSource).getSource(),
+                        let source = new fabric.Color(this.colorSource).getSource(),
                             destination = new fabric.Color(this.colorDestination).getSource();
                         source[0] /= 255;
                         source[1] /= 255;
@@ -154,14 +154,14 @@
             })(fabric);
 
 
-            var colorSourceHandler = function(evt) {
+            let colorSourceHandler = function(evt) {
                 swapColorFilter.colorSource = evt.target.value;
                 globalImage.applyFilters();
                 canvas.requestRenderAll();
             };
             document.getElementById('colorSource').addEventListener('change', colorSourceHandler);
 
-            var colorDestinationDark = function(evt) {
+            let colorDestinationDark = function(evt) {
                 swapColorFilter.colorDestination = evt.target.value;
                 console.log(swapColorFilter.colorDestination);
                 globalImage.applyFilters();

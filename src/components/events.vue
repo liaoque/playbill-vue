@@ -66,14 +66,14 @@
         mounted() {
             this.__canvases = [];
             fabric.Object.prototype.transparentCorners = false;
-            var canvas2 = this.canvas
+            let canvas2 = this.canvas
             canvas2.add(new fabric.Rect({width: 50, height: 50, fill: 'red', top: 100, left: 100}));
             canvas2.add(new fabric.Rect({width: 30, height: 30, fill: 'green', top: 50, left: 50}));
             canvas2.add(new fabric.Circle({radius: 20, fill: 'blue', top: 160, left: 140}));
             canvas2.add(new fabric.Textbox('Textbox', {fill: 'black', top: 70, left: 200}));
 
-            var log2 = document.getElementById('log1');
-            var clearButton = document.getElementById('clear_log');
+            let log2 = document.getElementById('log1');
+            let clearButton = document.getElementById('clear_log');
             clearButton.onclick = function () {
                 log2.innerHTML = '&nbsp;';
             }
@@ -86,17 +86,17 @@
                     return;
                 }
                 getCheckboxLabel(message, !!color)?.classList.add('bold');
-                var el = document.createElement('div');
+                let el = document.createElement('div');
                 el.classList.add('log-entry');
                 el.setAttribute('event', message);
                 el.setAttribute('object', !!color);
                 if (color) {
                     el.style.color = color;
                 }
-                var code = document.createElement('code');
+                let code = document.createElement('code');
                 code.innerText = JSON.stringify(opt, null, '\t');
                 code.setAttribute('hidden', true);
-                var button = document.createElement('button');
+                let button = document.createElement('button');
                 button.innerHTML = '+';
                 button.onclick = function (ev) {
                     if (code.hasAttribute('hidden')) {
@@ -107,15 +107,15 @@
                         button.innerHTML = '+';
                     }
                 }
-                var m = document.createElement('strong');
+                let m = document.createElement('strong');
                 m.innerHTML = message;
-                var t = document.createElement('small');
+                let t = document.createElement('small');
                 t.innerHTML = '\n' + new Date().toISOString();
                 el.append(button, m, document.createElement('br'), code, t);
                 log2.insertBefore(el, log2.firstChild);
-                var children = log2.children;
+                let children = log2.children;
                 while (children[100]) {
-                    var child = children[100];
+                    let child = children[100];
                     log2.removeChild(child);
                 }
             }
@@ -137,7 +137,7 @@
             }
 
             function toggleCheckbox(eventName, obj, value) {
-                var checkbox = getCheckbox(eventName, obj);
+                let checkbox = getCheckbox(eventName, obj);
                 if (checkbox) {
                     checkbox.checked = value;
                     checkbox.classList.remove('bold');
@@ -147,7 +147,7 @@
             }
 
             function toggleMovementEvents() {
-                var events = [
+                let events = [
                     'mouse:move',
                     'mousemove',
                     'mouse:move:before',
@@ -185,8 +185,8 @@
             let id = 0;
 
             function createEventDescriptor(eventName, obj) {
-                var para = document.createElement('div');
-                var checkbox = document.createElement('input');
+                let para = document.createElement('div');
+                let checkbox = document.createElement('input');
                 checkbox.id = 'checkbox_' + (++id);
                 checkbox.type = 'checkbox';
                 checkbox.checked = true;
@@ -196,7 +196,7 @@
                 };
                 para.setAttribute('event', eventName);
                 para.setAttribute('object', !!obj);
-                var label = document.createElement('label');
+                let label = document.createElement('label');
                 label.appendChild(document.createTextNode(eventName));
                 label.htmlFor = checkbox.id;
                 para.append(checkbox, label);
@@ -204,17 +204,17 @@
             }
 
             function logObservingEvent(eventName) {
-                var el = document.getElementById('observing-events-log');
+                let el = document.getElementById('observing-events-log');
                 el.appendChild(createEventDescriptor(eventName));
             }
 
             function logNonObservingEvent(eventName) {
-                var el = document.getElementById('non-observing-events-log');
+                let el = document.getElementById('non-observing-events-log');
                 el.appendChild(createEventDescriptor(eventName));
             }
 
             function logObservingEventObj(eventName) {
-                var el = document.getElementById('observing-events-log-obj');
+                let el = document.getElementById('observing-events-log-obj');
                 el.appendChild(createEventDescriptor(eventName, true));
             }
 

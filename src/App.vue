@@ -5,7 +5,7 @@
                 <button v-for="item in [
                     'panel0','erasing','custom-filter-swap-color','duotone-filter','text-on-paths',
                     'build-minimap','custom-controls-polygon','stroke-uniform','super-sub-script','events'
-                    ,'lanczos-webgl'  ,'loadfonts'
+                    ,'lanczos-webgl'  ,'loadfonts'  ,'copypaste', 'manage-selection', 'touch-events'
                     ]" @click="panel_name=item">{{ item }}</button>
 
                 <div>
@@ -15,15 +15,15 @@
                 </div>
             </el-header>
             <el-container>
-                <el-aside width="200px">
+                <el-aside width="100px">
                     left
                 </el-aside>
                 <el-main style="display: flex">
 
-                    <canvas id="canvas" width="500" height="650"></canvas>
+                    <canvas id="canvas" width="500" height="650" ></canvas>
 
                     <!-- 添加 -->
-                    <panel0 :canvas="canvas" v-if="panel_name == 'panel0'" />
+                    <panel0 :canvas="canvas" v-if="panel_name == 'panel0'"  />
 
                     <!-- 橡皮擦 -->
                     <erasing :canvas="canvas" v-if="panel_name == 'erasing'" />
@@ -57,11 +57,26 @@
 
 <!--                    字体-->
                     <loadfonts :canvas="canvas" v-if="panel_name == 'loadfonts'" />
+
+                    <!--                    复制，黏贴-->
+                    <copypaste :canvas="canvas" v-if="panel_name == 'copypaste'" />
+
+                    <!--           选择管理         -->
+                    <manage-selection :canvas="canvas" v-if="panel_name == 'manage-selection'" />
+
+                    <!--           触摸事件 ：目前vue        -->
+                    <touch-events :canvas="canvas" v-if="panel_name == 'touch-events'" />
                 </el-main>
             </el-container>
         </el-container>
     </div>
 </template>
+
+<style>
+    .el-header{
+        --el-header-height:100%
+    }
+</style>
 
 
 <script>
@@ -79,6 +94,9 @@
     import events from "./components/events.vue";
     import lanczosWebgl from "./components/lanczos-webgl.vue";
     import loadfonts from "./components/loadfonts.vue";
+    import copypaste from "./components/copypaste.vue";
+    import manageSelection from "./components/manage-selection.vue";
+    import touchEvents from "./components/touch-events.vue";
 
     export default {
         components: {
@@ -94,6 +112,9 @@
             events,
             lanczosWebgl,
             loadfonts,
+            copypaste,
+            manageSelection,
+            touchEvents,
         },
         data: () => {
             return {

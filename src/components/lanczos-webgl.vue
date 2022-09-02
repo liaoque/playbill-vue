@@ -18,28 +18,28 @@
         name: "lanczos-webgl",
         props: ['canvas'],
         mounted() {
-            var canvas1 = document.getElementById('c');
-            var canvas2 = document.getElementById('b');
-            var ctx = canvas1.getContext('2d');
-            var ctx2 = canvas2.getContext('2d');
+            let canvas1 = document.getElementById('c');
+            let canvas2 = document.getElementById('b');
+            let ctx = canvas1.getContext('2d');
+            let ctx2 = canvas2.getContext('2d');
             ctx.imageSmoothingEnabled = false;
             ctx2.imageSmoothingEnabled = false;
 
-            var canvas = this.canvas;
+            let canvas = this.canvas;
             canvas.set('imageSmoothingEnabled', false)
             canvas.set('enableRetinaScaling', false)
             canvas.set('fireRightClick', true)
             canvas.set('stopContextMenu', true)
 
-            var lanczosFilter = new fabric.Image.filters.Resize({
+            let lanczosFilter = new fabric.Image.filters.Resize({
                 scaleX: 1,
                 scaleY: 1,
                 resizeType: 'lanczos',
                 lanczosLobes: 3,
             });
 
-            var oImg;
-            var p = {
+            let oImg;
+            let p = {
                 x: 0,
                 y: 0,
             };
@@ -50,7 +50,7 @@
             });
 
             fabric.Image.fromURL('/public/dragon.jpg', function(img) {
-                var r = canvas.getRetinaScaling();
+                let r = canvas.getRetinaScaling();
                 oImg = img.set({ left: 400, top: 250}).scale(0.2);
                 lanczosFilter.scaleX = lanczosFilter.scaleY = oImg.scaleX * r;
                 oImg.lockScalingFlip = true;
@@ -59,8 +59,8 @@
                 oImg.filters = [lanczosFilter];
                 oImg.hoverCursor = 'crossHair';
                 oImg.on('scaling', function(opt) {
-                    var filters = [];
-                    var sX = Math.abs(this.scaleX) * r, sY = Math.abs(this.scaleY) * r;
+                    let filters = [];
+                    let sX = Math.abs(this.scaleX) * r, sY = Math.abs(this.scaleY) * r;
                     if (sX > 0.01 && sY > 0.01 && sX < 1 && sY < 1) {
                         if (sX <= 0.2 || sY <= 0.2) {
                             lanczosFilter.lanczosLobes = 2;
@@ -99,7 +99,7 @@
 
 
             function updateFor(valueX, valueY) {
-                var w = oImg._element.width, h = oImg._element.height,
+                let w = oImg._element.width, h = oImg._element.height,
                     sx = p.x * valueX, sy = p.y * valueY, fW = Math.floor(550 * valueX),
                     fH = Math.floor(400 * valueY);
                 if (sx + fW > w) {

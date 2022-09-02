@@ -13,8 +13,8 @@
         props: ['canvas'],
         methods:{
             remove() {
-                var canvas = this.canvas
-                var active = canvas.getActiveObject();
+                let canvas = this.canvas
+                let active = canvas.getActiveObject();
                 if (!active) return;
                 active.setSelectionStyles({
                     fontSize: undefined,
@@ -23,15 +23,15 @@
                 canvas.requestRenderAll();
             },
             superScript() {
-                var canvas = this.canvas
-                var active = canvas.getActiveObject();
+                let canvas = this.canvas
+                let active = canvas.getActiveObject();
                 if (!active) return;
                 active.setSuperscript();
                 canvas.requestRenderAll();
             },
             subScript() {
-                var canvas = this.canvas
-                var active = canvas.getActiveObject();
+                let canvas = this.canvas
+                let active = canvas.getActiveObject();
                 if (!active) return;
                 active.setSubscript();
                 canvas.requestRenderAll();
@@ -40,9 +40,9 @@
         },
         mounted() {
 
-            var canvas = this.canvas
+            let canvas = this.canvas
 // create a rectangle object
-            var itext = new fabric.IText('This is a IText object', {
+            let itext = new fabric.IText('This is a IText object', {
                 left: 100,
                 top: 150,
                 fill: '#D81B60',
@@ -50,7 +50,7 @@
                 stroke: "#880E4F",
             });
 
-            var textbox = new fabric.Textbox('This is a Textbox object', {
+            let textbox = new fabric.Textbox('This is a Textbox object', {
                 left: 20,
                 top: 50,
                 fill: '#880E4F',

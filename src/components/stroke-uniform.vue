@@ -8,8 +8,8 @@
         props:['canvas'],
         methods:{
             toggleUniform() {
-                var canvas = this.canvas
-                var aObject = canvas.getActiveObject();
+                let canvas = this.canvas
+                let aObject = canvas.getActiveObject();
                 if (aObject.type === 'activeSelection') {
                     aObject.getObjects().forEach(function(obj) {
                         obj.set('strokeUniform', !obj.strokeUniform);
@@ -25,9 +25,9 @@
             fabric.Object.prototype.noScaleCache = false;
 
 
-            var canvas = this.canvas
+            let canvas = this.canvas
 // create a rectangle object
-            var rect = new fabric.Rect({
+            let rect = new fabric.Rect({
                 left: 100,
                 top: 50,
                 fill: '#D81B60',
@@ -45,7 +45,7 @@
 
             canvas.add(rect);
 
-            var circle1 = new fabric.Circle({
+            let circle1 = new fabric.Circle({
                 radius: 65,
                 fill: '#039BE5',
                 left: 0,
@@ -53,7 +53,7 @@
                 strokeWidth: 6
             });
 
-            var circle2 = new fabric.Circle({
+            let circle2 = new fabric.Circle({
                 radius: 65,
                 fill: '#4FC3F7',
                 left: 110,

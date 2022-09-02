@@ -142,7 +142,7 @@
                         img.set({erasable: false});
                         canvas.on("erasing:end", ({targets, drawables}) => {
                             console.log(targets, drawables)
-                            var output = document.getElementById("output");
+                            let output = document.getElementById("output");
                             output.innerHTML = JSON.stringify({
                                 objects: targets.map((t) => t.type),
                                 drawables: Object.keys(drawables)
