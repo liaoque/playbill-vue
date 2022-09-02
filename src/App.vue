@@ -6,7 +6,7 @@
                     'panel0','erasing','custom-filter-swap-color','duotone-filter','text-on-paths',
                     'build-minimap','custom-controls-polygon','stroke-uniform','super-sub-script','events'
                     ,'lanczos-webgl','loadfonts','copypaste', 'manage-selection', 'touch-events'
-                    ,'video-element'
+                    ,'video-element', 'matrix-transformation'
                     ]" @click="panel_name=item">{{ item }}</button>
 
                 <div>
@@ -21,7 +21,7 @@
                 </el-aside>
                 <el-main style="display: flex">
 
-                    <canvas id="canvas" width="1200" height="700"  ></canvas>
+                    <canvas id="canvas" width="500" height="700"  ></canvas>
 
                     <!-- 添加 -->
                     <panel0 :canvas="canvas" v-if="panel_name == 'panel0'"  />
@@ -71,6 +71,9 @@
                     <!--           读取视频到canvas        -->
                     <video-element :canvas="canvas" v-if="panel_name == 'video-element'" />
 
+<!--                    缩放，转换偏移-->
+                    <matrix-transformation :canvas="canvas" v-if="panel_name == 'matrix-transformation'" />
+
                 </el-main>
             </el-container>
         </el-container>
@@ -103,6 +106,7 @@
     import manageSelection from "./components/manage-selection.vue";
     import touchEvents from "./components/touch-events.vue";
     import videoElement from "./components/video-element.vue";
+    import matrixTransformation from "./components/matrix-transformation.vue";
 
     export default {
         components: {
@@ -122,6 +126,7 @@
             manageSelection,
             touchEvents,
             videoElement,
+            matrixTransformation,
         },
         data: () => {
             return {

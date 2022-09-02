@@ -15,14 +15,12 @@
     export default {
         name: "video-element",
         props: ['canvas'],
-        data(){
+        data() {
             return {
-                info:[]
+                info: []
             }
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             let canvas = this.canvas;
 
@@ -56,7 +54,7 @@
             }
 
             if (navigator.mediaDevices.getUserMedia === undefined) {
-                navigator.mediaDevices.getUserMedia = function(constraints) {
+                navigator.mediaDevices.getUserMedia = function (constraints) {
 
                     // First get ahold of the legacy getUserMedia, if present
                     let getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -68,7 +66,7 @@
                     }
 
                     // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-                    return new Promise(function(resolve, reject) {
+                    return new Promise(function (resolve, reject) {
                         getUserMedia.call(navigator, constraints, resolve, reject);
                     });
                 }
