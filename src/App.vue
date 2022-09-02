@@ -5,7 +5,8 @@
                 <button v-for="item in [
                     'panel0','erasing','custom-filter-swap-color','duotone-filter','text-on-paths',
                     'build-minimap','custom-controls-polygon','stroke-uniform','super-sub-script','events'
-                    ,'lanczos-webgl'  ,'loadfonts'  ,'copypaste', 'manage-selection', 'touch-events'
+                    ,'lanczos-webgl','loadfonts','copypaste', 'manage-selection', 'touch-events'
+                    ,'video-element'
                     ]" @click="panel_name=item">{{ item }}</button>
 
                 <div>
@@ -20,7 +21,7 @@
                 </el-aside>
                 <el-main style="display: flex">
 
-                    <canvas id="canvas" width="500" height="650" ></canvas>
+                    <canvas id="canvas" width="1200" height="700"  ></canvas>
 
                     <!-- 添加 -->
                     <panel0 :canvas="canvas" v-if="panel_name == 'panel0'"  />
@@ -66,6 +67,10 @@
 
                     <!--           触摸事件 ：目前vue        -->
                     <touch-events :canvas="canvas" v-if="panel_name == 'touch-events'" />
+
+                    <!--           读取视频到canvas        -->
+                    <video-element :canvas="canvas" v-if="panel_name == 'video-element'" />
+
                 </el-main>
             </el-container>
         </el-container>
@@ -97,6 +102,7 @@
     import copypaste from "./components/copypaste.vue";
     import manageSelection from "./components/manage-selection.vue";
     import touchEvents from "./components/touch-events.vue";
+    import videoElement from "./components/video-element.vue";
 
     export default {
         components: {
@@ -115,6 +121,7 @@
             copypaste,
             manageSelection,
             touchEvents,
+            videoElement,
         },
         data: () => {
             return {
