@@ -6,7 +6,8 @@
                     'panel0','erasing','custom-filter-swap-color','duotone-filter','text-on-paths',
                     'build-minimap','custom-controls-polygon','stroke-uniform','super-sub-script','events'
                     ,'lanczos-webgl','loadfonts','copypaste', 'manage-selection', 'touch-events'
-                    ,'video-element', 'matrix-transformation'
+                    ,'video-element', 'matrix-transformation','svg-caching', 'animated-sprite'
+                    ,'controls-customization'
                     ]" @click="panel_name=item">{{ item }}</button>
 
                 <div>
@@ -71,9 +72,17 @@
                     <!--           读取视频到canvas        -->
                     <video-element :canvas="canvas" v-if="panel_name == 'video-element'" />
 
-<!--                    缩放，转换偏移-->
+<!--                    矩形缩放，转换偏移-->
                     <matrix-transformation :canvas="canvas" v-if="panel_name == 'matrix-transformation'" />
 
+<!--                    缓存svg-->
+                    <svg-caching :canvas="canvas" v-if="panel_name == 'svg-caching'" />
+
+                    <!--                    精灵动画-->
+                    <animated-sprite :canvas="canvas" v-if="panel_name == 'animated-sprite'" />
+
+<!--                    控制区的边框，显示，禁用-->
+                    <controls-customization :canvas="canvas" v-if="panel_name == 'controls-customization'" />
                 </el-main>
             </el-container>
         </el-container>
@@ -107,6 +116,9 @@
     import touchEvents from "./components/touch-events.vue";
     import videoElement from "./components/video-element.vue";
     import matrixTransformation from "./components/matrix-transformation.vue";
+    import svgCaching from "./components/svg-caching.vue";
+    import animatedSprite from "./components/animated-sprite.vue";
+    import controlsCustomization from "./components/controls-customization.vue";
 
     export default {
         components: {
@@ -127,6 +139,9 @@
             touchEvents,
             videoElement,
             matrixTransformation,
+            svgCaching,
+            animatedSprite,
+            controlsCustomization,
         },
         data: () => {
             return {
