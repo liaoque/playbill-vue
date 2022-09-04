@@ -11,7 +11,8 @@
 					,'shadows', 'solar-system', 'polygon-animation', 'patterns', 'bounding-rectangle'
 					, 'particles', 'per-pixel-drag-drop', 'many-objects', 'animation-easing'
 					,'interaction-with-objects-outside-canvas', 'quadratic-curve', 'static_canvas'
-					,'image-filters', 'controls'
+					,'image-filters', 'controls', 'stickman','polaroid','opacity_mouse_move'
+					,'ladybug', 'kitchensink', 'hovering', 'customization', 'cross'
                     ]" @click="setPanelName(item)">{{ item }}</button>
 
 				<div>
@@ -140,12 +141,25 @@
 					<!-- 二次曲线 -->
 					<quadratic-curve :canvas="canvas" v-if="panel_name == 'quadratic-curve'"></quadratic-curve>
 
-					
+
 					<static_canvas :canvas="canvas" v-if="panel_name == 'static_canvas'"></static_canvas>
 					<image-filters :canvas="canvas" v-if="panel_name == 'image-filters'"></image-filters>
 
-					
+
 					<controls :canvas="canvas" v-if="panel_name == 'controls'"></controls>
+					<stickman :canvas="canvas" v-if="panel_name == 'stickman'"></stickman>
+
+
+					<polaroid :canvas="canvas" v-if="panel_name == 'polaroid'"></polaroid>
+					<opacity_mouse_move :canvas="canvas" v-if="panel_name == 'opacity_mouse_move'"></opacity_mouse_move>
+					<ladybug :canvas="canvas" v-if="panel_name == 'ladybug'"></ladybug>
+					<kitchensink :canvas="canvas" v-if="panel_name == 'kitchensink'"></kitchensink>
+					<hovering :canvas="canvas" v-if="panel_name == 'hovering'"></hovering>
+					<customization :canvas="canvas" v-if="panel_name == 'customization'"></customization>
+					<cross :canvas="canvas" v-if="panel_name == 'cross'"></cross>
+
+
+
 				</el-main>
 			</el-container>
 		</el-container>
@@ -171,6 +185,7 @@
 	import {
 		markRaw
 	} from 'vue'
+
 
 	import panel0 from "./components/panel0.vue";
 	import erasing from "./components/erasing.vue";
@@ -210,6 +225,16 @@
 	import static_canvas from "./components/static_canvas.vue";
 	import imageFilters from "./components/image-filters.vue";
 	import controls from "./components/controls.vue";
+	import stickman from "./components/stickman.vue";
+
+
+	import polaroid from "./components/polaroid.vue";
+	import opacity_mouse_move from "./components/opacity_mouse_move.vue";
+	import ladybug from "./components/ladybug.vue";
+	import kitchensink from "./components/kitchensink.vue";
+	import hovering from "./components/hovering.vue";
+	import customization from "./components/customization.vue";
+	import cross from "./components/cross.vue";
 
 
 	export default {
@@ -252,6 +277,14 @@
 			static_canvas,
 			imageFilters,
 			controls,
+			stickman,
+			polaroid,
+			opacity_mouse_move,
+			ladybug,
+			kitchensink,
+			hovering,
+			customization,
+			cross,
 		},
 		data: () => {
 			return {
