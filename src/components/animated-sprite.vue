@@ -3,129 +3,127 @@
 </template>
 
 <script>
+	export default {
+		name: "animated-sprite",
+		props: ['canvas'],
+		created() {
 
+			fabric.Sprite = fabric.util.createClass(fabric.Image, {
 
-    export default {
-        name: "animated-sprite",
-        props:['canvas'],
-        created(){
+				type: 'sprite',
 
-            fabric.Sprite = fabric.util.createClass(fabric.Image, {
+				spriteWidth: 50,
+				spriteHeight: 72,
+				spriteIndex: 0,
+				frameTime: 100,
 
-                type: 'sprite',
+				initialize: function(element, options) {
+					options || (options = {});
 
-                spriteWidth: 50,
-                spriteHeight: 72,
-                spriteIndex: 0,
-                frameTime: 100,
+					options.width = this.spriteWidth;
+					options.height = this.spriteHeight;
 
-                initialize: function(element, options) {
-                    options || (options = { });
+					this.callSuper('initialize', element, options);
 
-                    options.width = this.spriteWidth;
-                    options.height = this.spriteHeight;
+					this.createTmpCanvas();
+					this.createSpriteImages();
+				},
 
-                    this.callSuper('initialize', element, options);
+				createTmpCanvas: function() {
+					this.tmpCanvasEl = fabric.util.createCanvasElement();
+					this.tmpCanvasEl.width = this.spriteWidth || this.width;
+					this.tmpCanvasEl.height = this.spriteHeight || this.height;
+				},
 
-                    this.createTmpCanvas();
-                    this.createSpriteImages();
-                },
+				createSpriteImages: function() {
+					this.spriteImages = [];
 
-                createTmpCanvas: function() {
-                    this.tmpCanvasEl = fabric.util.createCanvasElement();
-                    this.tmpCanvasEl.width = this.spriteWidth || this.width;
-                    this.tmpCanvasEl.height = this.spriteHeight || this.height;
-                },
+					var steps = this._element.width / this.spriteWidth;
+					for (var i = 0; i < steps; i++) {
+						this.createSpriteImage(i);
+					}
+				},
 
-                createSpriteImages: function() {
-                    this.spriteImages = [ ];
+				createSpriteImage: function(i) {
+					var tmpCtx = this.tmpCanvasEl.getContext('2d');
+					tmpCtx.clearRect(0, 0, this.tmpCanvasEl.width, this.tmpCanvasEl.height);
+					tmpCtx.drawImage(this._element, -i * this.spriteWidth, 0);
 
-                    var steps = this._element.width / this.spriteWidth;
-                    for (var i = 0; i < steps; i++) {
-                        this.createSpriteImage(i);
-                    }
-                },
+					var dataURL = this.tmpCanvasEl.toDataURL('image/png');
+					var tmpImg = fabric.util.createImage();
 
-                createSpriteImage: function(i) {
-                    var tmpCtx = this.tmpCanvasEl.getContext('2d');
-                    tmpCtx.clearRect(0, 0, this.tmpCanvasEl.width, this.tmpCanvasEl.height);
-                    tmpCtx.drawImage(this._element, -i * this.spriteWidth, 0);
+					tmpImg.src = dataURL;
 
-                    var dataURL = this.tmpCanvasEl.toDataURL('image/png');
-                    var tmpImg = fabric.util.createImage();
+					this.spriteImages.push(tmpImg);
+				},
 
-                    tmpImg.src = dataURL;
+				_render: function(ctx) {
+					ctx.drawImage(
+						this.spriteImages[this.spriteIndex],
+						-this.width / 2,
+						-this.height / 2
+					);
+				},
 
-                    this.spriteImages.push(tmpImg);
-                },
+				play: function() {
+					var _this = this;
+					this.animInterval = setInterval(function() {
 
-                _render: function(ctx) {
-                    ctx.drawImage(
-                        this.spriteImages[this.spriteIndex],
-                        -this.width / 2,
-                        -this.height / 2
-                    );
-                },
+						_this.onPlay && _this.onPlay();
+						_this.dirty = true;
+						_this.spriteIndex++;
+						if (_this.spriteIndex === _this.spriteImages.length) {
+							_this.spriteIndex = 0;
+						}
+					}, this.frameTime);
+				},
 
-                play: function() {
-                    var _this = this;
-                    this.animInterval = setInterval(function() {
+				stop: function() {
+					clearInterval(this.animInterval);
+				}
+			});
 
-                        _this.onPlay && _this.onPlay();
-                        _this.dirty = true;
-                        _this.spriteIndex++;
-                        if (_this.spriteIndex === _this.spriteImages.length) {
-                            _this.spriteIndex = 0;
-                        }
-                    }, this.frameTime);
-                },
+			fabric.Sprite.fromURL = function(url, callback, imgOptions) {
+				fabric.util.loadImage(url, function(img) {
+					callback(new fabric.Sprite(img, imgOptions));
+				});
+			};
 
-                stop: function() {
-                    clearInterval(this.animInterval);
-                }
-            });
+			fabric.Sprite.async = true;
+		},
+		mounted() {
+			var canvas = this.canvas;
+			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+			fabric.Object.prototype.transparentCorners = false;
 
-            fabric.Sprite.fromURL = function(url, callback, imgOptions) {
-                fabric.util.loadImage(url, function(img) {
-                    callback(new fabric.Sprite(img, imgOptions));
-                });
-            };
+			for (var i = 0, len = 5; i < len; i++) {
+				for (var j = 0, jlen = 5; j < jlen; j++) {
+					fabric.Sprite.fromURL('/public/sprite.png', createSprite(i, j));
+				}
+			}
 
-            fabric.Sprite.async = true;
-        },
-        mounted(){
-            var canvas = this.canvas;
-            fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
-            fabric.Object.prototype.transparentCorners = false;
+			function createSprite(i, j) {
+				return function(sprite) {
+					sprite.set({
+						left: i * 100 + 50,
+						top: j * 100 + 50,
+						angle: fabric.util.getRandomInt(-30, 30)
+					});
+					canvas.add(sprite);
+					setTimeout(function() {
+						sprite.set('dirty', true);
+						sprite.play();
+					}, fabric.util.getRandomInt(1, 10) * 100);
+				};
+			}
 
-            for (var i = 0, len = 5; i < len; i++) {
-                for (var j = 0, jlen = 5; j < jlen; j++) {
-                    fabric.Sprite.fromURL('/public/sprite.png', createSprite(i, j));
-                }
-            }
+			(function render() {
+				canvas.renderAll();
+				fabric.util.requestAnimFrame(render);
+			})();
 
-            function createSprite(i, j) {
-                return function(sprite) {
-                    sprite.set({
-                        left: i * 100 + 50,
-                        top: j * 100 + 50,
-                        angle: fabric.util.getRandomInt(-30, 30)
-                    });
-                    canvas.add(sprite);
-                    setTimeout(function() {
-                        sprite.set('dirty', true);
-                        sprite.play();
-                    }, fabric.util.getRandomInt(1, 10) * 100);
-                };
-            }
-
-            (function render() {
-                canvas.renderAll();
-                fabric.util.requestAnimFrame(render);
-            })();
-
-        }
-    }
+		}
+	}
 </script>
 
 <style scoped>
