@@ -122,17 +122,17 @@
 					:disabled="blur.disabled" v-model="blur.value" @change="blurValueC(blur.value)"></label>
 		</p>
 		<p>
-			<label><span>Sharpen:</span> <input type="checkbox" id="sharpen" :disabled="sharpen.disabled"  v-model="sharpen.value" @change="sharpenC(sharpen.value)">></label>
+			<label><span>Sharpen:</span> <input type="checkbox" id="sharpen" :disabled="sharpen.disabled"  v-model="sharpen.value" @change="sharpenC(sharpen.value)"></label>
 		</p>
 		<p>
-			<label><span>Emboss:</span> <input type="checkbox" id="emboss" :disabled="emboss.disabled"  v-model="emboss.value" @change="blurC(emboss.value)">></label>
+			<label><span>Emboss:</span> <input type="checkbox" id="emboss" :disabled="emboss.disabled"  v-model="emboss.value" @change="embossC(emboss.value)"></label>
 		</p>
 		<p>
-			<label><span>Blend Color:</span> <input type="checkbox" id="blend" :disabled="blend.disabled"  v-model="blend.value" @change="blendC(blend.value)">></label>
+			<label><span>Blend Color:</span> <input type="checkbox" id="blend" :disabled="blend.disabled"  v-model="blend.value" @change="blendC(blend.value)"></label>
 			<br>
 			<label>Mode:</label>
 			<select id="blend-mode" name="blend-mode" v-model="blend.mode" @change="blendModeC('mode',blend.mode)">
-				<option selected="" value="add">Add</option>
+				<option  value="add">Add</option>
 				<option value="diff">Diff</option>
 				<option value="subtract">Subtract</option>
 				<option value="multiply">Multiply</option>
@@ -145,14 +145,14 @@
 			</select>
 			<br>
 			<label>Color: <input type="color" id="blend_color" v-model="blend.color" @change="blendModeC('color',blend.color)"></label><br>
-			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.range" @change="blendModeC('range',blend.range)"></label><br>
+			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.alpha" @change="blendModeC('alpha',blend.alpha)"></label><br>
 		</p>
 		<label><span>Blend Image:</span> <input type="checkbox" id="blend_image"
 				:disabled="blend.disabled" v-model="blend.image" @change="blendImageC(blend.image)"></label>
 		<br>
 		<label>Mode:</label>
 		<select id="blend_image-mode" name="blend_image-mode" v-model="blend.imageMode" @change="blendImageModeC(blend.imageMode)">
-			<option selected="" value="multiply">Multiply</option>
+			<option value="multiply">Multiply</option>
 			<option value="mask">Mask</option>
 		</select>
 		<br>
@@ -259,9 +259,9 @@
 				blend: {
 					value: '',
 					color: '#00f900',
-					mode: '',
+					mode: 'add',
 					image: '',
-					imageMode: '',
+					imageMode: 'multiply',
 					alpha: '1',
 					imageAlpha: '1',
 					disabled: true
@@ -417,15 +417,18 @@
 				this.applyFilterValue(17, 'gamma', current);
 			},
 			contrastC(value) {
+				let f = fabric.Image.filters;
 				this.applyFilter(6, value && new f.Contrast({
 					contrast: parseFloat(this.contrast.value)
 				}));
 			},
 			contrastValueC(value) {
+				let f = fabric.Image.filters;
 				this.applyFilterValue(6, 'contrast', parseFloat(value));
 			},
 			saturationC(value){
-				this.applyFilter(7, checked && new f.Saturation({
+				let f = fabric.Image.filters;
+				this.applyFilter(7, value && new f.Saturation({
 				      saturation: parseFloat(this.saturation.value)
 				    }));
 			},
@@ -433,15 +436,17 @@
 				this.applyFilterValue(7, 'saturation', parseFloat(value));
 			},
 			vibranceC(value){
-				this.applyFilter(8, checked && new f.Vibrance({
-				      saturation: parseFloat(this.vibrance.value)
+				let f = fabric.Image.filters;
+				this.applyFilter(8, value && new f.Vibrance({
+					vibrance: parseFloat(this.vibrance.value)
 				    }));
 			},
 			vibranceValueC(value){
 				this.applyFilterValue(8, 'vibrance', parseFloat(value));
 			},
 			hueC(value){
-				this.applyFilter(21, checked && new f.HueRotation({
+				let f = fabric.Image.filters;
+				this.applyFilter(21, value && new f.HueRotation({
 				      rotation: parseFloat(this.vibrance.value)
 				    }));
 			},
@@ -449,7 +454,8 @@
 				this.applyFilterValue(21, 'rotation', parseFloat(value));
 			},
 			noiseC(value){
-				this.applyFilter(9, checked && new f.Noise({
+				let f = fabric.Image.filters;
+				this.applyFilter(9, value && new f.Noise({
 				      noise: parseFloat(this.vibrance.value)
 				    }));
 			},
@@ -457,22 +463,25 @@
 				this.applyFilterValue(9, 'noise', parseFloat(value));
 			},
 			pixelateC(value){
-				this.applyFilter(10, checked && new f.Pixelate({
+				let f = fabric.Image.filters;
+				this.applyFilter(10, value && new f.Pixelate({
 				      blocksize: parseFloat(this.pixelate.value)
 				    }));
 			},
 			pixelateValueC(value){
-				this.applyFilterValue(9, 'blocksize', parseFloat(value));
+				this.applyFilterValue(10, 'blocksize', parseFloat(value));
 			},
 			blurC(value){
-				this.applyFilter(11, checked && new f.Blur({
-				      value: parseFloat(this.pixelate.value)
+				let f = fabric.Image.filters;
+				this.applyFilter(11, value && new f.Blur({
+					blur: parseFloat(this.pixelate.value)
 				    }));
 			},
 			blurValueC(value){
-				this.applyFilterValue(11, 'value', parseFloat(value));
+				this.applyFilterValue(11, 'blur', parseFloat(value));
 			},
 			sharpenC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(12, value && new f.Convolute({
 				      matrix: [  0, -1,  0,
 				                -1,  5, -1,
@@ -480,6 +489,7 @@
 				    }));
 			},
 			embossC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(13, value && new f.Convolute({
 					  matrix: [ 1,   1,  1,
 								1, 0.7, -1,
@@ -487,17 +497,19 @@
 					}));
 
 			},
-			sharpenC(value){
+			blendC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(16, value && new f.BlendColor({
-				      color: document.getElementById('blend-color').value,
-				      mode: document.getElementById('blend-mode').value,
-				      alpha: document.getElementById('blend-alpha').value
+				      color:  this.blend.color,
+				      mode: this.blend.mode,
+				      alpha:  this.blend.alpha,
 				    }));
 			},
 			blendModeC(mode, value){
 				this.applyFilterValue(16, mode, value);
 			},
 			blendImageC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(20, value && new f.BlendImage({
 				      image: this.fImage,
 				    }));
@@ -506,7 +518,7 @@
 				this.applyFilterValue(20, 'mode', value);
 			},
 			blendImageAlphaC(value){
-					this.applyFilterValue(20, 'mode', value);
+				this.applyFilterValue(20, 'mode', value);
 			}
 		},
 		mounted() {
