@@ -12,7 +12,7 @@
 		},
 		methods() {
 
-		}
+		},
 		mounted() {
 			var canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;

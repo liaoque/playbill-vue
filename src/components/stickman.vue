@@ -12,7 +12,7 @@
 		},
 		methods() {
 
-		}
+		},
 		mounted() {
 			var canvas = this.canvas;
 			canvas.selection = false;

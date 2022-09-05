@@ -51,17 +51,17 @@
 		<p>
 			<label><span>Remove color:</span> <input type="checkbox" id="remove_color" :disabled="remove_color.disabled"
 					v-model="remove_color.value" @change="remove_colorC(remove_color.value)"></label><br>
-			<label>Color: <input type="color" id="remove_color-color" v-model="remove_color.color"></label><br>
+			<label>Color: <input type="color" id="remove_color-color" v-model="remove_color.color"  @change="remove_color_colorC(remove_color.remove_color)"></label><br>
 			<br>
 			<label>Distance: <input type="range" id="remove_color-distance" min="0" max="1" step="0.01"
-					:disabled="remove_color.disabled" v-model="remove_color.distance"></label>
+					:disabled="remove_color.disabled" v-model="remove_color.distance" @change="remove_color_distanceC(remove_color.distance)"></label>
 		</p>
 		<p>
 			<label><span>Brightness:</span> <input type="checkbox" id="brightness" :disabled="brightness.disabled"
 					v-model="brightness.brightness"  @change="brightnessC(brightness.brightness)"></label>
 			<br>
 			<label>Value: <input type="range" id="brightness-value" min="-1" max="1" step="0.003921"
-					:disabled="brightness.disabled" v-model="brightness.value" 
+					:disabled="brightness.disabled" v-model="brightness.value"
 					@change="brightnessValueC(brightness.value)"></label>
 		</p>
 		<p>
@@ -106,7 +106,7 @@
 		<p>
 			<label><span>Noise:</span> <input type="checkbox" id="noise" :disabled="noise.disabled"  v-model="noise.noise" @change="noiseC(noise.noise)"></label>
 			<br>
-			<label>Value: <input type="range" id="noise-value" value="100" min="0" max="1000"
+			<label>Value: <input type="range" id="noise-value" min="0" max="1000"
 					:disabled="noise.disabled"  v-model="noise.value" @change="noiseValueC(noise.value)"></label>
 		</p>
 		<p>
@@ -131,7 +131,7 @@
 			<label><span>Blend Color:</span> <input type="checkbox" id="blend" :disabled="blend.disabled"  v-model="blend.value" @change="blendC(blend.value)">></label>
 			<br>
 			<label>Mode:</label>
-			<select id="blend-mode" name="blend-mode" v-model="blend.mode" @change="blendModeC('mode'，blend.mode)">
+			<select id="blend-mode" name="blend-mode" v-model="blend.mode" @change="blendModeC('mode',blend.mode)">
 				<option selected="" value="add">Add</option>
 				<option value="diff">Diff</option>
 				<option value="subtract">Subtract</option>
@@ -144,8 +144,8 @@
 				<option value="tint">Tint</option>
 			</select>
 			<br>
-			<label>Color: <input type="color" id="blend_color" v-model="blend.color" @change="blendModeC('color'，blend.color)"></label><br>
-			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.range" @change="blendModeC('range'，blend.range)"></label><br>
+			<label>Color: <input type="color" id="blend_color" v-model="blend.color" @change="blendModeC('color',blend.color)"></label><br>
+			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.range" @change="blendModeC('range',blend.range)"></label><br>
 		</p>
 		<label><span>Blend Image:</span> <input type="checkbox" id="blend_image"
 				:disabled="blend.disabled" v-model="blend.image" @change="blendImageC(blend.image)"></label>
@@ -348,7 +348,7 @@
 			},
 			sepiaC(value) {
 				let f = fabric.Image.filters;
-				this.applyFilter(3, value && new f.sepiaC());
+				this.applyFilter(3, value && new f.Sepia());
 			},
 			blackwhiteC(value) {
 				let f = fabric.Image.filters;
@@ -367,7 +367,7 @@
 			},
 			kodachromeC(value) {
 				let f = fabric.Image.filters;
-				this.applyFilter(18, this.checked && new f.Kodachrome());
+				this.applyFilter(18, value && new f.Kodachrome());
 			},
 			technicolorC(value) {
 				let f = fabric.Image.filters;
@@ -383,6 +383,15 @@
 					distance: this.remove_color.distance,
 					color: this.remove_color.color,
 				}));
+			},
+			remove_color_colorC(value) {
+				this.applyFilterValue(2, 'color', value);
+
+			},
+			remove_color_distanceC(value) {
+				let f = fabric.Image.filters;
+				this.applyFilterValue(2, 'distance', value);
+
 			},
 			brightnessC(value) {
 				let f = fabric.Image.filters;

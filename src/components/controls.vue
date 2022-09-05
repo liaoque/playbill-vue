@@ -36,37 +36,37 @@
 				skewY: 0,
 			}
 		},
-		methods(){
+		methods:{
 			angleControl(value) {
 				this.rect.set('angle', parseInt(value, 10)).setCoords();
 				canvas.requestRenderAll();
 			},
-			
+
 			scaleControl(value) {
 				this.rect.scale(parseFloat(value)).setCoords();
 				canvas.requestRenderAll();
 			},
-			
+
 			topControl(value) {
 				this.rect.set('top', parseInt(value, 10)).setCoords();
 				canvas.requestRenderAll();
 			},
-			
+
 			leftControl(value) {
 				this.rect.set('left', parseInt(value, 10)).setCoords();
 				canvas.requestRenderAll();
 			},
-			
+
 			skewXControl(value) {
 				this.rect.set('skewX', parseInt(value, 10)).setCoords();
 				canvas.requestRenderAll();
 			},
-			
+
 			skewYControl(value) {
 				this.rect.set('skewY', parseInt(value, 10)).setCoords();
 				canvas.requestRenderAll();
 			},
-		}
+		},
 		mounted() {
 			var canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
@@ -83,7 +83,7 @@
 
 			canvas.add(rect);
 
-		
+
 
 			function updateControls() {
 				scaleControl.value = rect.scaleX;
