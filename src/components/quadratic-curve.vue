@@ -6,7 +6,7 @@
 		name: 'quadratic-curve',
 		props: ['canvas'],
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 			canvas.on({
@@ -17,7 +17,7 @@
 
 			(function drawQuadratic() {
 
-				var line = new fabric.Path('M 65 0 Q 100, 100, 200, 0', {
+				let line = new fabric.Path('M 65 0 Q 100, 100, 200, 0', {
 					fill: '',
 					stroke: 'black',
 					objectCaching: false
@@ -35,22 +35,22 @@
 				line.selectable = false;
 				canvas.add(line);
 
-				var p1 = makeCurvePoint(200, 200, null, line, null)
+				let p1 = makeCurvePoint(200, 200, null, line, null)
 				p1.name = "p1";
 				canvas.add(p1);
 
-				var p0 = makeCurveCircle(100, 100, line, p1, null);
+				let p0 = makeCurveCircle(100, 100, line, p1, null);
 				p0.name = "p0";
 				canvas.add(p0);
 
-				var p2 = makeCurveCircle(300, 100, null, p1, line);
+				let p2 = makeCurveCircle(300, 100, null, p1, line);
 				p2.name = "p2";
 				canvas.add(p2);
 
 			})();
 
 			function makeCurveCircle(left, top, line1, line2, line3) {
-				var c = new fabric.Circle({
+				let c = new fabric.Circle({
 					left: left,
 					top: top,
 					strokeWidth: 5,
@@ -69,7 +69,7 @@
 			}
 
 			function makeCurvePoint(left, top, line1, line2, line3) {
-				var c = new fabric.Circle({
+				let c = new fabric.Circle({
 					left: left,
 					top: top,
 					strokeWidth: 8,
@@ -88,7 +88,7 @@
 			}
 
 			function onObjectSelected(e) {
-				var activeObject = e.target;
+				let activeObject = e.target;
 
 				if (activeObject.name == "p0" || activeObject.name == "p2") {
 					activeObject.line2.animate('opacity', '1', {
@@ -100,7 +100,7 @@
 			}
 
 			function onSelectionCleared(e) {
-				var activeObject = e.target;
+				let activeObject = e.target;
 				if (activeObject.name == "p0" || activeObject.name == "p2") {
 					activeObject.line2.animate('opacity', '0', {
 						duration: 200,
@@ -118,7 +118,7 @@
 
 			function onObjectMoving(e) {
 				if (e.target.name == "p0" || e.target.name == "p2") {
-					var p = e.target;
+					let p = e.target;
 
 					if (p.line1) {
 						p.line1.path[0][1] = p.left;
@@ -128,14 +128,14 @@
 						p.line3.path[1][4] = p.top;
 					}
 				} else if (e.target.name == "p1") {
-					var p = e.target;
+					let p = e.target;
 
 					if (p.line2) {
 						p.line2.path[1][1] = p.left;
 						p.line2.path[1][2] = p.top;
 					}
 				} else if (e.target.name == "p0" || e.target.name == "p2") {
-					var p = e.target;
+					let p = e.target;
 
 					p.line1 && p.line1.set({
 						'x2': p.left,

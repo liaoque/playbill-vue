@@ -8,14 +8,14 @@
 		mounted() {
 			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			canvas.set({
 				hoverCursor: 'pointer',
 				selection: false,
 				perPixelTargetFind: true,
 				targetFindTolerance: 5
 			})
-			 
+
 
 			// load sun and center it
 			fabric.Image.fromURL('/public/sun.png', function(sunImg) {
@@ -23,7 +23,7 @@
 				sunImg.center();
 			});
 
-			var planetSize = 26,
+			let planetSize = 26,
 				totalPlanets = 12,
 				rotationSpeed = 20000,
 				orbits = [],
@@ -33,7 +33,7 @@
 					'Zeus', 'Rhea', 'Titan', 'Janus', 'Hyperion', 'Iapetus'
 				];
 
-			var hoverCircle = new fabric.Circle({
+			let hoverCircle = new fabric.Circle({
 				radius: 13,
 				fill: '#000',
 				stroke: 'rgb(0,192,255)',
@@ -42,7 +42,7 @@
 				top: -100
 			});
 
-			var planetLabel = new fabric.Text('', {
+			let planetLabel = new fabric.Text('', {
 				fill: '#fff',
 				fontSize: 16,
 				fontFamily: 'Open Sans',
@@ -53,7 +53,7 @@
 			fabric.Image.fromURL('/public/planets.png', function(planetsImg) {
 
 				// temp canvas to generate planet images
-				var tempCanvas = new fabric.StaticCanvas();
+				let tempCanvas = new fabric.StaticCanvas();
 
 				// only to fit one planet onto temp canvas
 				tempCanvas.setDimensions({
@@ -68,12 +68,12 @@
 				// add it onto temp canvas
 				tempCanvas.add(planetsImg);
 
-				for (var i = 0; i < totalPlanets; i++) {
+				for (let i = 0; i < totalPlanets; i++) {
 					createOrbit(i);
 				}
 				canvas.add(hoverCircle);
 
-				for (var i = 0; i < totalPlanets; i++) {
+				for (let i = 0; i < totalPlanets; i++) {
 					createPlanet(i, planetsImg, tempCanvas);
 				}
 
@@ -81,7 +81,7 @@
 			});
 
 			function createOrbit(i) {
-				var orbit = new fabric.Circle({
+				let orbit = new fabric.Circle({
 					radius: 26 * i + 90,
 					left: canvas.getWidth() / 2,
 					top: canvas.getHeight() / 2,
@@ -105,10 +105,10 @@
 				tempCanvas.renderAll();
 
 				// get data url for that planet
-				var img = new Image();
+				let img = new Image();
 				img.onload = function() {
 					// create image of a planet from data url
-					var oImg = new fabric.Image(img, {
+					let oImg = new fabric.Image(img, {
 
 						name: planetNames[i],
 						index: i,
@@ -131,7 +131,7 @@
 
 			function animatePlanet(oImg, planetIndex) {
 
-				var radius = planetIndex * 26 + 90,
+				let radius = planetIndex * 26 + 90,
 
 					// rotate around canvas center
 					cx = canvas.getWidth() / 2,
@@ -159,8 +159,8 @@
 						onChange: function(angle) {
 							angle = fabric.util.degreesToRadians(angle);
 
-							var x = cx + radius * Math.cos(angle);
-							var y = cy + radius * Math.sin(angle);
+							let x = cx + radius * Math.cos(angle);
+							let y = cy + radius * Math.sin(angle);
 
 							oImg.set({
 								left: x,
@@ -177,7 +177,7 @@
 				})();
 			}
 
-			var hoverTarget, prevHoverTarget;
+			let hoverTarget, prevHoverTarget;
 
 			canvas.on('mouse:over', function(options) {
 				hoverTarget = options.target;
@@ -194,8 +194,8 @@
 					orbit.stroke = 'rgba(0,192,255,0.5)';
 				});
 				if (hoverTarget && !hoverTarget.text && hoverTarget.index) {
-					var hoveredPlanet = planets[hoverTarget.index];
-					var hoveredOrbit = orbits[hoveredPlanet.index];
+					let hoveredPlanet = planets[hoverTarget.index];
+					let hoveredOrbit = orbits[hoveredPlanet.index];
 
 					hoveredOrbit.set({
 						strokeWidth: 3,

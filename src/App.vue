@@ -143,19 +143,31 @@
 
 
 					<static_canvas :canvas="canvas" v-if="panel_name == 'static_canvas'"></static_canvas>
+
+<!--					曝光-->
 					<image-filters :canvas="canvas" v-if="panel_name == 'image-filters'"></image-filters>
 
-
+<!--					旋转控制-->
 					<controls :canvas="canvas" v-if="panel_name == 'controls'"></controls>
+
+<!--					火柴人-->
 					<stickman :canvas="canvas" v-if="panel_name == 'stickman'"></stickman>
 
-
+<!--					相机效果-->
 					<polaroid :canvas="canvas" v-if="panel_name == 'polaroid'"></polaroid>
+
+<!--					透明-->
 					<opacity_mouse_move :canvas="canvas" v-if="panel_name == 'opacity_mouse_move'"></opacity_mouse_move>
+
+<!--					滑动瓢虫-->
 					<ladybug :canvas="canvas" v-if="panel_name == 'ladybug'"></ladybug>
 					<kitchensink :canvas="canvas" v-if="panel_name == 'kitchensink'"></kitchensink>
+
+<!--					Hovering-->
 					<hovering :canvas="canvas" v-if="panel_name == 'hovering'"></hovering>
 					<customization :canvas="canvas" v-if="panel_name == 'customization'"></customization>
+
+<!--					穿插效果-->
 					<cross :canvas="canvas" v-if="panel_name == 'cross'"></cross>
 
 
@@ -230,7 +242,11 @@
 
 	import polaroid from "./components/polaroid.vue";
 	import opacity_mouse_move from "./components/opacity_mouse_move.vue";
+
+
 	import ladybug from "./components/ladybug.vue";
+
+
 	import kitchensink from "./components/kitchensink.vue";
 	import hovering from "./components/hovering.vue";
 	import customization from "./components/customization.vue";

@@ -6,10 +6,10 @@
 		name: "intersection",
 		props: ['canvas'],
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
 
-			var rect1 = new fabric.Rect({
+			let rect1 = new fabric.Rect({
 				width: 200,
 				height: 100,
 				left: 0,
@@ -18,7 +18,7 @@
 				fill: 'rgba(255,0,0,0.5)'
 			});
 
-			var rect2 = new fabric.Rect({
+			let rect2 = new fabric.Rect({
 				width: 100,
 				height: 100,
 				left: 350,
@@ -27,7 +27,7 @@
 				fill: 'rgba(0,200,0,0.5)'
 			});
 
-			var rect3 = new fabric.Rect({
+			let rect3 = new fabric.Rect({
 				width: 50,
 				height: 100,
 				left: 275,
@@ -38,14 +38,14 @@
 				fill: 'rgba(0,0,200,0.5)'
 			});
 
-			var circle = new fabric.Circle({
+			let circle = new fabric.Circle({
 				radius: 50,
 				left: 275,
 				top: 75,
 				fill: '#aac'
 			});
 
-			var triangle = new fabric.Triangle({
+			let triangle = new fabric.Triangle({
 				width: 100,
 				height: 100,
 				left: 50,

@@ -14,13 +14,13 @@
 
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			canvas.set({
 				backgroundColor: '#333',
 				HOVER_CURSOR: 'pointer'
 			})
 
-			var PolaroidPhoto = fabric.util.createClass(fabric.Image, {
+			let PolaroidPhoto = fabric.util.createClass(fabric.Image, {
 				H_PADDING: 20,
 				V_PADDING: 50,
 				originX: 'center',
@@ -49,7 +49,7 @@
 					}
 				}
 			});
-			var photo = new PolaroidPhoto('/public/pug.jpg', {
+			let photo = new PolaroidPhoto('/public/pug.jpg', {
 				top: 200,
 				left: 200,
 				scaleX: 0.2,

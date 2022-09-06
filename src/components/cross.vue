@@ -14,10 +14,10 @@
 
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
 
-			var Cross = fabric.util.createClass(fabric.Object, {
+			let Cross = fabric.util.createClass(fabric.Object, {
 				objectCaching: false,
 				initialize: function(options) {
 					this.callSuper('initialize', options);
@@ -31,10 +31,10 @@
 				},
 
 				animateWidthHeight: function() {
-					var interval = 2;
+					let interval = 2;
 
 					if (this.h2 >= 30 && this.h2 <= 100) {
-						var actualInterval = (this.animDirection === 'up' ? interval : -interval);
+						let actualInterval = (this.animDirection === 'up' ? interval : -interval);
 						this.h2 += actualInterval;
 						this.w1 += actualInterval;
 					}

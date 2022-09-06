@@ -14,13 +14,13 @@
 
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			canvas.selection = false;
 			fabric.Object.prototype.transparentCorners = false;
 			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 			function makeCircle(left, top, line1, line2, line3, line4) {
-				var c = new fabric.Circle({
+				let c = new fabric.Circle({
 					left: left,
 					top: top,
 					strokeWidth: 5,
@@ -48,7 +48,7 @@
 				});
 			}
 
-			var line = makeLine([250, 125, 250, 175]),
+			let line = makeLine([250, 125, 250, 175]),
 				line2 = makeLine([250, 175, 250, 250]),
 				line3 = makeLine([250, 250, 300, 350]),
 				line4 = makeLine([250, 250, 200, 350]),
@@ -68,7 +68,7 @@
 			);
 
 			canvas.on('object:moving', function(e) {
-				var p = e.target;
+				let p = e.target;
 				p.line1 && p.line1.set({
 					'x2': p.left,
 					'y2': p.top

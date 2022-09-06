@@ -301,32 +301,32 @@
 		},
 		methods: {
 			getFilter(index) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				return obj.filters[index];
 			},
 			applyFilterValue(index, prop, value) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				if (obj.filters[index]) {
 					obj.filters[index][prop] = value;
-					var timeStart = +new Date();
+					let timeStart = +new Date();
 					obj.applyFilters();
-					var timeEnd = +new Date();
-					var dimString = canvas.getActiveObject().width + ' x ' +
+					let timeEnd = +new Date();
+					let dimString = canvas.getActiveObject().width + ' x ' +
 						canvas.getActiveObject().height;
 					this.bench = dimString + 'px ' + parseFloat(timeEnd - timeStart) + 'ms';
 					canvas.renderAll();
 				}
 			},
 			applyFilter(index, filter) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				obj.filters[index] = filter;
-				var timeStart = +new Date();
+				let timeStart = +new Date();
 				obj.applyFilters();
-				var timeEnd = +new Date();
-				var dimString = canvas.getActiveObject().width + ' x ' +
+				let timeEnd = +new Date();
+				let dimString = canvas.getActiveObject().width + ' x ' +
 					canvas.getActiveObject().height;
 				this.bench = dimString + 'px ' + parseFloat(timeEnd - timeStart) + 'ms';
 				canvas.renderAll();
@@ -404,15 +404,15 @@
 			},
 			gammaC(value) {
 				let f = fabric.Image.filters;
-				var v1 = parseFloat(this.gamma.red);
-				var v2 = parseFloat(this.gamma.green);
-				var v3 = parseFloat(this.gamma.blue);
+				let v1 = parseFloat(this.gamma.red);
+				let v2 = parseFloat(this.gamma.green);
+				let v3 = parseFloat(this.gamma.blue);
 				this.applyFilter(17, value && new f.Gamma({
 					gamma: [v1, v2, v3]
 				}));
 			},
 			gammaColorC(index, value) {
-				var current = this.getFilter(17).gamma;
+				let current = this.getFilter(17).gamma;
 				current[index] = parseFloat(value);
 				this.applyFilterValue(17, 'gamma', current);
 			},
@@ -538,13 +538,13 @@
 			fabric.Object.prototype.transparentCorners = false;
 
 
-			var canvas = this.canvas,
+			let canvas = this.canvas,
 				f = fabric.Image.filters;
 			let filters = self.filters
 
 			canvas.on({
 				'selection:created': function() {
-					for (var i = 0; i < filters.length; i++) {
+					for (let i = 0; i < filters.length; i++) {
 						if (self[filters[i]]) {
 							self[filters[i]].disabled = false
 							self[filters[i]].checked = !!canvas.getActiveObject().filters[i]
@@ -552,7 +552,7 @@
 					}
 				},
 				'selection:cleared': function() {
-					for (var i = 0; i < filters.length; i++) {
+					for (let i = 0; i < filters.length; i++) {
 						if (self[filters[i]]) {
 							self[filters[i]].disabled = true
 						}
@@ -563,28 +563,28 @@
 
 
 			fabric.Image.fromURL('/public/pug.jpg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 0
 				}).scale(0.25);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/printio.png', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 150,
 					top: 0
 				}).scale(0.4);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/dragon.jpg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 270
 				}).scale(0.2);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/dragon2.jpeg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 500
 				}).scale(0.2);
@@ -593,9 +593,9 @@
 
 
 
-			var imageElement = document.createElement('img');
+			let imageElement = document.createElement('img');
 			imageElement.src = '/public/printio.png';
-			var fImage = this.fImage = new fabric.Image(imageElement);
+			let fImage = this.fImage = new fabric.Image(imageElement);
 			fImage.scaleX = 1;
 			fImage.scaleY = 1;
 			fImage.top = 15;
