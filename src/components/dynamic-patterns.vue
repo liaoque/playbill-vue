@@ -47,7 +47,7 @@
 		},
 		methods: {
 			imgWidth(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.img.scaleToWidth(parseInt(value, 10));
 				this.patternSourceCanvas.setDimensions({
 					width: this.img.getScaledWidth() + this.img_padding,
@@ -56,14 +56,14 @@
 				canvas.requestRenderAll();
 			},
 			imgAngle(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.img.set('angle', value);
 				this.patternSourceCanvas.renderAll();
 				canvas.requestRenderAll();
 			},
 			imgPadding(value) {
-				var canvas = this.canvas;
-				var padding = parseInt(value, 10);
+				let canvas = this.canvas;
+				let padding = parseInt(value, 10);
 				this.patternSourceCanvas.setDimensions({
 					width: this.img.getScaledWidth() + padding,
 					height: this.img.getScaledHeight() + padding,
@@ -71,28 +71,28 @@
 				canvas.requestRenderAll();
 			},
 			imgOffsetx(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.pattern.offsetX = parseInt(value, 10);
 				canvas.requestRenderAll();
 			},
 			imgOffsety(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.pattern.offsetY = parseInt(value, 10);
 				canvas.requestRenderAll();
 			},
 			imgRepeat(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.pattern.repeat = value ? 'repeat' : 'no-repeat';
 				canvas.requestRenderAll();
 			}
 		},
 
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 
 			fabric.Object.prototype.transparentCorners = false;
 
-			var padding = 0;
+			let padding = 0;
 			let self = this
 			fabric.Image.fromURL('/public/pug.jpg', function(img) {
 				self.img = img

@@ -49,8 +49,8 @@
 		},
 		methods: {
 			animateBtn() {
-				var canvas = this.canvas;
-				var rect = this.rect
+				let canvas = this.canvas;
+				let rect = this.rect
 				this.disabled = true;
 				let self = this
 				rect.animate('left', rect.left === 100 ? 400 : 100, {
@@ -64,9 +64,9 @@
 			}
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 
-			var rect = this.rect = new fabric.Rect({
+			let rect = this.rect = new fabric.Rect({
 				width: 50,
 				height: 50,
 				left: 100,
@@ -78,7 +78,7 @@
 			});
 			canvas.add(rect);
 
-			
+
 		}
 	}
 </script>

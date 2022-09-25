@@ -44,14 +44,14 @@
 				this.loadPattern('/public/' + value);
 			},
 			repeatC(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.text.fill.repeat = value;
 				canvas.renderAll();
 			},
 			loadPattern(url) {
 				let text = this.text
 				let shape = this.shape
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				fabric.util.loadImage(url, function(img) {
 					text.set('fill', new fabric.Pattern({
 						source: img,
@@ -66,10 +66,10 @@
 			}
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
 
-			var text = this.text = new fabric.Text('Honey,\nI\'m subtle', {
+			let text = this.text = new fabric.Text('Honey,\nI\'m subtle', {
 				fontSize: 250,
 				left: 0,
 				top: 0,
@@ -81,7 +81,7 @@
 				scaleX: 0.4,
 				scaleY: 0.4
 			});
-			var shape = this.shape = new fabric.Rect({
+			let shape = this.shape = new fabric.Rect({
 				width: 200,
 				height: 100,
 				left: 10,

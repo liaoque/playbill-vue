@@ -189,30 +189,30 @@
 		},
 		methods: {
 			observeBoolean(property, value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.item(0)[property] = value;
 				canvas.renderAll();
 			},
-			
+
 			observeOptionsList(name, value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				console.log(name, value)
 				canvas.item(0)['setControlVisible'](name, value);
 				canvas.renderAll();
 			},
 			observeRadio(name, value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				console.log(value)
 				canvas.item(0)[name] = value;
 				canvas.renderAll();
 			},
 			rotatingPointOffsetC() {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.item(0).controls.mtr.offsetY = -parseFloat(this.rotatingPointOffset);
 				canvas.requestRenderAll();
 			},
 			observeNumeric(property, value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.item(0)[property] = parseFloat(value);
 				if (property === 'padding') {
 					canvas.item(0).setCoords();
@@ -220,16 +220,16 @@
 				canvas.requestRenderAll();
 			},
 			observeValue(property, value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.item(0)[property] = value;
 				canvas.requestRenderAll();
 			}
 
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 
-			var rect = new fabric.Rect({
+			let rect = new fabric.Rect({
 				left: 150,
 				top: 200,
 				originX: 'left',

@@ -6,7 +6,7 @@
 		name: 'particles',
 		props: ['canvas'],
 		mounted() {
-			var total = 1000,
+			let total = 1000,
 				blobs = new Array(total),
 				myfps = 60,
 				updateTime = 1000 / myfps,
@@ -32,8 +32,8 @@
 			});
 
 			function blobLoaded(img) {
-				for (var i = 0; i < total; i++) {
-					var img2 = new fabric.Image(img.getElement(), {
+				for (let i = 0; i < total; i++) {
+					let img2 = new fabric.Image(img.getElement(), {
 						left: Math.random() * maxx,
 						top: Math.random() * maxy,
 						selectable: false
@@ -61,12 +61,12 @@
 			}
 
 			function animate() {
-				for (var i = 0; i < total; i++) {
-					var blob = blobs[i];
-					var dx = blob.left - mouse_pos.x;
-					var dy = blob.top - mouse_pos.y;
-					var vx = blob.vx;
-					var vy = blob.vy;
+				for (let i = 0; i < total; i++) {
+					let blob = blobs[i];
+					let dx = blob.left - mouse_pos.x;
+					let dy = blob.top - mouse_pos.y;
+					let vx = blob.vx;
+					let vy = blob.vy;
 
 					if (dx * dx + dy * dy <= 10000) {
 						vx += dx * 0.01;
@@ -78,11 +78,11 @@
 					vx += Math.random() - 0.5;
 					vy += Math.random() - 0.5;
 
-					var x = blob.left += vx;
-					var y = blob.top += vy;
+					let x = blob.left += vx;
+					let y = blob.top += vy;
 
 					if (x < 0 || x > maxx || y < 0 || y > maxy) {
-						var r = Math.atan2(y - maxy / 2, x - maxx / 2);
+						let r = Math.atan2(y - maxy / 2, x - maxx / 2);
 						vx = -Math.cos(r);
 						vy = -Math.sin(r);
 					}
@@ -91,7 +91,7 @@
 					blob.vy = vy;
 				}
 
-				var time = Date.now();
+				let time = Date.now();
 				frames++;
 
 				if (time > prevTime + 1000) {

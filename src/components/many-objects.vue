@@ -6,7 +6,7 @@
 	</div>
 	<div id="" style="margin-left: 10px;">
 		<div id="results-c2" style="background-color: antiquewhite;">{{ resultsC2 }}</div>​
-	
+
 		<canvas id="c2" width="400" height="350"></canvas>
 	</div>
 </template>
@@ -26,7 +26,7 @@
 			fabric.Object.prototype.transparentCorners = false;
 			this.__canvases = [];
 
-			var i, dot,
+			let i, dot,
 				t1, t2,
 				startTimer = function() {
 					t1 = new Date().getTime();
@@ -43,7 +43,7 @@
 			//
 			// Rendering canvas #1
 			//
-			var canvas1 = new fabric.Canvas('c1', {
+			let canvas1 = new fabric.Canvas('c1', {
 				backgroundColor: "#000"
 			});
 
@@ -64,7 +64,7 @@
 			//
 			// Rendering canvas #2
 			//
-			var canvas2 = new fabric.Canvas('c2', {
+			let canvas2 = new fabric.Canvas('c2', {
 				backgroundColor: "#000",
 				renderOnAddRemove: false
 			});

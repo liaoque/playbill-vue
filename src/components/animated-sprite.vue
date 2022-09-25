@@ -38,19 +38,19 @@
 				createSpriteImages: function() {
 					this.spriteImages = [];
 
-					var steps = this._element.width / this.spriteWidth;
-					for (var i = 0; i < steps; i++) {
+					let steps = this._element.width / this.spriteWidth;
+					for (let i = 0; i < steps; i++) {
 						this.createSpriteImage(i);
 					}
 				},
 
 				createSpriteImage: function(i) {
-					var tmpCtx = this.tmpCanvasEl.getContext('2d');
+					let tmpCtx = this.tmpCanvasEl.getContext('2d');
 					tmpCtx.clearRect(0, 0, this.tmpCanvasEl.width, this.tmpCanvasEl.height);
 					tmpCtx.drawImage(this._element, -i * this.spriteWidth, 0);
 
-					var dataURL = this.tmpCanvasEl.toDataURL('image/png');
-					var tmpImg = fabric.util.createImage();
+					let dataURL = this.tmpCanvasEl.toDataURL('image/png');
+					let tmpImg = fabric.util.createImage();
 
 					tmpImg.src = dataURL;
 
@@ -66,7 +66,7 @@
 				},
 
 				play: function() {
-					var _this = this;
+					let _this = this;
 					this.animInterval = setInterval(function() {
 
 						_this.onPlay && _this.onPlay();
@@ -92,12 +92,12 @@
 			fabric.Sprite.async = true;
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 			fabric.Object.prototype.transparentCorners = false;
 
-			for (var i = 0, len = 5; i < len; i++) {
-				for (var j = 0, jlen = 5; j < jlen; j++) {
+			for (let i = 0, len = 5; i < len; i++) {
+				for (let j = 0, jlen = 5; j < jlen; j++) {
 					fabric.Sprite.fromURL('/public/sprite.png', createSprite(i, j));
 				}
 			}

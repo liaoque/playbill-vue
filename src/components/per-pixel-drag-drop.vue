@@ -7,7 +7,7 @@
 		name: 'per-pixel-drag-drop',
 		props: ['canvas'],
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 
 			canvas.set({
 				hoverCursor: 'pointer',
@@ -24,7 +24,7 @@
 				}
 			});
 
-			for (var i = 0, len = 15; i < len; i++) {
+			for (let i = 0, len = 15; i < len; i++) {
 				fabric.Image.fromURL('/public/ladybug.png', function(img) {
 					img.set({
 						left: fabric.util.getRandomInt(0, 600),

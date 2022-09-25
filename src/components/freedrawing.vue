@@ -20,7 +20,7 @@
 			</select><br>
 
 			<label for="drawing-line-width">Line width:</label>
-			<span class="info">{{drawing_line_width}}</span><input type="range"  min="0" max="150" id="drawing-line-width"  v-model="drawing_line_width" 
+			<span class="info">{{drawing_line_width}}</span><input type="range"  min="0" max="150" id="drawing-line-width"  v-model="drawing_line_width"
 				@change="drawingLineWidthEl(drawing_line_width)"><br>
 
 			<label for="drawing-color">Line color:</label>
@@ -48,7 +48,7 @@
 		data() {
 			return {
 				drawingModeElTitle: 'Cancel drawing mode',
-				
+
 				vLinePatternBrush: null,
 				hLinePatternBrush: null,
 				squarePatternBrush: null,
@@ -67,7 +67,7 @@
 		},
 		methods: {
 			drawingModeEl() {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				this.drawingMode = canvas.isDrawingMode = !canvas.isDrawingMode;
 				if (canvas.isDrawingMode) {
 					this.drawingModeElTitle = 'Cancel drawing mode';
@@ -76,11 +76,11 @@
 				}
 			},
 			clearEl() {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.clear()
 			},
 			drawingModeSelector(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				if (value === 'hline') {
 					canvas.freeDrawingBrush = this.vLinePatternBrush;
 				} else if (value === 'vline') {
@@ -96,7 +96,7 @@
 				}
 
 				if (canvas.freeDrawingBrush) {
-					var brush = canvas.freeDrawingBrush;
+					let brush = canvas.freeDrawingBrush;
 					brush.color = this.drawing_color;
 					if (brush.getPatternSrc) {
 						brush.source = brush.getPatternSrc.call(brush);
@@ -112,44 +112,44 @@
 				}
 			},
 			drawingColorEl(value) {
-				var canvas = this.canvas;
-				var brush = canvas.freeDrawingBrush;
+				let canvas = this.canvas;
+				let brush = canvas.freeDrawingBrush;
 				brush.color = value;
 				if (brush.getPatternSrc) {
 					brush.source = brush.getPatternSrc.call(brush);
 				}
 			},
 			drawingShadowColorEl(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.freeDrawingBrush.shadow.color = value;
 			},
 			drawingLineWidthEl(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.freeDrawingBrush.width = parseInt(value, 10) || 1;
 			},
 			drawingShadowWidth(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.freeDrawingBrush.shadow.blur = parseInt(value, 10) || 0;
 			},
 			drawingShadowOffset(value) {
-				var canvas = this.canvas;
+				let canvas = this.canvas;
 				canvas.freeDrawingBrush.shadow.offsetX = parseInt(value, 10) || 0;
 				canvas.freeDrawingBrush.shadow.offsetY = parseInt(value, 10) || 0;
 			}
 
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			canvas.isDrawingMode = true;
-			this.drawingModeSelector(this.drawing_mode_selector) 
+			this.drawingModeSelector(this.drawing_mode_selector)
 			fabric.Object.prototype.transparentCorners = false;
 
 			if (fabric.PatternBrush) {
 				this.vLinePatternBrush = new fabric.PatternBrush(canvas);
 				this.vLinePatternBrush.getPatternSrc = function() {
-					var patternCanvas = fabric.document.createElement('canvas');
+					let patternCanvas = fabric.document.createElement('canvas');
 					patternCanvas.width = patternCanvas.height = 10;
-					var ctx = patternCanvas.getContext('2d');
+					let ctx = patternCanvas.getContext('2d');
 					ctx.strokeStyle = this.color;
 					ctx.lineWidth = 5;
 					ctx.beginPath();
@@ -163,9 +163,9 @@
 				this.hLinePatternBrush = new fabric.PatternBrush(canvas);
 				this.hLinePatternBrush.getPatternSrc = function() {
 
-					var patternCanvas = fabric.document.createElement('canvas');
+					let patternCanvas = fabric.document.createElement('canvas');
 					patternCanvas.width = patternCanvas.height = 10;
-					var ctx = patternCanvas.getContext('2d');
+					let ctx = patternCanvas.getContext('2d');
 					ctx.strokeStyle = this.color;
 					ctx.lineWidth = 5;
 					ctx.beginPath();
@@ -179,11 +179,11 @@
 				this.squarePatternBrush = new fabric.PatternBrush(canvas);
 				this.squarePatternBrush.getPatternSrc = function() {
 
-					var squareWidth = 10,
+					let squareWidth = 10,
 						squareDistance = 2;
-					var patternCanvas = fabric.document.createElement('canvas');
+					let patternCanvas = fabric.document.createElement('canvas');
 					patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
-					var ctx = patternCanvas.getContext('2d');
+					let ctx = patternCanvas.getContext('2d');
 					ctx.fillStyle = this.color;
 					ctx.fillRect(0, 0, squareWidth, squareWidth);
 					return patternCanvas;
@@ -192,17 +192,17 @@
 				this.diamondPatternBrush = new fabric.PatternBrush(canvas);
 				this.diamondPatternBrush.getPatternSrc = function() {
 
-					var squareWidth = 10,
+					let squareWidth = 10,
 						squareDistance = 5;
-					var patternCanvas = fabric.document.createElement('canvas');
-					var rect = new fabric.Rect({
+					let patternCanvas = fabric.document.createElement('canvas');
+					let rect = new fabric.Rect({
 						width: squareWidth,
 						height: squareWidth,
 						angle: 45,
 						fill: this.color
 					});
 
-					var canvasWidth = rect.getBoundingRect().width;
+					let canvasWidth = rect.getBoundingRect().width;
 
 					patternCanvas.width = patternCanvas.height = canvasWidth + squareDistance;
 					rect.set({
@@ -210,13 +210,13 @@
 						top: canvasWidth / 2
 					});
 
-					var ctx = patternCanvas.getContext('2d');
+					let ctx = patternCanvas.getContext('2d');
 					rect.render(ctx);
 
 					return patternCanvas;
 				};
 
-				var img = new Image();
+				let img = new Image();
 				img.src = '/public/honey_im_subtle.png';
 
 				this.texturePatternBrush = new fabric.PatternBrush(canvas);

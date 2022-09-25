@@ -2,49 +2,82 @@
 </template>
 
 <script>
-	export default {
-		name: 'ladybug',
-		props: ['canvas'],
-		data() {
-			return {
+    export default {
+        name: 'opacity_mouse_move',
+        props: ['canvas'],
+        data() {
+            return {
 
-			}
-		},
-		methods() {
+            }
+        },
+        methods() {
 
-		}
-		mounted() {
-			var canvas = this.canvas;
+        },
+        mounted() {
+            let canvas = this.canvas;
 
-
-			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
-
-			setInterval(function() {
-				fabric.Image.fromURL('/public/ladybug.png', function(img) {
-					img.set('left', fabric.util.getRandomInt(200, 600)).set('top', -50);
-					img.movingLeft = !!Math.round(Math.random());
-					canvas.add(img);
-				});
-			}, 250);
-
-			(function animate() {
-				canvas.getObjects().concat().forEach(function(obj) {
-					obj.left += (obj.movingLeft ? -1 : 1);
-					obj.top += 1;
-					if (obj.left > 900 || obj.left < -100 || obj.top > 500) {
-						canvas.remove(obj);
-					} else {
-						obj.rotate(obj.get('angle') + 2);
-					}
-				});
-				canvas.renderAll();
-				fabric.util.requestAnimFrame(animate);
-			})();
+            fabric.Object.prototype.transparentCorners = false;
+            fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 
-		}
-	}
+
+            fabric.loadSVGFromURL('/public/135.svg', function(objects) {
+
+                let obj = objects[0].scale(0.25);
+                obj.originX = 'center';
+                obj.originY = 'center';
+                canvas.centerObject(obj);
+                canvas.add(obj);
+
+                obj.clone(function(c) {
+                    canvas.add(c.set({
+                        left: 100,
+                        top: 100,
+                        angle: -15
+                    }));
+                });
+                obj.clone(function(c) {
+                    canvas.add(c.set({
+                        left: 480,
+                        top: 100,
+                        angle: 15
+                    }));
+                });
+                obj.clone(function(c) {
+                    canvas.add(c.set({
+                        left: 100,
+                        top: 400,
+                        angle: -15
+                    }));
+                });
+                obj.clone(function(c) {
+                    canvas.add(c.set({
+                        left: 480,
+                        top: 400,
+                        angle: 15
+                    }));
+                });
+
+                canvas.on('mouse:move', function(options) {
+
+                    let p = canvas.getPointer(options.e);
+
+                    canvas.forEachObject(function(obj) {
+                        let distX = Math.abs(p.x - obj.left),
+                            distY = Math.abs(p.y - obj.top),
+                            dist = Math.round(Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2)));
+
+                        obj.set('opacity', 1 / (dist / 20));
+                    });
+
+                    canvas.renderAll();
+                });
+            });
+
+        }
+    }
 </script>
 
 <style>
 </style>
+

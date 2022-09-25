@@ -6,9 +6,9 @@
 		name: 'clipping',
 		props: ['canvas'],
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
-			var radius = 300;
+			let radius = 300;
 			canvas.preserveObjectStacking = true;
 
 			// 狗
@@ -49,10 +49,10 @@
 			});
 
 			fabric.Image.fromURL('/public/mononoke.jpg', function(img) {
-				var scalar = 1,
+				let scalar = 1,
 					abort;
-				var path = 'M 230 230 A 45 45, 0, 1, 1, 275 275 L 275 230 Z';
-				var shell = new fabric.Path(path, {
+				let path = 'M 230 230 A 45 45, 0, 1, 1, 275 275 L 275 230 Z';
+				let shell = new fabric.Path(path, {
 					fill: '',
 					stroke: 'blue',
 					strokeWidth: 5,
@@ -65,8 +65,8 @@
 					originX: 'center',
 					originY: 'center',
 				});
-				
-				var clipPath = new fabric.Path(path, {
+
+				let clipPath = new fabric.Path(path, {
 					absolutePositioned: true,
 					originX: 'center',
 					originY: 'center',
@@ -99,7 +99,7 @@
 					top: 180,
 					clipPath: clipPath
 				});
-				
+
 				shell.on('moving', ({
 					e,
 					transform,

@@ -6,7 +6,7 @@
 		name: 'static_canvas',
 		props: ['canvas'],
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			canvas.add(
 				new fabric.Rect({
 					top: 100,

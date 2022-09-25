@@ -51,17 +51,17 @@
 		<p>
 			<label><span>Remove color:</span> <input type="checkbox" id="remove_color" :disabled="remove_color.disabled"
 					v-model="remove_color.value" @change="remove_colorC(remove_color.value)"></label><br>
-			<label>Color: <input type="color" id="remove_color-color" v-model="remove_color.color"></label><br>
+			<label>Color: <input type="color" id="remove_color-color" v-model="remove_color.color"  @change="remove_color_colorC(remove_color.remove_color)"></label><br>
 			<br>
 			<label>Distance: <input type="range" id="remove_color-distance" min="0" max="1" step="0.01"
-					:disabled="remove_color.disabled" v-model="remove_color.distance"></label>
+					:disabled="remove_color.disabled" v-model="remove_color.distance" @change="remove_color_distanceC(remove_color.distance)"></label>
 		</p>
 		<p>
 			<label><span>Brightness:</span> <input type="checkbox" id="brightness" :disabled="brightness.disabled"
 					v-model="brightness.brightness"  @change="brightnessC(brightness.brightness)"></label>
 			<br>
 			<label>Value: <input type="range" id="brightness-value" min="-1" max="1" step="0.003921"
-					:disabled="brightness.disabled" v-model="brightness.value" 
+					:disabled="brightness.disabled" v-model="brightness.value"
 					@change="brightnessValueC(brightness.value)"></label>
 		</p>
 		<p>
@@ -106,7 +106,7 @@
 		<p>
 			<label><span>Noise:</span> <input type="checkbox" id="noise" :disabled="noise.disabled"  v-model="noise.noise" @change="noiseC(noise.noise)"></label>
 			<br>
-			<label>Value: <input type="range" id="noise-value" value="100" min="0" max="1000"
+			<label>Value: <input type="range" id="noise-value" min="0" max="1000"
 					:disabled="noise.disabled"  v-model="noise.value" @change="noiseValueC(noise.value)"></label>
 		</p>
 		<p>
@@ -122,17 +122,17 @@
 					:disabled="blur.disabled" v-model="blur.value" @change="blurValueC(blur.value)"></label>
 		</p>
 		<p>
-			<label><span>Sharpen:</span> <input type="checkbox" id="sharpen" :disabled="sharpen.disabled"  v-model="sharpen.value" @change="sharpenC(sharpen.value)">></label>
+			<label><span>Sharpen:</span> <input type="checkbox" id="sharpen" :disabled="sharpen.disabled"  v-model="sharpen.value" @change="sharpenC(sharpen.value)"></label>
 		</p>
 		<p>
-			<label><span>Emboss:</span> <input type="checkbox" id="emboss" :disabled="emboss.disabled"  v-model="emboss.value" @change="blurC(emboss.value)">></label>
+			<label><span>Emboss:</span> <input type="checkbox" id="emboss" :disabled="emboss.disabled"  v-model="emboss.value" @change="embossC(emboss.value)"></label>
 		</p>
 		<p>
-			<label><span>Blend Color:</span> <input type="checkbox" id="blend" :disabled="blend.disabled"  v-model="blend.value" @change="blendC(blend.value)">></label>
+			<label><span>Blend Color:</span> <input type="checkbox" id="blend" :disabled="blend.disabled"  v-model="blend.value" @change="blendC(blend.value)"></label>
 			<br>
 			<label>Mode:</label>
-			<select id="blend-mode" name="blend-mode" v-model="blend.mode" @change="blendModeC('mode'，blend.mode)">
-				<option selected="" value="add">Add</option>
+			<select id="blend-mode" name="blend-mode" v-model="blend.mode" @change="blendModeC('mode',blend.mode)">
+				<option  value="add">Add</option>
 				<option value="diff">Diff</option>
 				<option value="subtract">Subtract</option>
 				<option value="multiply">Multiply</option>
@@ -144,15 +144,15 @@
 				<option value="tint">Tint</option>
 			</select>
 			<br>
-			<label>Color: <input type="color" id="blend_color" v-model="blend.color" @change="blendModeC('color'，blend.color)"></label><br>
-			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.range" @change="blendModeC('range'，blend.range)"></label><br>
+			<label>Color: <input type="color" id="blend_color" v-model="blend.color" @change="blendModeC('color',blend.color)"></label><br>
+			<label>Alpha: <input type="range" id="blend-alpha" min="0" max="1"  step="0.01" v-model="blend.alpha" @change="blendModeC('alpha',blend.alpha)"></label><br>
 		</p>
 		<label><span>Blend Image:</span> <input type="checkbox" id="blend_image"
 				:disabled="blend.disabled" v-model="blend.image" @change="blendImageC(blend.image)"></label>
 		<br>
 		<label>Mode:</label>
 		<select id="blend_image-mode" name="blend_image-mode" v-model="blend.imageMode" @change="blendImageModeC(blend.imageMode)">
-			<option selected="" value="multiply">Multiply</option>
+			<option value="multiply">Multiply</option>
 			<option value="mask">Mask</option>
 		</select>
 		<br>
@@ -259,9 +259,9 @@
 				blend: {
 					value: '',
 					color: '#00f900',
-					mode: '',
+					mode: 'add',
 					image: '',
-					imageMode: '',
+					imageMode: 'multiply',
 					alpha: '1',
 					imageAlpha: '1',
 					disabled: true
@@ -301,32 +301,32 @@
 		},
 		methods: {
 			getFilter(index) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				return obj.filters[index];
 			},
 			applyFilterValue(index, prop, value) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				if (obj.filters[index]) {
 					obj.filters[index][prop] = value;
-					var timeStart = +new Date();
+					let timeStart = +new Date();
 					obj.applyFilters();
-					var timeEnd = +new Date();
-					var dimString = canvas.getActiveObject().width + ' x ' +
+					let timeEnd = +new Date();
+					let dimString = canvas.getActiveObject().width + ' x ' +
 						canvas.getActiveObject().height;
 					this.bench = dimString + 'px ' + parseFloat(timeEnd - timeStart) + 'ms';
 					canvas.renderAll();
 				}
 			},
 			applyFilter(index, filter) {
-				var canvas = this.canvas
-				var obj = canvas.getActiveObject();
+				let canvas = this.canvas
+				let obj = canvas.getActiveObject();
 				obj.filters[index] = filter;
-				var timeStart = +new Date();
+				let timeStart = +new Date();
 				obj.applyFilters();
-				var timeEnd = +new Date();
-				var dimString = canvas.getActiveObject().width + ' x ' +
+				let timeEnd = +new Date();
+				let dimString = canvas.getActiveObject().width + ' x ' +
 					canvas.getActiveObject().height;
 				this.bench = dimString + 'px ' + parseFloat(timeEnd - timeStart) + 'ms';
 				canvas.renderAll();
@@ -348,7 +348,7 @@
 			},
 			sepiaC(value) {
 				let f = fabric.Image.filters;
-				this.applyFilter(3, value && new f.sepiaC());
+				this.applyFilter(3, value && new f.Sepia());
 			},
 			blackwhiteC(value) {
 				let f = fabric.Image.filters;
@@ -367,7 +367,7 @@
 			},
 			kodachromeC(value) {
 				let f = fabric.Image.filters;
-				this.applyFilter(18, this.checked && new f.Kodachrome());
+				this.applyFilter(18, value && new f.Kodachrome());
 			},
 			technicolorC(value) {
 				let f = fabric.Image.filters;
@@ -384,6 +384,15 @@
 					color: this.remove_color.color,
 				}));
 			},
+			remove_color_colorC(value) {
+				this.applyFilterValue(2, 'color', value);
+
+			},
+			remove_color_distanceC(value) {
+				let f = fabric.Image.filters;
+				this.applyFilterValue(2, 'distance', value);
+
+			},
 			brightnessC(value) {
 				let f = fabric.Image.filters;
 				this.applyFilter(5, value && new f.Brightness({
@@ -395,28 +404,31 @@
 			},
 			gammaC(value) {
 				let f = fabric.Image.filters;
-				var v1 = parseFloat(this.gamma.red);
-				var v2 = parseFloat(this.gamma.green);
-				var v3 = parseFloat(this.gamma.blue);
+				let v1 = parseFloat(this.gamma.red);
+				let v2 = parseFloat(this.gamma.green);
+				let v3 = parseFloat(this.gamma.blue);
 				this.applyFilter(17, value && new f.Gamma({
 					gamma: [v1, v2, v3]
 				}));
 			},
 			gammaColorC(index, value) {
-				var current = this.getFilter(17).gamma;
+				let current = this.getFilter(17).gamma;
 				current[index] = parseFloat(value);
 				this.applyFilterValue(17, 'gamma', current);
 			},
 			contrastC(value) {
+				let f = fabric.Image.filters;
 				this.applyFilter(6, value && new f.Contrast({
 					contrast: parseFloat(this.contrast.value)
 				}));
 			},
 			contrastValueC(value) {
+				let f = fabric.Image.filters;
 				this.applyFilterValue(6, 'contrast', parseFloat(value));
 			},
 			saturationC(value){
-				this.applyFilter(7, checked && new f.Saturation({
+				let f = fabric.Image.filters;
+				this.applyFilter(7, value && new f.Saturation({
 				      saturation: parseFloat(this.saturation.value)
 				    }));
 			},
@@ -424,15 +436,17 @@
 				this.applyFilterValue(7, 'saturation', parseFloat(value));
 			},
 			vibranceC(value){
-				this.applyFilter(8, checked && new f.Vibrance({
-				      saturation: parseFloat(this.vibrance.value)
+				let f = fabric.Image.filters;
+				this.applyFilter(8, value && new f.Vibrance({
+					vibrance: parseFloat(this.vibrance.value)
 				    }));
 			},
 			vibranceValueC(value){
 				this.applyFilterValue(8, 'vibrance', parseFloat(value));
 			},
 			hueC(value){
-				this.applyFilter(21, checked && new f.HueRotation({
+				let f = fabric.Image.filters;
+				this.applyFilter(21, value && new f.HueRotation({
 				      rotation: parseFloat(this.vibrance.value)
 				    }));
 			},
@@ -440,7 +454,8 @@
 				this.applyFilterValue(21, 'rotation', parseFloat(value));
 			},
 			noiseC(value){
-				this.applyFilter(9, checked && new f.Noise({
+				let f = fabric.Image.filters;
+				this.applyFilter(9, value && new f.Noise({
 				      noise: parseFloat(this.vibrance.value)
 				    }));
 			},
@@ -448,22 +463,25 @@
 				this.applyFilterValue(9, 'noise', parseFloat(value));
 			},
 			pixelateC(value){
-				this.applyFilter(10, checked && new f.Pixelate({
+				let f = fabric.Image.filters;
+				this.applyFilter(10, value && new f.Pixelate({
 				      blocksize: parseFloat(this.pixelate.value)
 				    }));
 			},
 			pixelateValueC(value){
-				this.applyFilterValue(9, 'blocksize', parseFloat(value));
+				this.applyFilterValue(10, 'blocksize', parseFloat(value));
 			},
 			blurC(value){
-				this.applyFilter(11, checked && new f.Blur({
-				      value: parseFloat(this.pixelate.value)
+				let f = fabric.Image.filters;
+				this.applyFilter(11, value && new f.Blur({
+					blur: parseFloat(this.pixelate.value)
 				    }));
 			},
 			blurValueC(value){
-				this.applyFilterValue(11, 'value', parseFloat(value));
+				this.applyFilterValue(11, 'blur', parseFloat(value));
 			},
 			sharpenC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(12, value && new f.Convolute({
 				      matrix: [  0, -1,  0,
 				                -1,  5, -1,
@@ -471,6 +489,7 @@
 				    }));
 			},
 			embossC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(13, value && new f.Convolute({
 					  matrix: [ 1,   1,  1,
 								1, 0.7, -1,
@@ -478,17 +497,19 @@
 					}));
 
 			},
-			sharpenC(value){
+			blendC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(16, value && new f.BlendColor({
-				      color: document.getElementById('blend-color').value,
-				      mode: document.getElementById('blend-mode').value,
-				      alpha: document.getElementById('blend-alpha').value
+				      color:  this.blend.color,
+				      mode: this.blend.mode,
+				      alpha:  this.blend.alpha,
 				    }));
 			},
 			blendModeC(mode, value){
 				this.applyFilterValue(16, mode, value);
 			},
 			blendImageC(value){
+				let f = fabric.Image.filters;
 				this.applyFilter(20, value && new f.BlendImage({
 				      image: this.fImage,
 				    }));
@@ -497,7 +518,7 @@
 				this.applyFilterValue(20, 'mode', value);
 			},
 			blendImageAlphaC(value){
-					this.applyFilterValue(20, 'mode', value);
+				this.applyFilterValue(20, 'mode', value);
 			}
 		},
 		mounted() {
@@ -517,13 +538,13 @@
 			fabric.Object.prototype.transparentCorners = false;
 
 
-			var canvas = this.canvas,
+			let canvas = this.canvas,
 				f = fabric.Image.filters;
 			let filters = self.filters
 
 			canvas.on({
 				'selection:created': function() {
-					for (var i = 0; i < filters.length; i++) {
+					for (let i = 0; i < filters.length; i++) {
 						if (self[filters[i]]) {
 							self[filters[i]].disabled = false
 							self[filters[i]].checked = !!canvas.getActiveObject().filters[i]
@@ -531,7 +552,7 @@
 					}
 				},
 				'selection:cleared': function() {
-					for (var i = 0; i < filters.length; i++) {
+					for (let i = 0; i < filters.length; i++) {
 						if (self[filters[i]]) {
 							self[filters[i]].disabled = true
 						}
@@ -542,28 +563,28 @@
 
 
 			fabric.Image.fromURL('/public/pug.jpg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 0
 				}).scale(0.25);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/printio.png', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 150,
 					top: 0
 				}).scale(0.4);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/dragon.jpg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 270
 				}).scale(0.2);
 				canvas.add(oImg);
 			});
 			fabric.Image.fromURL('/public/dragon2.jpeg', function(img) {
-				var oImg = img.set({
+				let oImg = img.set({
 					left: 0,
 					top: 500
 				}).scale(0.2);
@@ -572,9 +593,9 @@
 
 
 
-			var imageElement = document.createElement('img');
+			let imageElement = document.createElement('img');
 			imageElement.src = '/public/printio.png';
-			var fImage = this.fImage = new fabric.Image(imageElement);
+			let fImage = this.fImage = new fabric.Image(imageElement);
 			fImage.scaleX = 1;
 			fImage.scaleY = 1;
 			fImage.top = 15;

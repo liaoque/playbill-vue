@@ -15,7 +15,7 @@
 			}
 		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 			fabric.Object.prototype.transparentCorners = false;
 			fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
@@ -26,13 +26,13 @@
 				};
 			}
 
-			var btnWidth = 85,
+			let btnWidth = 85,
 				btnHeight = 18;
 
 			let self = this;
 
 			function positionBtn(obj) {
-				var absCoords = canvas.getAbsoluteCoords(obj);
+				let absCoords = canvas.getAbsoluteCoords(obj);
 
 				self.btn.left = (absCoords.left - btnWidth / 2) + 'px';
 				self.btn.top = (absCoords.top - btnHeight / 2) + 'px';

@@ -12,27 +12,31 @@
 		},
 		methods() {
 
-		}
+		},
 		mounted() {
-			var canvas = this.canvas;
+			let canvas = this.canvas;
 
 			fabric.Object.prototype.transparentCorners = false;
 
 			canvas.on('mouse:over', function(e) {
-				e.target.set('fill', 'red');
+			    if(e.target){
+                    e.target.set('fill', 'red');
+                }
 				canvas.renderAll();
 			});
 
 			canvas.on('mouse:out', function(e) {
-				e.target.set('fill', 'green');
+                if(e.target){
+                    e.target.set('fill', 'green');
+                }
 				canvas.renderAll();
 			});
 
 			// add random objects
-			for (var i = 15; i--;) {
-				var dim = fabric.util.getRandomInt(30, 60);
-				var klass = ['Rect', 'Triangle', 'Circle'][fabric.util.getRandomInt(0, 2)];
-				var options = {
+			for (let i = 15; i--;) {
+				let dim = fabric.util.getRandomInt(30, 60);
+				let klass = ['Rect', 'Triangle', 'Circle'][fabric.util.getRandomInt(0, 2)];
+				let options = {
 					top: fabric.util.getRandomInt(0, 600),
 					left: fabric.util.getRandomInt(0, 600),
 					fill: 'green'

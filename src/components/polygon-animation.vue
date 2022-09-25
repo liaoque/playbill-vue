@@ -6,27 +6,27 @@
 		name:'polygon-animation',
 		props:['canvas'],
 		mounted() {
-			var canvas = this.canvas ;
-			
-			  var startPoints = [
+			let canvas = this.canvas ;
+
+			  let startPoints = [
 			    {x: 0, y: 42},
 			    {x: 155, y: 0},
 			    {x: 155, y: 243},
 			    {x: 0, y: 256}
 			  ];
-			
-			  var endPoints = [
+
+			  let endPoints = [
 			    {x: 185, y: 0},
 			    {x: 250, y: 100},
 			    {x: 385, y: 170},
 			    {x: 0, y: 245}
 			  ];
-			
-			  var clonedStartPoints = startPoints.map(function(o){
+
+			  let clonedStartPoints = startPoints.map(function(o){
 			    return fabric.util.object.clone(o);
 			  });
-			
-			  var polygon = new fabric.Polygon(clonedStartPoints, {
+
+			  let polygon = new fabric.Polygon(clonedStartPoints, {
 			    left: 0,
 			    top: 0,
 			    fill: 'purple',
@@ -34,7 +34,7 @@
 			    objectCaching: false,
 			  });
 			  canvas.add(polygon);
-			
+
 			  function animatePoint(i, prop, endPoints) {
 			    fabric.util.animate({
 			      startValue: polygon.points[i][prop],
@@ -57,15 +57,15 @@
 			      }
 			    });
 			  }
-			
+
 			  function animate() {
-			    for (var i = 0, len = startPoints.length; i < len; i++) {
+			    for (let i = 0, len = startPoints.length; i < len; i++) {
 			      animatePoint(i, 'x', even ? endPoints : startPoints);
 			      animatePoint(i, 'y', even ? endPoints : startPoints);
 			    }
 			  }
-			
-			  var even = true;
+
+			  let even = true;
 			  setTimeout(animate, 1000);
 
 		}
