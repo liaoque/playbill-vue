@@ -12,10 +12,13 @@
     "fabric": "^5.2.4",
     "fabric-with-erasing": "^1.0.1",
     "fontfaceobserver": "^2.3.0",
-    "vue": "^3.2.37"
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.0.4"
+    "vite": "^3.0.4",
+    "vite-plugin-require-transform": "^1.0.3"
   }
 }
