@@ -4,37 +4,20 @@
 
 
       <el-form-item label="背景颜色">
-        <el-color-picker v-model="color" />
+        <el-color-picker v-model="color" @change="useDesignStore.setBackgroundColor" />
       </el-form-item>
 
       <el-form-item label="上传背景图">
-        <el-upload action="#" list-type="picture-card" :auto-upload="false">
+        <el-upload action="#"
+                   list-type="picture-card"
+                   :on-success="handleSuccess"
+                   :on-remove="handleRemove"
+                   :auto-upload="true"
+                   :limit="1"
+        >
           <el-icon>
             <Plus />
           </el-icon>
-
-          <template #file="{ file }">
-            <div>
-              <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
-              <span class="el-upload-list__item-actions">
-                <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-                  <el-icon>
-                    <zoom-in />
-                  </el-icon>
-                </span>
-                <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleDownload(file)">
-                  <el-icon>
-                    <Download />
-                  </el-icon>
-                </span>
-                <span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
-                  <el-icon>
-                    <Delete />
-                  </el-icon>
-                </span>
-              </span>
-            </div>
-          </template>
         </el-upload>
 
         <el-dialog v-model="dialogVisible">
@@ -43,10 +26,10 @@
 
       </el-form-item>
 
+      <el-form-item label="删除背景图">
+        <el-button @click="useDesignStore.removeBackground">删除</el-button>
+      </el-form-item>
 
-      <!-- <el-form-item>
-        <el-button type="primary" @click="onSubmit">Query</el-button>
-      </el-form-item> -->
     </el-form>
   </div>
 
@@ -54,76 +37,58 @@
 
 
 <script lang="ts">
-  // 普通 <script>, 在模块作用域下执行 (仅一次)
-  // runSideEffectOnce()
+// 普通 <script>, 在模块作用域下执行 (仅一次)
+// runSideEffectOnce()
 
-  // 声明额外的选项
-  export default {
-
-  }
+// 声明额外的选项
+export default {};
 </script>
 
 
 <script lang="ts" setup>
-  import {
-    ref,
-    defineProps,
-    onMounted,
-    defineExpose,
-    nextTick
-  } from 'vue'
+import {
+  ref,
+  defineProps,
+  onMounted,
+  defineExpose,
+  nextTick
+} from "vue";
+import { Plus } from "@element-plus/icons-vue";
 
-  import {
-    Delete,
-    Download,
-    Plus,
-    ZoomIn
-  } from '@element-plus/icons-vue'
+import type {
+  UploadFile
+} from "element-plus";
 
-  import type {
-    UploadFile
-  } from 'element-plus'
+import {
+  useDesignStoreHook
+} from "/@/store/modules/design";
 
-  import {
-    useDesignStoreHook
-  } from "/@/store/modules/design";
+const useDesignStore = useDesignStoreHook();
 
-  const useDesignStore = useDesignStoreHook()
+let color = ref("");
+const disabled = ref(false);
+const dialogImageUrl = ref("");
+const dialogVisible = ref(false);
+
+onMounted(() => {
+});
+
+defineExpose({});
+
+const handleRemove = (file: UploadFile) => {
+  useDesignStore.removeBackground();
+};
+
+const handleSuccess = (file: UploadFile) => {
+  console.log(file)
+};
 
 
-  let color = ref('')
-  const dialogImageUrl = ref('')
-  const dialogVisible = ref(false)
-  const disabled = ref(false)
-
-
-
-  onMounted(() => {
-    //设置宽高
-
-    // console.log(props.canvas, props.canvas.setWidth, getCurrentInstance())
-  })
-
-  defineExpose({
-  })
-
-  const handleRemove = (file: UploadFile) => {
-    console.log(file)
-  }
-
-  const handlePictureCardPreview = (file: UploadFile) => {
-    dialogImageUrl.value = file.url!
-      dialogVisible.value = true
-  }
-
-  const handleDownload = (file: UploadFile) => {
-    console.log(file)
-  }
 </script>
 
 <style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
 </style>

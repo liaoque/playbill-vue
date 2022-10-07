@@ -46,7 +46,9 @@
 
   onMounted(() => {
     //设置宽高
-
+    nextTick(()=>{
+      useDesignStore.setWh()
+    })
   })
 
   defineExpose({

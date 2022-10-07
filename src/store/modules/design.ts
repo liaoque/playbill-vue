@@ -2,15 +2,16 @@ import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { designCanvasType, designBackgroundType, designCanvasMapType } from "./types";
 import { fabric } from "/@/utils/fabric";
+import { markRaw } from "vue";
 
 let background: designBackgroundType = {
-  src: ''
-}
+  src: ""
+};
 
 let canvasMap: designCanvasMapType = {
   width: 375,
-  height: 667,
-}
+  height: 667
+};
 
 export const useDesignStore = defineStore({
   id: "design-setting",
@@ -35,30 +36,18 @@ export const useDesignStore = defineStore({
       this.canvas = canvas;
     },
     setWh() {
-      this.canvas.setWidth(parseInt(this.canvasMap.width))
-      this.canvas.setHeight(parseInt(this.canvasMap.height))
+      this.canvas.setWidth(parseInt(this.canvasMap.width));
+      this.canvas.setHeight(parseInt(this.canvasMap.height));
+    },
+    setBackgroundColor(color: string) {
+      this.canvas.setBackgroundColor(color, this.canvas.renderAll.bind(this.canvas));
     },
     setBackground(src: string) {
-      let self = this
-      this.background.instance = new fabric.Image.fromURL(src, function(image: any) {
-        // image.
-        image.set({
-          // width: 200,
-          // height: 100,
-          // radius: 200,
-          //
-          scaleX: 0.5,
-          scaleY: 0.5,
-          objectCaching: false,
-          stroke: 'lightgreen',
-          strokeWidth: 4,
-        })
-        // image.scaleToWidth(200);
-        self.canvas.add(image);
-
-      }, {
-        crossOrigin: 'anonymous',
-      })
+      // this.removeBackground()
+      this.canvas.setBackgroundImage(src, this.canvas.renderAll.bind(this.canvas));
+    },
+    removeBackground() {
+      this.canvas.setBackgroundImage(null, this.canvas.renderAll.bind(this.canvas));
     }
   }
 });
