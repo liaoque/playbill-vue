@@ -26,6 +26,8 @@ import "@pureadmin/components/dist/dark.scss";
 import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
 
+import fabric from 'fabric-with-erasing';
+
 const app = createApp(App);
 
 // 自定义指令
@@ -50,6 +52,7 @@ getServerConfig(app).then(async config => {
   injectResponsiveStorage(app, config);
   setupStore(app);
   app.use(MotionPlugin).use(useI18n).use(ElementPlus);
+  app.use(fabric)
   // .use(useEcharts);
   // .use(Table);
   // .use(PureDescriptions);

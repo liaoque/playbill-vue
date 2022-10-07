@@ -20,6 +20,8 @@ buttons:
   hscloseAllTabs: Close AllTabs
 menus:
   hshome: Home
+  design: Design
+  demo: Demo
   hslogin: Login
   hserror: Error Page
   hsfourZeroFour: "404"

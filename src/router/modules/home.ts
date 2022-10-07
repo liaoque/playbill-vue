@@ -20,6 +20,22 @@ const homeRouter: RouteConfigsTable = {
       meta: {
         title: $t("menus.hshome")
       }
+    },
+    {
+      path: "/design",
+      name: "Design",
+      component: () => import("/@/views/design/index.vue"),
+      meta: {
+        title: $t("menus.design")
+      }
+    },
+    {
+      path: "/demo",
+      name: "Demo",
+      component: () => import("/@/views/demo/index.vue"),
+      meta: {
+        title: $t("menus.demo")
+      }
     }
   ]
 };

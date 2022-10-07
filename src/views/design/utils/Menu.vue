@@ -1,0 +1,94 @@
+<template>
+  <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-click="changePanle">
+    <el-tab-pane label="模版">
+
+    </el-tab-pane>
+    <el-tab-pane label="素材">
+
+    </el-tab-pane>
+    <el-tab-pane label="特效文字">
+
+    </el-tab-pane>
+    <el-tab-pane label="3D文字">
+
+    </el-tab-pane>
+    <el-tab-pane label="照片">
+      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement" />
+      <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> -->
+    </el-tab-pane>
+
+    <el-tab-pane label="背景">
+      <Background ></Background>
+    </el-tab-pane>
+    <el-tab-pane label="画布">
+
+    </el-tab-pane>
+  </el-tabs>
+
+
+
+
+</template>
+
+
+
+<script lang="ts" setup>
+  // import {
+  //   Expand,
+  //   Fold
+  // } from '@element-plus/icons-vue'
+  // import fabric from ".../utils/fabric.vue"
+  import {
+    fabric
+  } from "/@/utils/fabric"
+
+  import {
+    ref,
+    defineEmits,
+    defineProps
+  } from 'vue'
+
+  import Background from "./Menu-tab/Background.vue"
+  import {
+    useDesignStoreHook
+  } from "/@/store/modules/design";
+
+  const useDesignStore = useDesignStoreHook()
+
+
+  let src = ref(
+    "https://img.tuguaishou.com/designer_upload_asset/16/44/32/62/68/70/704997b8ad30519510dd30032592466e.jpg!l2000?auth_key=1665021601-0-0-506e4ad834ccd639832efacca57367a6"
+  )
+
+
+  let panelIndex = ref('6');
+  const emit = defineEmits(['changePanle'])
+
+  function changePanle(pane, ev) {
+    // panelIndex = pane.index
+    emit('changePanle', {
+      pane,
+      ev
+    })
+    // console.log(pane, ev)
+  }
+
+  // elElement
+  function changeElement(e) {
+    useDesignStore.setBackground(e.path[0].currentSrc)
+  }
+
+</script>
+
+
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+
+  .container {
+    color: rgba(254, 254, 254, 0.65);
+    background-color: #0f0303
+  }
+</style>
