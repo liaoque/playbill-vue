@@ -43,7 +43,7 @@
           <!-- 蒙版 -->
           <duotone-filter :canvas="canvas" v-if="panel_name == 'duotone-filter'" />
 
-          <!-- 添加文字 -->
+          <!-- 文字路径 -->
           <text-on-paths :canvas="canvas" v-if="panel_name == 'text-on-paths'" />
 
           <!-- 添加文字 -->

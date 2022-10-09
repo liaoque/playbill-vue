@@ -59,6 +59,10 @@
   onMounted(() => {
     // canvas.value = markRaw(new fabric.Canvas('canvas'));
     useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
+    useDesignStore.canvas.on('selection:created', (e)=>{
+      console.log(e)
+    })
+
     // useDesignStore.setCanvas(markRaw(new fabric.Canvas('canvas')))
     // setTimeout(()=>{proxy.$refs.canvas_setting.setWh()}, 3000)
   })

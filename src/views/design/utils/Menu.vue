@@ -7,7 +7,7 @@
 
     </el-tab-pane>
     <el-tab-pane label="特效文字">
-
+      <DesignFont></DesignFont>
     </el-tab-pane>
     <el-tab-pane label="3D文字">
 
@@ -49,6 +49,7 @@
   } from 'vue'
 
   import Background from "./Menu-tab/Background.vue"
+  import DesignFont from "./Menu-tab/DesignFont.vue"
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";

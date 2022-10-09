@@ -44,7 +44,10 @@ export const useDesignStore = defineStore({
     },
     setBackground(src: string) {
       // this.removeBackground()
-      this.canvas.setBackgroundImage(src, this.canvas.renderAll.bind(this.canvas));
+      let self = this
+      self.canvas.setBackgroundImage(src, (obj)=>{
+        self.canvas.renderAll(obj)
+      });
     },
     removeBackground() {
       this.canvas.setBackgroundImage(null, this.canvas.renderAll.bind(this.canvas));
