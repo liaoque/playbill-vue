@@ -1,0 +1,85 @@
+<template>
+  <div>
+    <el-form :inline="true" class="demo-form-inline">
+
+      <el-form-item label="背景颜色">
+        <el-color-picker @change="setColor"/>
+      </el-form-item>
+
+
+      <el-form-item label="字体">
+        <el-select v-model="fontName" @change="loadAndUse" class="m-2" placeholder="Select" size="large">
+          <el-option
+            v-for="(item, index) in options"
+            :key="index"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+      </el-form-item>
+
+
+    </el-form>
+
+  </div>
+</template>
+
+
+<script lang="ts">
+  // 声明额外的选项
+  export default {}
+</script>
+
+
+<script lang="ts" setup>
+  import {
+    onMounted,
+    onUnmounted,
+    ref,
+    defineProps,
+  } from 'vue'
+  import FontFaceObserver from 'fontfaceobserver'
+
+  const props = defineProps({
+    klassObj: Object
+  })
+
+  const options = ["observer-test1", "unknown", "observer-test3", "observer-test4", "observer-test5",
+    "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular", "Neue Frutiger 1450 W04"]
+
+  let fontName = ref('')
+
+  onMounted(() => {
+    console.log(props.klassObj)
+  })
+
+  function setColor() {
+    // props.klassObj
+  }
+
+  function loadAndUse(font) {
+    console.log(font)
+    let myfont = new FontFaceObserver(font)
+    myfont.load().then(function () {
+      // when font is loaded, use it.
+      canvas.getActiveObject().set("fontFamily", font);
+      canvas.requestRenderAll();
+    }).catch(function (e) {
+      console.log(e)
+      alert('font loading failed ' + font);
+    });
+  }
+
+
+  // onUnmounted(()=>{
+  //   console.log("4444444444444")
+  // })
+
+</script>
+
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+</style>

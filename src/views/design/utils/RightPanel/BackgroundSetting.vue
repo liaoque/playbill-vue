@@ -2,7 +2,6 @@
   <div class="" style="background-color: #FFFFFF;padding: 5px;">
     <el-form :inline="true" class="demo-form-inline">
 
-
       <el-form-item label="背景颜色">
         <el-color-picker v-model="color" @change="useDesignStore.setBackgroundColor" />
       </el-form-item>

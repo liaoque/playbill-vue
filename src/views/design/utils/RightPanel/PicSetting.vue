@@ -1,5 +1,7 @@
 <template>
-  pic
+  <div>
+    pic
+  </div>
 
 
 </template>

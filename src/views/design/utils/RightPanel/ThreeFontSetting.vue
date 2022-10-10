@@ -1,5 +1,5 @@
 <template>
-  elem
+  <div>3d</div>
 
 </template>
 
@@ -16,7 +16,7 @@
 
 
 <script lang="ts" setup>
-  
+
 </script>
 
 <style>

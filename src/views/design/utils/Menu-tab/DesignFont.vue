@@ -9,75 +9,80 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  defineProps,
-  defineEmits,
-  onMounted
-} from "vue";
-import {
-  useDesignStoreHook
-} from "/@/store/modules/design";
-import { fabric } from "/@/utils/fabric";
+  import {
+    ref,
+    defineProps,
+    defineEmits,
+    onMounted
+  } from "vue";
+  import {
+    useDesignStoreHook
+  } from "/@/store/modules/design";
+  import {fabric} from "/@/utils/fabric";
 
-let picList = ref([]);
+  let picList = ref([]);
 
 
-onMounted(() => {
+  onMounted(() => {
 
-});
-
-const useDesignStore = useDesignStoreHook();
-
-function addText() {
-  let fabricText = new fabric.IText("双击修改文字", { fontSize: 16, top: 20, left: 20 });
-  useDesignStore.canvas.add(fabricText);
-}
-
-function addPic() {
-  new fabric.Image.fromURL("./public/pug.jpg", function(image) {
-    image.set({
-      scaleX: 0.5,
-      scaleY: 0.5,
-      objectCaching: false
-    });
-    useDesignStore.canvas.add(image);
   });
-}
 
-function addQrcode() {
-  new fabric.Image.fromURL("./public/ewm.png", function(image) {
-    image.set({
+  const useDesignStore = useDesignStoreHook();
+
+  function addText() {
+    let fabricText = new fabric.IText("双击修改文字", {fontSize: 16, top: 20, left: 20});
+    fabricText.component_type = 'text'
+    useDesignStore.canvas.add(fabricText);
+  }
+
+  function addPic() {
+    new fabric.Image.fromURL("./public/pug.jpg", function (image) {
+      image.set({
+        scaleX: 0.5,
+        scaleY: 0.5,
+        objectCaching: false,
+        component_type: 'pic'
+      });
+      useDesignStore.canvas.add(image);
+    });
+  }
+
+  function addQrcode() {
+    new fabric.Image.fromURL("./public/ewm.png", function (image) {
+      image.set({
+        scaleX: 0.5,
+        scaleY: 0.5,
+        objectCaching: false,
+        stroke: "lightgreen",
+        strokeWidth: 1,
+        component_type: 'qrcode'
+      });
+      useDesignStore.canvas.add(image);
+    });
+  }
+
+  function addRect() {
+    let rect = new fabric.Rect({
+      left: 100,
+      top: 50,
+      fill: "yellow",
+      width: 200,
+      height: 100,
       scaleX: 0.5,
       scaleY: 0.5,
       objectCaching: false,
       stroke: "lightgreen",
-      strokeWidth: 1
+      strokeWidth: 1,
+      component_type: 'rect'
     });
-    useDesignStore.canvas.add(image);
-  });
-}
-
-function addRect() {
-  let rect = new fabric.Rect({
-    left: 100,
-    top: 50,
-    fill: "yellow",
-    width: 200,
-    height: 100,
-    objectCaching: false,
-    stroke: "lightgreen",
-    strokeWidth: 1
-  });
-
-  useDesignStore.canvas.add(rect);
-}
+    useDesignStore.canvas.add(rect);
+  }
 
 </script>
 
 <style>
-.image {
-  width: 100%;
-  display: block;
-}
+  .image {
+    width: 100%;
+    display: block;
+  }
 </style>

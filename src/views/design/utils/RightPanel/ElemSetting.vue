@@ -1,5 +1,7 @@
 <template>
-  effect
+  <div>
+    elem
+  </div>
 
 </template>
 
