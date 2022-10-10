@@ -63,6 +63,7 @@
     useDesignStore.canvas.on('selection:created', (e) => {
       if (e.selected.length) {
         let selected = e.selected[0];
+        console.log(selected)
         switch (selected.component_type) {
           case 'text':
             panelComponent.value = EffectFontSettingVue
