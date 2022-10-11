@@ -8,6 +8,7 @@
     <el-menu-item index="3">下一步</el-menu-item>
 
     <div class="flex-grow"/>
+    <el-menu-item index="5">预览</el-menu-item>
     <el-menu-item index="4">分享</el-menu-item>
     <el-menu-item index="4">分享</el-menu-item>
     <el-menu-item index="5">预览</el-menu-item>

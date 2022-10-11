@@ -1,8 +1,9 @@
-import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { designCanvasType, designBackgroundType, designCanvasMapType } from "./types";
-import { fabric } from "/@/utils/fabric";
-import { markRaw } from "vue";
+import {defineStore} from "pinia";
+import {store} from "/@/store";
+import {designCanvasType, designBackgroundType, designCanvasMapType} from "./types";
+import {fabric} from "/@/utils/fabric";
+import {markRaw} from "vue";
+import {any} from "vue-types";
 
 let background: designBackgroundType = {
   src: ""
@@ -13,11 +14,12 @@ let canvasMap: designCanvasMapType = {
   height: 667
 };
 
+
 export const useDesignStore = defineStore({
   id: "design-setting",
   state: (): designCanvasType => ({
     background: background,
-    canvasMap: canvasMap
+    canvasMap: canvasMap,
   }),
   getters: {
     getBackground(): designBackgroundType {
@@ -26,14 +28,16 @@ export const useDesignStore = defineStore({
     getCanvasMap(): designCanvasMapType {
       return this.canvasMap;
     },
-
-    getHiddenSideBar() {
-      return this.HiddenSideBar;
-    }
+    getActiveSelection() {
+      return this.activeSelection;
+    },
   },
   actions: {
     setCanvas(canvas: Object) {
-      this.canvas = canvas;
+      this.canvas = markRaw(canvas);
+    },
+    setActiveSelection(activeSelection?: any) {
+      this.activeSelection = markRaw(activeSelection || this.canvas.getActiveObject());
     },
     setWh() {
       this.canvas.setWidth(parseInt(this.canvasMap.width));
@@ -45,7 +49,7 @@ export const useDesignStore = defineStore({
     setBackground(src: string) {
       // this.removeBackground()
       let self = this
-      self.canvas.setBackgroundImage(src, (obj)=>{
+      self.canvas.setBackgroundImage(src, (obj) => {
         self.canvas.renderAll(obj)
       });
     },

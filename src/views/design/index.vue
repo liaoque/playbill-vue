@@ -59,37 +59,58 @@
   let klassObj = ref({})
   onMounted(() => {
 
-    useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
-    useDesignStore.canvas.on('selection:created', (e) => {
+    let selection = (e) => {
       if (e.selected.length) {
         let selected = e.selected[0];
-        console.log(selected)
+        let basePrototype = {
+          left: selected.left,
+          top: selected.top,
+          opacity: selected.opacity,
+          angle: selected.angle,
+          klass: markRaw(selected),
+        }
         switch (selected.component_type) {
           case 'text':
             panelComponent.value = EffectFontSettingVue
-            klassObj.value = selected
+            klassObj.value = {
+              fill: selected.fill,
+              fontName: selected.fill,
+              fontSize: selected.fontSize,
+              fontWeight: selected.fontWeight || 'normal',
+              text: selected.text,
+              ...basePrototype
+            };
             break;
           case 'pic':
             panelComponent.value = PicSettingVue
-            klassObj.value = selected
+            klassObj.value = {
+              ...basePrototype
+            };
             break;
           case 'qrcode':
             panelComponent.value = CanvasSetting
-            klassObj.value = selected
+            klassObj.value = {
+              ...basePrototype
+            };
             break;
           case 'rect':
             panelComponent.value = CanvasSetting
-            klassObj.value = selected
+            klassObj.value = {
+              ...basePrototype
+            };
             break;
           default:
             panelComponent.value = CanvasSetting
             break;
         }
+        useDesignStore.setActiveSelection();
       }
-    })
+    }
 
-    // useDesignStore.setCanvas(markRaw(new fabric.Canvas('canvas')))
-    // setTimeout(()=>{proxy.$refs.canvas_setting.setWh()}, 3000)
+    useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
+    useDesignStore.canvas.on('selection:created', selection)
+    useDesignStore.canvas.on('selection:updated', selection)
+
   })
 
 

@@ -1,5 +1,5 @@
-import { RouteRecordName } from "vue-router";
-import { fabric } from "/@/utils/fabric";
+import {RouteRecordName} from "vue-router";
+import {fabric} from "/@/utils/fabric";
 
 export type cacheType = {
   mode: string;
@@ -56,8 +56,10 @@ export type designCanvasMapType = {
 
 
 export type designCanvasType = {
+  // @ts-ignore
   canvas?: fabric.Canvas;
   background: designBackgroundType;
   canvasMap: designCanvasMapType;
+  activeSelection?: any;
 
 }

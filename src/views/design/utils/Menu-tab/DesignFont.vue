@@ -30,7 +30,7 @@
   const useDesignStore = useDesignStoreHook();
 
   function addText() {
-    let fabricText = new fabric.IText("双击修改文字", {fontSize: 16, top: 20, left: 20});
+    let fabricText = new fabric.IText("双击修改文字", {top: 20, left: 20});
     fabricText.component_type = 'text'
     useDesignStore.canvas.add(fabricText);
   }

@@ -1,10 +1,6 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
 
-    <el-form-item label="背景颜色">
-      <el-color-picker @change="setColor" />
-    </el-form-item>
-
     <el-form-item label="字体">
       <el-select v-model="fontName" @change="loadAndUse" class="m-2" placeholder="Select" size="large">
         <el-option
@@ -15,41 +11,62 @@
         />
       </el-select>
     </el-form-item>
-    <el-form-item label="尺寸：宽，高">
+
+    <el-form-item label="字体：颜色,粗细">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.width"
-            type="text"
-          />
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
         </el-col>
         <el-col :span="12">
           <el-input
-            v-model="props.klassObj.height"
+            v-model="props.klassObj.fontWeight"
             type="text"
+            @change="renderKlass"
           />
         </el-col>
       </el-row>
     </el-form-item>
-    <el-form-item label="位置：x，y">
+
+    <el-form-item label="字体: 大小,透明度">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-input
+            v-model="props.klassObj.fontSize"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+        <el-col :span="12">
+          <el-input
+            v-model="props.klassObj.opacity"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+      </el-row>
+    </el-form-item>
+
+    <el-form-item label="位置：x, y">
       <el-row :gutter="20">
         <el-col :span="12">
           <el-input
             v-model="props.klassObj.left"
             type="text"
+            @change="renderKlass"
           />
         </el-col>
         <el-col :span="12">
           <el-input
             v-model="props.klassObj.top"
             type="text"
+            @change="renderKlass"
           />
         </el-col>
       </el-row>
     </el-form-item>
 
-    <el-form-item label="旋转" style="display: block;width: 100%;" >
-        <el-slider v-model="props.klassObj.heigh" style="width: 90%;margin: 0 auto;" />
+    <el-form-item label="旋转" style="display: block;width: 100%;">
+      <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
     <el-form-item label="唯一标识">
@@ -63,6 +80,7 @@
       <el-input
         v-model="props.klassObj.text"
         type="textarea"
+        @change="renderKlass"
       />
     </el-form-item>
 
@@ -74,145 +92,67 @@
 
 
 <script lang="ts">
-// 声明额外的选项
-export default {};
+  // 声明额外的选项
+  export default {};
 </script>
 
 
 <script lang="ts" setup>
-import Actions from "./Actions.vue";
-import {
-  onMounted,
-  onUnmounted,
-  ref,
-  defineProps
-} from "vue";
-import FontFaceObserver from "fontfaceobserver";
+  import Actions from "./Actions.vue";
+  import {
+    onMounted,
+    onUnmounted,
+    ref,
+    defineProps, nextTick
+  } from "vue";
+  import FontFaceObserver from "fontfaceobserver";
+  import "/@/assets/fonts/fonts.css"
+  import {useDesignStoreHook} from "/@/store/modules/design";
 
-
-const props = defineProps({
-  klassObj: Object
-});
-
-const options = ["observer-test1", "unknown", "observer-test3", "observer-test4", "observer-test5",
-  "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular", "Neue Frutiger 1450 W04"];
-
-let fontName = ref("");
-let text = ref("");
-let textarea = ref("");
-
-onMounted(() => {
-});
-
-function setColor() {
-  // props.klassObj
-}
-
-function loadAndUse(font) {
-  console.log(font);
-  let myfont = new FontFaceObserver(font);
-  myfont.load().then(function() {
-    // when font is loaded, use it.
-    canvas.getActiveObject().set("fontFamily", font);
-    canvas.requestRenderAll();
-  }).catch(function(e) {
-    console.log(e);
-    alert("font loading failed " + font);
+  const useDesignStore = useDesignStoreHook()
+  const props = defineProps({
+    klassObj: Object
   });
-}
+
+  const options = ["observer-test1", "unknown", "observer-test3", "observer-test4", "observer-test5",
+    "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular", "Neue Frutiger 1450 W04"];
+
+  let fontName = ref("");
+  let text = ref("");
+  let textarea = ref("");
+
+  onMounted(() => {
+  });
+
+  function renderKlass() {
+    console.log(props.klassObj.fill, props.klassObj.fontSize, props.klassObj.klass, parseFloat(props.klassObj.fontWeight) )
+    props.klassObj.klass.set('fill', props.klassObj.fill)
+    props.klassObj.klass.set('fontSize', parseFloat(props.klassObj.fontSize))
+    props.klassObj.klass.set('fontWeight', parseFloat(props.klassObj.fontWeight) || 'normal')
+    props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity))
+    props.klassObj.klass.set('left', parseFloat(props.klassObj.left))
+    props.klassObj.klass.set('right', parseFloat(props.klassObj.right))
+    props.klassObj.klass.set('angle', parseFloat(props.klassObj.angle))
+    props.klassObj.klass.set('text', props.klassObj.text)
+    useDesignStore.canvas.requestRenderAll();
+  }
+
+  function setColor(e) {
+    props.klassObj.klass.set('fill', e)
+    useDesignStore.canvas.requestRenderAll();
+  }
+
+  function loadAndUse(font) {
+    let myfont = new FontFaceObserver(font);
+    myfont.load().then(function () {
+      // when font is loaded, use it.
+      props.klassObj.klass.set("fontFamily", font);
+      useDesignStore.canvas.requestRenderAll();
+    }).catch(function (e) {
+      alert("font loading failed " + font);
+    });
+  }
 
 
 </script>
 
-<style scoped>
-
-
-@font-face {
-  font-family: observer-test1;
-  src: url("./assets/fonts/sourcesanspro-regular.woff") format('woff'),
-  url("./assets/fonts/sourcesanspro-regular.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: unknown;
-  src: url(unknown.woff) format('woff'),
-  url(unknown.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: observer-test3;
-  src: url("~@/assets/fonts/sourcesanspro-regular.woff") format('woff'),
-  url("~@/assets/fonts/sourcesanspro-regular.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: observer-test4;
-  src: url("~@/assets/fonts/subset.woff") format('woff'),
-  url("~@/assets/fonts/subset.ttf") format('truetype');
-  unicode-range: u+0021;
-}
-
-@font-face {
-  font-family: observer-test5;
-  src: url("~@/assets/fonts/subset.woff") format('woff'),
-  url("~@/assets/fonts/subset.ttf") format('truetype');
-  unicode-range: u+4 e2d, u+56 fd;
-}
-
-@font-face {
-  font-family: observer-test6;
-  src: url("~@/assets/fonts/subset.woff") format('woff'),
-  url("~@/assets/fonts/subset.ttf") format('truetype');
-  unicode-range: u+10 ffff;
-}
-
-@font-face {
-  font-family: observer-test7;
-  src: url("~@/assets/fonts/subset.woff") format('woff'),
-  url("~@/assets/fonts/subset.ttf") format('truetype');
-  unicode-range: u+23;
-}
-
-@font-face {
-  font-family: observer-test8;
-  src: url(@/assets/fonts/sourcesanspro-regular.woff) format('woff'),
-  url(@/assets/fonts/sourcesanspro-regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: Trebuchet W01 Regular;
-  src: url(@/assets/fonts/sourcesanspro-regular.woff) format('woff'),
-  url(@/assets/fonts/sourcesanspro-regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Neue Frutiger 1450 W04';
-  src: url(@/assets/fonts/sourcesanspro-regular.woff) format('woff'),
-  url(@/assets/fonts/sourcesanspro-regular.ttf) format('truetype');
-}
-
-.slider-demo-block {
-  display: flex;
-  align-items: center;
-}
-
-.slider-demo-block .el-slider {
-  margin-top: 0;
-  margin-left: 12px;
-}
-
-.slider-demo-block .demonstration {
-  font-size: 14px;
-  color: var(--el-text-color-secondary);
-  line-height: 44px;
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 0;
-}
-
-.slider-demo-block .demonstration + .el-slider {
-  flex: 0 0 70%;
-}
-</style>

@@ -12,6 +12,7 @@
                 let aObject = canvas.getActiveObject();
                 if (aObject.type === 'activeSelection') {
                     aObject.getObjects().forEach(function(obj) {
+                      // 是否锁定笔触宽度
                         obj.set('strokeUniform', !obj.strokeUniform);
                     });
                 } else {

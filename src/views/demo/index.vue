@@ -3,8 +3,9 @@
     <el-container>
       <el-header>
         <el-button v-for="item in [
-                    'panel0','erasing','custom-filter-swap-color','duotone-filter','text-on-paths',
-                    'build-minimap','custom-controls-polygon','stroke-uniform','super-sub-script','events'
+                    'panel0','erasing','custom-filter-swap-color:替换图片的颜色','duotone-filter:蒙版','text-on-paths:路径上增加文字',
+                    'build-minimap:创建一个地图','custom-controls-polygon:自定义形状','stroke-uniform:控制 stroke 宽度，锁定或者自定义',
+                    'super-sub-script:选中文字后，点击按钮，对应文字会上移或者下移','events:事件'
                     ,'lanczos-webgl','loadfonts','copypaste', 'manage-selection', 'touch-events'
                     ,'video-element', 'matrix-transformation','svg-caching', 'animated-sprite'
                     ,'controls-customization' ,'freedrawing','intersection', 'clipping','dynamic-patterns'
@@ -52,7 +53,7 @@
           <!--                    自定义形状-->
           <custom-controls-polygon :canvas="canvas" v-if="panel_name == 'custom-controls-polygon'" />
 
-          <!--                    控制 stroke 宽度，锁定或者自定义-->
+          <!--                    控制 stroke 宽度，锁定 stroke 宽度或者自定义-->
           <stroke-uniform :canvas="canvas" v-if="panel_name == 'stroke-uniform'" />
 
           <!--      选中文字后，点击按钮，对应文字会上移或者下移              -->
@@ -295,10 +296,11 @@
     },
     methods: {
       setPanelName(name) {
+        let name1 = name.split(":")[0]
         let canvas = this.canvas;
         canvas.clear();
-        this.panel_name = name
-        this.sky = name
+        this.panel_name = name1
+        this.sky = name1
       },
       downloadImage() {
         const ext = "png";
