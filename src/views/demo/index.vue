@@ -3,23 +3,24 @@
     <el-container>
       <el-header>
         <el-button v-for="item in [
-                    'panel0','erasing','custom-filter-swap-color:替换图片的颜色','duotone-filter:蒙版','text-on-paths:路径上增加文字',
+                    '添加，删除 panel0','erasing','custom-filter-swap-color:替换图片的颜色','duotone-filter:蒙版','text-on-paths:路径上增加文字',
                     'build-minimap:创建一个地图','custom-controls-polygon:自定义形状','stroke-uniform:控制 stroke 宽度，锁定或者自定义',
                     'super-sub-script:选中文字后，点击按钮，对应文字会上移或者下移','events:事件'
                     ,'lanczos-webgl','loadfonts','copypaste', 'manage-selection', 'touch-events'
                     ,'video-element', 'matrix-transformation','svg-caching', 'animated-sprite'
-                    ,'controls-customization' ,'freedrawing','intersection', 'clipping','dynamic-patterns'
+                    ,'对边框的控制，对图形的显示和禁用 controls-customization' ,'freedrawing','intersection', 'clipping','dynamic-patterns'
 					,'shadows', 'solar-system', 'polygon-animation', 'patterns', 'bounding-rectangle'
 					, 'particles', 'per-pixel-drag-drop', 'many-objects', 'animation-easing'
 					,'interaction-with-objects-outside-canvas', 'quadratic-curve', 'static_canvas'
 					,'image-filters', 'controls', 'stickman','polaroid','opacity_mouse_move'
 					,'ladybug', 'kitchensink', 'hovering', 'customization', 'cross'
-                    ]" @click="setPanelName(item)">{{ item }}</el-button>
+                    ]" @click="setPanelName(item)">{{ item }}
+        </el-button>
 
         <div>
-          <el-button  @click="toJSON()">toJSON</el-button>
-          <el-button  @click="downloadImage()">to Image</el-button>
-          <el-button  @click="downloadSVG()">toSVG</el-button>
+          <el-button @click="toJSON()">toJSON</el-button>
+          <el-button @click="downloadImage()">to Image</el-button>
+          <el-button @click="downloadSVG()">toSVG</el-button>
         </div>
       </el-header>
       <el-container>
@@ -33,64 +34,64 @@
           </div>
 
           <!-- 添加 -->
-          <panel0 :canvas="canvas" v-if="panel_name == 'panel0'" />
+          <panel0 :canvas="canvas" v-if="panel_name == 'panel0'"/>
 
           <!-- 橡皮擦 -->
-          <erasing :canvas="canvas" v-if="panel_name == 'erasing'" />
+          <erasing :canvas="canvas" v-if="panel_name == 'erasing'"/>
 
           <!-- 替换颜色 -->
-          <custom-filter-swap-color :canvas="canvas" v-if="panel_name == 'custom-filter-swap-color'" />
+          <custom-filter-swap-color :canvas="canvas" v-if="panel_name == 'custom-filter-swap-color'"/>
 
           <!-- 蒙版 -->
-          <duotone-filter :canvas="canvas" v-if="panel_name == 'duotone-filter'" />
+          <duotone-filter :canvas="canvas" v-if="panel_name == 'duotone-filter'"/>
 
           <!-- 文字路径 -->
-          <text-on-paths :canvas="canvas" v-if="panel_name == 'text-on-paths'" />
+          <text-on-paths :canvas="canvas" v-if="panel_name == 'text-on-paths'"/>
 
           <!-- 添加文字 -->
-          <build-minimap :canvas="canvas" v-if="panel_name == 'build-minimap'" />
+          <build-minimap :canvas="canvas" v-if="panel_name == 'build-minimap'"/>
 
           <!--                    自定义形状-->
-          <custom-controls-polygon :canvas="canvas" v-if="panel_name == 'custom-controls-polygon'" />
+          <custom-controls-polygon :canvas="canvas" v-if="panel_name == 'custom-controls-polygon'"/>
 
           <!--                    控制 stroke 宽度，锁定 stroke 宽度或者自定义-->
-          <stroke-uniform :canvas="canvas" v-if="panel_name == 'stroke-uniform'" />
+          <stroke-uniform :canvas="canvas" v-if="panel_name == 'stroke-uniform'"/>
 
           <!--      选中文字后，点击按钮，对应文字会上移或者下移              -->
-          <super-sub-script :canvas="canvas" v-if="panel_name == 'super-sub-script'" />
+          <super-sub-script :canvas="canvas" v-if="panel_name == 'super-sub-script'"/>
 
           <!-- 打印事件 -->
-          <events :canvas="canvas" v-if="panel_name == 'events'" />
+          <events :canvas="canvas" v-if="panel_name == 'events'"/>
 
           <!--                    缩略图-->
-          <lanczos-webgl :canvas="canvas" v-if="panel_name == 'lanczos-webgl'" />
+          <lanczos-webgl :canvas="canvas" v-if="panel_name == 'lanczos-webgl'"/>
 
           <!--                    字体-->
-          <loadfonts :canvas="canvas" v-if="panel_name == 'loadfonts'" />
+          <loadfonts :canvas="canvas" v-if="panel_name == 'loadfonts'"/>
 
           <!--                    复制，黏贴-->
-          <copypaste :canvas="canvas" v-if="panel_name == 'copypaste'" />
+          <copypaste :canvas="canvas" v-if="panel_name == 'copypaste'"/>
 
           <!--           选择管理         -->
-          <manage-selection :canvas="canvas" v-if="panel_name == 'manage-selection'" />
+          <manage-selection :canvas="canvas" v-if="panel_name == 'manage-selection'"/>
 
           <!--           触摸事件 ：目前vue        -->
-          <touch-events :canvas="canvas" v-if="panel_name == 'touch-events'" />
+          <touch-events :canvas="canvas" v-if="panel_name == 'touch-events'"/>
 
           <!--           读取视频到canvas        -->
-          <video-element :canvas="canvas" v-if="panel_name == 'video-element'" />
+          <video-element :canvas="canvas" v-if="panel_name == 'video-element'"/>
 
           <!--                    矩形缩放，转换偏移-->
-          <matrix-transformation :canvas="canvas" v-if="panel_name == 'matrix-transformation'" />
+          <matrix-transformation :canvas="canvas" v-if="panel_name == 'matrix-transformation'"/>
 
           <!--                    缓存svg-->
-          <svg-caching :canvas="canvas" v-if="panel_name == 'svg-caching'" />
+          <svg-caching :canvas="canvas" v-if="panel_name == 'svg-caching'"/>
 
           <!--                    精灵动画-->
-          <animated-sprite :canvas="canvas" v-if="panel_name == 'animated-sprite'" />
+          <animated-sprite :canvas="canvas" v-if="panel_name == 'animated-sprite'"/>
 
           <!--                    控制区的边框，显示，禁用-->
-          <controls-customization :canvas="canvas" v-if="panel_name == 'controls-customization'" />
+          <controls-customization :canvas="canvas" v-if="panel_name == 'controls-customization'"/>
 
           <!-- 自定义画笔 -->
           <freedrawing :canvas="canvas" v-if="panel_name == 'freedrawing'"></freedrawing>
@@ -136,7 +137,7 @@
 
           <!-- 对象联动 -->
           <interaction-with-objects-outside-canvas :canvas="canvas"
-            v-if="panel_name == 'interaction-with-objects-outside-canvas'">
+                                                   v-if="panel_name == 'interaction-with-objects-outside-canvas'">
           </interaction-with-objects-outside-canvas>
 
           <!-- 二次曲线 -->
@@ -158,7 +159,6 @@
           <hovering :canvas="canvas" v-if="panel_name == 'hovering'"></hovering>
           <customization :canvas="canvas" v-if="panel_name == 'customization'"></customization>
           <cross :canvas="canvas" v-if="panel_name == 'cross'"></cross>
-
 
 
         </el-main>
@@ -341,9 +341,9 @@
         };
         try {
           navigator.clipboard &&
-            (navigator.clipboard.write([
-              new ClipboardItem(clipboardItemData)
-            ]));
+          (navigator.clipboard.write([
+            new ClipboardItem(clipboardItemData)
+          ]));
         } catch (error) {
           console.log(error);
         }
@@ -358,9 +358,6 @@
     mounted() {
       let canvas = this.canvas = markRaw(new fabric.Canvas('canvas'));
       // console.log(canvas)
-
-
-
 
 
     }

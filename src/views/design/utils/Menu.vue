@@ -1,5 +1,5 @@
 <template>
-  <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-click="changePanle">
+  <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-change="changePanle">
     <el-tab-pane label="模版">
 
     </el-tab-pane>
@@ -13,23 +13,20 @@
 
     </el-tab-pane>
     <el-tab-pane label="照片">
-      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement" />
+      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement"/>
       <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> -->
     </el-tab-pane>
 
     <el-tab-pane label="背景">
-      <Background ></Background>
+      <Background></Background>
     </el-tab-pane>
     <el-tab-pane label="画布">
-
+      <CanvasLayer :componentSize="componentSize"></CanvasLayer>
     </el-tab-pane>
   </el-tabs>
 
 
-
-
 </template>
-
 
 
 <script lang="ts" setup>
@@ -50,6 +47,7 @@
 
   import Background from "./Menu-tab/Background.vue"
   import DesignFont from "./Menu-tab/DesignFont.vue"
+  import CanvasLayer from "./Menu-tab/CanvasLayer.vue"
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
@@ -63,15 +61,13 @@
 
 
   let panelIndex = ref('6');
-  const emit = defineEmits(['changePanle'])
+  let componentSize = ref(0);
 
-  function changePanle(pane, ev) {
-    // panelIndex = pane.index
-    emit('changePanle', {
-      pane,
-      ev
-    })
-    // console.log(pane, ev)
+  function changePanle() {
+    if (panelIndex.value == '6') {
+      componentSize.value = useDesignStore.canvas.size()
+      console.log(componentSize)
+    }
   }
 
   // elElement

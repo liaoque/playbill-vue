@@ -1,0 +1,33 @@
+<template>
+  <ul class="list">
+    <li v-for="i in props.componentSize" :key="i" class="list-item">
+      <el-button style=" width: 100%;" @click="selection(i)">图层{{ i }}</el-button>
+
+    </li>
+  </ul>
+</template>
+
+<script lang="ts">
+  export default {
+    name: "CanvasLayer"
+  }
+</script>
+
+<script lang="ts" setup>
+  import {computed, onActivated, defineProps} from "@vue/runtime-core";
+  import {useDesignStoreHook} from "/@/store/modules/design";
+
+  const useDesignStore = useDesignStoreHook()
+  const props = defineProps({
+    componentSize: Number
+  })
+  let selection = (i) => {
+    useDesignStore.canvas.setActiveObject(useDesignStore.canvas.item(i - 1))
+    useDesignStore.canvas.requestRenderAll();
+  }
+
+</script>
+
+<style scoped>
+
+</style>

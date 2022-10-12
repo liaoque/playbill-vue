@@ -2,7 +2,7 @@
   <el-form :inline="true" class="demo-form-inline" label-position="top">
 
     <el-form-item label="字体">
-      <el-select v-model="fontName" @change="loadAndUse" class="m-2" placeholder="Select" size="large">
+      <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large">
         <el-option
           v-for="(item, index) in options"
           :key="index"
@@ -119,13 +119,11 @@
 
   let fontName = ref("");
   let text = ref("");
-  let textarea = ref("");
 
   onMounted(() => {
   });
 
   function renderKlass() {
-    console.log(props.klassObj.fill, props.klassObj.fontSize, props.klassObj.klass, parseFloat(props.klassObj.fontWeight) )
     props.klassObj.klass.set('fill', props.klassObj.fill)
     props.klassObj.klass.set('fontSize', parseFloat(props.klassObj.fontSize))
     props.klassObj.klass.set('fontWeight', parseFloat(props.klassObj.fontWeight) || 'normal')

@@ -67,6 +67,8 @@
           top: selected.top,
           opacity: selected.opacity,
           angle: selected.angle,
+          visible: selected.visible,
+          selectable: selected.selectable,
           klass: markRaw(selected),
         }
         switch (selected.component_type) {
@@ -107,10 +109,13 @@
       }
     }
 
+
     useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
-
+    useDesignStore.canvas.on('selection:cleared', ()=>{
+      panelComponent.value = CanvasSetting
+    })
   })
 
 

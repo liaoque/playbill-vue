@@ -31,6 +31,9 @@ export const useDesignStore = defineStore({
     getActiveSelection() {
       return this.activeSelection;
     },
+    getCanvas() {
+      return this.canvas;
+    },
   },
   actions: {
     setCanvas(canvas: Object) {

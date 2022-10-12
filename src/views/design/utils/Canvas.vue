@@ -95,10 +95,13 @@
   }
 
   function deleteSelection() {
-    if (!clipboard) {
+    let canvas = useDesignStore.canvas;
+    let clipboard2 = canvas.getActiveObject();
+    if (!clipboard2) {
       return;
     }
-
+    canvas.remove(clipboard2);
+    canvas.requestRenderAll();
   }
 
 </script>

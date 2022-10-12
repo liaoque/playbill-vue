@@ -11,15 +11,9 @@
   // runSideEffectOnce()
 
   // 声明额外的选项
-  export default {
-
-  }
+  export default {}
 </script>
 
-
-<script lang="ts" setup>
-
-</script>
 
 <style>
   .el-menu-vertical-demo:not(.el-menu--collapse) {
