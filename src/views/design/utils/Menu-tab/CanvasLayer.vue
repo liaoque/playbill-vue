@@ -1,7 +1,7 @@
 <template>
   <ul class="list">
     <li v-for="i in props.componentSize" :key="i" class="list-item">
-      <el-button style=" width: 100%;" @click="selection(i)">图层{{ i }}</el-button>
+      <el-button style=" width: 100%;" @click="selection(i)">图层{{ i }}({{ prefix(i) }})</el-button>
 
     </li>
   </ul>
@@ -24,6 +24,11 @@
   let selection = (i) => {
     useDesignStore.canvas.setActiveObject(useDesignStore.canvas.item(i - 1))
     useDesignStore.canvas.requestRenderAll();
+  }
+
+  let prefix = (i) => {
+    let klass = useDesignStore.canvas.item(i - 1)
+    return klass.component_type
   }
 
 </script>

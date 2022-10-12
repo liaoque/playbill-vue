@@ -1,6 +1,21 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
 
+    <el-form-item label="唯一标识">
+      <el-input
+        v-model="props.klassObj.uuid"
+        type="text"
+      />
+    </el-form-item>
+
+    <el-form-item label="内容">
+      <el-input
+        v-model="props.klassObj.text"
+        type="textarea"
+        @change="renderKlass"
+      />
+    </el-form-item>
+
     <el-form-item label="字体">
       <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large">
         <el-option
@@ -69,20 +84,8 @@
       <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
-    <el-form-item label="唯一标识">
-      <el-input
-        v-model="text"
-        type="text"
-      />
-    </el-form-item>
 
-    <el-form-item label="内容">
-      <el-input
-        v-model="props.klassObj.text"
-        type="textarea"
-        @change="renderKlass"
-      />
-    </el-form-item>
+
 
     <Actions :klassObj="props.klassObj"></Actions>
 

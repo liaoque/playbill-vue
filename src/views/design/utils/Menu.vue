@@ -30,14 +30,7 @@
 
 
 <script lang="ts" setup>
-  // import {
-  //   Expand,
-  //   Fold
-  // } from '@element-plus/icons-vue'
-  // import fabric from ".../utils/fabric.vue"
-  import {
-    fabric
-  } from "/@/utils/fabric"
+
 
   import {
     ref,
@@ -77,15 +70,3 @@
 
 </script>
 
-
-<style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
-
-  .container {
-    color: rgba(254, 254, 254, 0.65);
-    background-color: #0f0303
-  }
-</style>

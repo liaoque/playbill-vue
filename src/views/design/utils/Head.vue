@@ -91,7 +91,7 @@
 
   function toJSON() {
     let canvas = useDesignStore.canvas;
-    const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type"]);
+    const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid"]);
     const out = JSON.stringify(json, null, "\t");
     const blob = new Blob([out], {
       type: "text/plain"

@@ -15,8 +15,6 @@
           <KeepAlive>
             <component :is="panelComponent" :klassObj="klassObj"></component>
           </KeepAlive>
-          <!--          <component :is="item" :canvas="canvas" v-for="item in panles"></component> -->
-          <!-- <CasnvasSetting ref="canvas_setting" :canvas="canvas"></CasnvasSetting> -->
         </el-aside>
       </el-container>
     </el-container>
@@ -29,9 +27,7 @@
     onMounted,
     ref,
     markRaw,
-    shallowRef, defineAsyncComponent,
-    // getCurrentInstance,
-    // nextTick
+    shallowRef,
   } from 'vue'
   import {
     fabric
@@ -39,13 +35,6 @@
   import Head from "./utils/Head.vue"
   import Menu from "./utils/Menu.vue"
   import Canvas from "./utils/Canvas.vue"
-  // import CanvasSetting from "./utils/RightPanel/CanvasSetting.vue"
-  // import BackgroundSettingVue from './utils/RightPanel/BackgroundSetting.vue'
-  // import TemplateSettingVue from './utils/RightPanel/TemplateSetting.vue'
-  // import ElemSettingVue from './utils/RightPanel/ElemSetting.vue'
-  // import EffectFontSettingVue from './utils/RightPanel/EffectFontSetting.vue'
-  // import ThreeFontSettingVue from './utils/RightPanel/ThreeFontSetting.vue'
-  // import PicSettingVue from './utils/RightPanel/PicSetting.vue'
 
   import {
     useDesignStoreHook
@@ -81,11 +70,11 @@
           angle: selected.angle,
           visible: selected.visible,
           selectable: selected.selectable,
+          uuid: selected.uuid,
           klass: markRaw(selected),
         }
         switch (selected.component_type) {
           case 'text':
-
             klassObj.value = {
               fill: selected.fill,
               fontName: selected.fill,

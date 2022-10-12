@@ -1,22 +1,12 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
-
-    <el-form-item label="尺寸：宽，高">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.width"
-            type="text"
-          />
-        </el-col>
-        <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.height"
-            type="text"
-          />
-        </el-col>
-      </el-row>
+    <el-form-item label="唯一标识">
+      <el-input
+        v-model="props.klassObj.uuid"
+        type="text"
+      />
     </el-form-item>
+
     <el-form-item label="位置：x，y">
       <el-row :gutter="20">
         <el-col :span="12">
@@ -36,14 +26,6 @@
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
       <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
-    </el-form-item>
-
-
-    <el-form-item label="唯一标识">
-      <el-input
-        v-model="text"
-        type="text"
-      />
     </el-form-item>
 
     <Actions :klassObj="props.klassObj"></Actions>
@@ -69,7 +51,6 @@
     klassObj: Object
   });
 
-  let text = ref("");
 
   const useDesignStore = useDesignStoreHook()
 
