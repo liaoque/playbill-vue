@@ -12,7 +12,9 @@
           <Canvas></Canvas>
         </el-main>
         <el-aside width="300px">
-          <component :is="panelComponent" :klassObj="klassObj"></component>
+          <KeepAlive>
+            <component :is="panelComponent" :klassObj="klassObj"></component>
+          </KeepAlive>
           <!--          <component :is="item" :canvas="canvas" v-for="item in panles"></component> -->
           <!-- <CasnvasSetting ref="canvas_setting" :canvas="canvas"></CasnvasSetting> -->
         </el-aside>
@@ -108,12 +110,10 @@
         useDesignStore.setActiveSelection();
       }
     }
-
-
     useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
-    useDesignStore.canvas.on('selection:cleared', ()=>{
+    useDesignStore.canvas.on('selection:cleared', () => {
       panelComponent.value = CanvasSetting
     })
   })

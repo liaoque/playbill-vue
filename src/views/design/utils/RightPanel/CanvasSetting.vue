@@ -2,10 +2,11 @@
   <div class="" style="background-color: #FFFFFF;padding: 5px;">
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item label="画布宽">
-        <el-input placeholder="宽" v-model="useDesignStore.getCanvasMap.width" @change="useDesignStore.setWh" ></el-input>
+        <el-input placeholder="宽" v-model="useDesignStore.getCanvasMap.width" @change="useDesignStore.setWh"></el-input>
       </el-form-item>
       <el-form-item label="画布高">
-        <el-input placeholder="高" v-model="useDesignStore.getCanvasMap.height"  @change="useDesignStore.setWh" ></el-input>
+        <el-input placeholder="高" v-model="useDesignStore.getCanvasMap.height"
+                  @change="useDesignStore.setWh"></el-input>
       </el-form-item>
 
       <el-form-item label="图层">
@@ -18,15 +19,15 @@
 </template>
 
 
-<script lang="ts">
-  // 普通 <script>, 在模块作用域下执行 (仅一次)
-  // runSideEffectOnce()
+<!--<script lang="ts">-->
+<!--  // 普通 <script>, 在模块作用域下执行 (仅一次)-->
+<!--  // runSideEffectOnce()-->
 
-  // 声明额外的选项
-  export default {
-
-  }
-</script>
+<!--  // 声明额外的选项-->
+<!--  export default {-->
+<!--      name:'CanvasSetting'-->
+<!--  }-->
+<!--</script>-->
 
 
 <script lang="ts" setup>
@@ -41,18 +42,18 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
+
   const useDesignStore = useDesignStoreHook()
 
 
   onMounted(() => {
     //设置宽高
-    nextTick(()=>{
+    nextTick(() => {
       useDesignStore.setWh()
     })
   })
 
-  defineExpose({
-  })
+  defineExpose({})
 </script>
 
 <style>
