@@ -29,7 +29,7 @@
     onMounted,
     ref,
     markRaw,
-    shallowRef,
+    shallowRef, defineAsyncComponent,
     // getCurrentInstance,
     // nextTick
   } from 'vue'
@@ -38,18 +38,28 @@
   } from "/@/utils/fabric"
   import Head from "./utils/Head.vue"
   import Menu from "./utils/Menu.vue"
-  import CanvasSetting from "./utils/RightPanel/CanvasSetting.vue"
-  import BackgroundSettingVue from './utils/RightPanel/BackgroundSetting.vue'
   import Canvas from "./utils/Canvas.vue"
-  import TemplateSettingVue from './utils/RightPanel/TemplateSetting.vue'
-  import ElemSettingVue from './utils/RightPanel/ElemSetting.vue'
-  import EffectFontSettingVue from './utils/RightPanel/EffectFontSetting.vue'
-  import ThreeFontSettingVue from './utils/RightPanel/ThreeFontSetting.vue'
-  import PicSettingVue from './utils/RightPanel/PicSetting.vue'
+  // import CanvasSetting from "./utils/RightPanel/CanvasSetting.vue"
+  // import BackgroundSettingVue from './utils/RightPanel/BackgroundSetting.vue'
+  // import TemplateSettingVue from './utils/RightPanel/TemplateSetting.vue'
+  // import ElemSettingVue from './utils/RightPanel/ElemSetting.vue'
+  // import EffectFontSettingVue from './utils/RightPanel/EffectFontSetting.vue'
+  // import ThreeFontSettingVue from './utils/RightPanel/ThreeFontSetting.vue'
+  // import PicSettingVue from './utils/RightPanel/PicSetting.vue'
 
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
+
+  import {
+    CanvasSetting,
+    EffectFontSettingVue,
+    TemplateSettingVue,
+    ElemSettingVue,
+    ThreeFontSettingVue,
+    PicSettingVue,
+    BackgroundSettingVue
+  } from './utils/RightPanel/panel';
 
   let panles = [
     TemplateSettingVue, ElemSettingVue,
@@ -75,7 +85,7 @@
         }
         switch (selected.component_type) {
           case 'text':
-            panelComponent.value = EffectFontSettingVue
+
             klassObj.value = {
               fill: selected.fill,
               fontName: selected.fill,
@@ -84,12 +94,14 @@
               text: selected.text,
               ...basePrototype
             };
+            panelComponent.value = EffectFontSettingVue
             break;
           case 'pic':
-            panelComponent.value = PicSettingVue
             klassObj.value = {
               ...basePrototype
             };
+            panelComponent.value = PicSettingVue
+
             break;
           case 'qrcode':
             panelComponent.value = CanvasSetting

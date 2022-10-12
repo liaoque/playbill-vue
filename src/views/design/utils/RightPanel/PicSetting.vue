@@ -34,8 +34,8 @@
       </el-row>
     </el-form-item>
 
-    <el-form-item label="旋转" style="display: block;width: 100%;" >
-      <el-slider v-model="props.klassObj.heigh" style="width: 90%;margin: 0 auto;" />
+    <el-form-item label="旋转" style="display: block;width: 100%;">
+      <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
 
@@ -54,28 +54,34 @@
 </template>
 
 
+<script lang="ts">
+  // 声明额外的选项
+  export default {};
+</script>
 
 <script lang="ts" setup>
 
-import { defineProps } from "vue";
+  import {defineProps, ref} from "vue";
+  import Actions from "./Actions.vue";
+  import {useDesignStoreHook} from "/@/store/modules/design";
 
-const props = defineProps({
-  klassObj: Object
-});
+  const props = defineProps({
+    klassObj: Object
+  });
+
+  let text = ref("");
+
+  const useDesignStore = useDesignStoreHook()
+
+  function renderKlass() {
+
+    props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity))
+    props.klassObj.klass.set('left', parseFloat(props.klassObj.left))
+    props.klassObj.klass.set('right', parseFloat(props.klassObj.right))
+    props.klassObj.klass.set('angle', parseFloat(props.klassObj.angle))
+
+    useDesignStore.canvas.requestRenderAll();
+  }
 </script>
 
-<style>
 
-</style>
-
-
-
-<script lang="ts">
-// 普通 <script>, 在模块作用域下执行 (仅一次)
-// runSideEffectOnce()
-
-// 声明额外的选项
-export default {
-
-}
-</script>
