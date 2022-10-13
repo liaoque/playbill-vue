@@ -3,35 +3,28 @@
     <el-menu-item index="0">
 
     </el-menu-item>
-    <el-menu-item index="1">新建</el-menu-item>
-    <el-menu-item index="2">上一步</el-menu-item>
-    <el-menu-item index="3">下一步</el-menu-item>
+    <el-menu-item index="new">新建</el-menu-item>
+    <el-menu-item index="prev">上一步</el-menu-item>
+    <el-menu-item index="next">下一步</el-menu-item>
 
     <div class="flex-grow"/>
-    <el-menu-item index="5">预览</el-menu-item>
-    <el-menu-item index="4">分享</el-menu-item>
-    <el-menu-item index="4">分享</el-menu-item>
-    <el-menu-item index="5">预览</el-menu-item>
-    <el-sub-menu index="6">
+    <el-menu-item index="addText" @click="addText">+文字</el-menu-item>
+    <el-menu-item index="addPic" @click="addPic">+图片</el-menu-item>
+    <el-sub-menu index="addRect">
+      <template #title>+图形</template>
+      <el-menu-item index="addRect-1" @click="addRect">+矩形</el-menu-item>
+      <el-menu-item index="addRect-2" @click="addCircular">+圆形</el-menu-item>
+      <el-menu-item index="addRect-3" @click="addTriangle">+三角形</el-menu-item>
+    </el-sub-menu>
+    <el-menu-item index="shares">分享</el-menu-item>
+    <el-menu-item index="preview">预览</el-menu-item>
+    <el-sub-menu index="save">
       <template #title>保存</template>
-      <el-menu-item index="6-1" @click="downloadImage">保存到png</el-menu-item>
-      <el-menu-item index="6-2" @click="downloadSVG">保存到svg</el-menu-item>
-      <el-menu-item index="6-3" @click="toJSON">保存到json</el-menu-item>
+      <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>
+      <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>
+      <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>
     </el-sub-menu>
 
-    <!-- <el-menu-item index="1">Processing Center</el-menu-item> -->
-    <!--  <el-sub-menu index="2">
-             <template #title>Workspace</template>
-             <el-menu-item index="2-1">item one</el-menu-item>
-             <el-menu-item index="2-2">item two</el-menu-item>
-             <el-menu-item index="2-3">item three</el-menu-item>
-             <el-sub-menu index="2-4">
-               <template #title>item four</template>
-               <el-menu-item index="2-4-1">item one</el-menu-item>
-               <el-menu-item index="2-4-2">item two</el-menu-item>
-               <el-menu-item index="2-4-3">item three</el-menu-item>
-             </el-sub-menu>
-           </el-sub-menu> -->
   </el-menu>
 
 </template>
@@ -55,65 +48,13 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
+  import {addText, addPic, addRect, addCircular, addTriangle} from "./Header/tools";
+  import {downloadImage, downloadSVG, toJSON} from "./Header/save";
 
   const useDesignStore = useDesignStoreHook();
 
-  const activeIndex = ref("1");
+  const activeIndex = ref("new");
 
-
-  function downloadImage() {
-    const ext = "png";
-    let canvas = useDesignStore.canvas;
-    const base64 = canvas.toDataURL({
-      format: ext,
-      enableRetinaScaling: true,
-      multiplier: 2
-    });
-    const link = document.createElement("a");
-    link.href = base64;
-    link.download = `eraser_example.${ext}`;
-    link.click();
-  }
-
-  function downloadSVG() {
-    let canvas = useDesignStore.canvas;
-    const svg = canvas.toSVG();
-    const a = document.createElement("a");
-    const blob = new Blob([svg], {
-      type: "image/svg+xml"
-    });
-    const blobURL = URL.createObjectURL(blob);
-    a.href = blobURL;
-    a.download = "eraser_example.svg";
-    a.click();
-    URL.revokeObjectURL(blobURL);
-  }
-
-  function toJSON() {
-    let canvas = useDesignStore.canvas;
-    const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid"]);
-    const out = JSON.stringify(json, null, "\t");
-    const blob = new Blob([out], {
-      type: "text/plain"
-    });
-    const clipboardItemData = {
-      [blob.type]: blob
-    };
-    try {
-      navigator.clipboard &&
-      (navigator.clipboard.write([
-        new ClipboardItem(clipboardItemData)
-      ]));
-    } catch (error) {
-      console.log(error);
-    }
-    const blobURL = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = blobURL;
-    a.download = "eraser_example.json";
-    a.click();
-    URL.revokeObjectURL(blobURL);
-  }
 </script>
 
 <style lang="scss">
@@ -124,7 +65,6 @@
   .layout-theme-default body[layout=vertical] .el-menu--horizontal {
     .el-menu-item.is-active, .el-sub-menu.is-active {
       color: #ff0000 !important;
-
     }
 
     .el-sub-menu.is-active > .el-sub-menu__title {

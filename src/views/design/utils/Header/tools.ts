@@ -11,7 +11,7 @@ const addText = () => {
 }
 
 function addPic() {
-  new fabric.Image.fromURL("./public/pug.jpg", function (image) {
+  new fabric.Image.fromURL("./public/sun.png", function (image) {
     image.set({
       scaleX: 0.5,
       scaleY: 0.5,
@@ -32,18 +32,55 @@ function addRect() {
     height: 100,
     scaleX: 0.5,
     scaleY: 0.5,
-    objectCaching: false,
-    stroke: "lightgreen",
-    strokeWidth: 1,
+    // objectCaching: false,
+    // stroke: "lightgreen",
+    // strokeWidth: 1,
     component_type: 'rect',
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
 }
 
+function addCircular() {
+  let rect = new fabric.Circle({
+    radius: 50,
+    left: 100,
+    top: 50,
+    fill: "green",
+    component_type: 'circle',
+    // objectCaching: false,
+    // stroke: "lightgreen",
+    // strokeWidth: 1,
+    uuid: uuidv4()
+  });
+  useDesignStore.canvas.add(rect);
+}
+
+
+function addTriangle() {
+  let rect = new fabric.Triangle({
+    width: 100,
+    height: 100,
+    left: 100,
+    top: 50,
+    fill: "red",
+    component_type: 'triangle',
+    // objectCaching: false,
+    // stroke: "lightgreen",
+    // strokeWidth: 1,
+    uuid: uuidv4()
+  });
+  useDesignStore.canvas.add(rect);
+}
+
+
+
+
 
 export {
   addText,
   addRect,
+  addCircular,
+  addTriangle,
   addPic
 }

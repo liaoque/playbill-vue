@@ -1,9 +1,4 @@
 <template>
-  <el-row>
-    <el-button type="primary" @click="addText">文字</el-button>
-    <el-button type="success" @click="addPic">图片</el-button>
-    <el-button type="warning" @click="addRect">图形</el-button>
-  </el-row>
 
 </template>
 
