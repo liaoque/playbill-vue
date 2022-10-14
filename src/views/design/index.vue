@@ -48,14 +48,14 @@
     ThreeFontSettingVue,
     PicSettingVue,
     RectSettingVue,
-    BackgroundSettingVue
+    // BackgroundSettingVue
   } from './utils/RightPanel/panel';
-
-  let panles = [
-    TemplateSettingVue, ElemSettingVue,
-    EffectFontSettingVue, ThreeFontSettingVue,
-    PicSettingVue, BackgroundSettingVue, CanvasSetting
-  ];
+  //
+  // let panles = [
+  //   TemplateSettingVue, ElemSettingVue,
+  //   EffectFontSettingVue, ThreeFontSettingVue,
+  //   PicSettingVue, BackgroundSettingVue, CanvasSetting
+  // ];
   const useDesignStore = useDesignStoreHook()
   let panelComponent = shallowRef(CanvasSetting)
   let klassObj = ref({})

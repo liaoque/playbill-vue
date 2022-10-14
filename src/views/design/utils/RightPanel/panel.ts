@@ -30,10 +30,10 @@ const PicSettingVue = defineAsyncComponent({
   delay: 200,
 })
 
-const BackgroundSettingVue = defineAsyncComponent({
-  loader: () => import( './BackgroundSetting.vue'),
-  delay: 200,
-})
+// const BackgroundSettingVue = defineAsyncComponent({
+//   loader: () => import( './BackgroundSetting.vue'),
+//   delay: 200,
+// })
 
 const RectSettingVue = defineAsyncComponent({
   loader: () => import( './RectSetting.vue'),
@@ -44,7 +44,7 @@ export {
   CanvasSetting,
   ElemSettingVue,
   TemplateSettingVue,
-  BackgroundSettingVue,
+  // BackgroundSettingVue,
   ThreeFontSettingVue,
   RectSettingVue,
   PicSettingVue,
