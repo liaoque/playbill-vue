@@ -26,13 +26,13 @@
       <el-row :gutter="20">
         <el-col :span="12">
           <el-input
-            v-model="props.klassObj.width"
+            v-model="props.klassObj.width" disabled
             type="text"
           />
         </el-col>
         <el-col :span="12">
           <el-input
-            v-model="props.klassObj.height"
+            v-model="props.klassObj.height" disabled
             type="text"
           />
         </el-col>
