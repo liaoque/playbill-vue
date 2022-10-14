@@ -28,8 +28,8 @@
       <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
-    <el-form-item label="上传背景图">
-      <el-upload action="http://localhost:8000/upload"
+    <el-form-item label="上传">
+      <el-upload :action="uploadApiUrl"
                  list-type="picture-card"
                  :on-success="handleSuccess"
                  :on-remove="handleRemove"
@@ -43,6 +43,21 @@
       <el-dialog v-model="dialogVisible">
         <img w-full :src="dialogImageUrl" alt="Preview Image"/>
       </el-dialog>
+    </el-form-item>
+
+    <el-form-item label="边框：颜色,宽度">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
+        </el-col>
+        <el-col :span="12">
+          <el-input
+            v-model="props.klassObj.strokeWidth"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+      </el-row>
     </el-form-item>
 
     <Actions :klassObj="props.klassObj"></Actions>
@@ -65,6 +80,7 @@
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {Plus} from "@element-plus/icons-vue";
   import {UploadFile} from "element-plus";
+  import {uploadApiUrl, handleSuccess as handleSuccess2} from "../Tools/uploads"
 
   const props = defineProps({
     klassObj: Object
@@ -74,10 +90,12 @@
   const useDesignStore = useDesignStoreHook()
 
   function renderKlass() {
-    props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity))
-    props.klassObj.klass.set('left', parseFloat(props.klassObj.left))
-    props.klassObj.klass.set('right', parseFloat(props.klassObj.right))
-    props.klassObj.klass.set('angle', parseFloat(props.klassObj.angle))
+    props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity).toFixed(2))
+    props.klassObj.klass.set('left', parseInt(props.klassObj.left))
+    props.klassObj.klass.set('right', parseInt(props.klassObj.right))
+    props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
+    props.klassObj.klass.set('stroke', props.klassObj.stroke)
+    props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
     useDesignStore.canvas.requestRenderAll();
   }
 
@@ -90,9 +108,7 @@
   };
 
   const handleSuccess = (file: UploadFile) => {
-    console.log(file)
-    console.log("http://localhost:8000/images/head.jpg")
-    props.klassObj.klass.setSrc("http://localhost:8000/images/head.jpg", useDesignStore.canvas.renderAll.bind(useDesignStore.canvas), {crossOrigin: "anonymous"})
+    handleSuccess2(props.klassObj.klass, file.url);
   };
 
 

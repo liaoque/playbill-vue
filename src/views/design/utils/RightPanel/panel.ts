@@ -10,7 +10,6 @@ const EffectFontSettingVue = defineAsyncComponent({
   delay: 200,
 })
 
-
 const TemplateSettingVue = defineAsyncComponent({
   loader: () => import( './TemplateSetting.vue'),
   delay: 200,

@@ -1,9 +1,10 @@
 <template>
+
   <div class="d-centext">
+
     <div style="" class="d-canvas" v-contextmenu:contextmenu>
       <canvas style="" id="canvas"></canvas>
     </div>
-
 
     <v-contextmenu ref="contextmenu">
       <v-contextmenu-item @click="copySelection">复制</v-contextmenu-item>
@@ -55,7 +56,6 @@
 
   function copySelection() {
     let activeObject = useDesignStore.canvas.getActiveObject()
-    console.log(activeObject)
     activeObject.clone(function (cloned) {
       clipboard = cloned;
       clipboard.component_type = activeObject.component_type;
@@ -66,7 +66,6 @@
     if (!clipboard) {
       return;
     }
-    console.log(clipboard)
     clipboard.clone(function (clonedObj) {
       let canvas = useDesignStore.canvas;
       canvas.discardActiveObject();

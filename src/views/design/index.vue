@@ -27,7 +27,7 @@
     onMounted,
     ref,
     markRaw,
-    shallowRef,
+    shallowRef, nextTick,
   } from 'vue'
   import {
     fabric
@@ -70,6 +70,8 @@
           angle: selected.angle,
           visible: selected.visible,
           selectable: selected.selectable,
+          stroke: selected.stroke,
+          strokeWidth: selected.strokeWidth,
           uuid: selected.uuid,
           klass: markRaw(selected),
         }
@@ -90,13 +92,6 @@
               ...basePrototype
             };
             panelComponent.value = PicSettingVue
-
-            break;
-          case 'qrcode':
-            panelComponent.value = CanvasSetting
-            klassObj.value = {
-              ...basePrototype
-            };
             break;
           case 'rect':
             panelComponent.value = CanvasSetting
@@ -111,12 +106,26 @@
         useDesignStore.setActiveSelection();
       }
     }
+
+    let selectionBackground = () => {
+      let selected = useDesignStore.canvas
+      panelComponent.value = CanvasSetting
+      klassObj.value = {
+        backgroundColor: selected.backgroundColor,
+        backgroundImage: selected.backgroundImage,
+      };
+    }
+
     useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
-    useDesignStore.canvas.on('selection:cleared', () => {
-      panelComponent.value = CanvasSetting
+    useDesignStore.canvas.on('selection:cleared', selectionBackground)
+    //设置宽高
+    nextTick(() => {
+      useDesignStore.setWh();
+      selectionBackground();
     })
+
   })
 
 
@@ -124,6 +133,6 @@
 
 
   defineOptions({
-    name: "Welcome"
+    name: "design"
   });
 </script>

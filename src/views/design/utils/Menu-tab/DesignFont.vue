@@ -12,7 +12,6 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
-  import {addText, addPic, addRect} from "../../utils/Header/tools";
 
   onMounted(() => {
 

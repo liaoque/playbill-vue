@@ -48,8 +48,8 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
-  import {addText, addPic, addRect, addCircular, addTriangle} from "./Header/tools";
-  import {downloadImage, downloadSVG, toJSON} from "./Header/save";
+  import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
+  import {downloadImage, downloadSVG, toJSON} from "./Tools/save";
 
   const useDesignStore = useDesignStoreHook();
 

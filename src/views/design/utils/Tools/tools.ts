@@ -4,7 +4,12 @@ import {useDesignStoreHook} from "/@/store/modules/design";
 const useDesignStore = useDesignStoreHook();
 
 const addText = () => {
-  let fabricText = new fabric.IText("双击修改文字", {top: 20, left: 20});
+  let fabricText = new fabric.IText("双击修改文字", {
+    top: 20,
+    left: 20,
+    // stroke: "#6F3636",
+    strokeWidth: 1,
+  });
   fabricText.component_type = 'text'
   fabricText.uuid = uuidv4()
   useDesignStore.canvas.add(fabricText);
@@ -17,6 +22,8 @@ function addPic() {
       scaleY: 0.5,
       objectCaching: false,
       component_type: 'pic',
+      // stroke: "lightgreen",
+      strokeWidth: 1,
       uuid: uuidv4()
     });
     useDesignStore.canvas.add(image);
@@ -34,7 +41,7 @@ function addRect() {
     scaleY: 0.5,
     // objectCaching: false,
     // stroke: "lightgreen",
-    // strokeWidth: 1,
+    strokeWidth: 1,
     component_type: 'rect',
     uuid: uuidv4()
   });
@@ -50,7 +57,7 @@ function addCircular() {
     component_type: 'circle',
     // objectCaching: false,
     // stroke: "lightgreen",
-    // strokeWidth: 1,
+    strokeWidth: 1,
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
