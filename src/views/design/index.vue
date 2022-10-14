@@ -47,6 +47,7 @@
     ElemSettingVue,
     ThreeFontSettingVue,
     PicSettingVue,
+    RectSettingVue,
     BackgroundSettingVue
   } from './utils/RightPanel/panel';
 
@@ -75,6 +76,7 @@
           uuid: selected.uuid,
           klass: markRaw(selected),
         }
+        console.log(selected.component_type)
         switch (selected.component_type) {
           case 'text':
             klassObj.value = {
@@ -94,12 +96,21 @@
             panelComponent.value = PicSettingVue
             break;
           case 'rect':
-            panelComponent.value = CanvasSetting
+          case 'circle':
+          case 'triangle':
+            panelComponent.value = RectSettingVue
             klassObj.value = {
+              fill: selected.fill,
+              width: selected.width,
+              height: selected.height,
               ...basePrototype
             };
             break;
           default:
+            klassObj.value = {
+              backgroundColor: selected.backgroundColor,
+              backgroundImage: selected.backgroundImage,
+            };
             panelComponent.value = CanvasSetting
             break;
         }

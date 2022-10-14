@@ -7,6 +7,21 @@
       />
     </el-form-item>
 
+    <el-form-item label="填充: 颜色,透明度">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
+        </el-col>
+        <el-col :span="12">
+          <el-input
+            v-model="props.klassObj.opacity"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+      </el-row>
+    </el-form-item>
+
     <el-form-item label="位置：宽，高">
       <el-row :gutter="20">
         <el-col :span="12">
@@ -43,23 +58,6 @@
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
       <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
-    </el-form-item>
-
-    <el-form-item label="上传">
-      <el-upload :action="uploadApiUrl"
-                 list-type="picture-card"
-                 :on-success="handleSuccess"
-                 :on-remove="handleRemove"
-                 :auto-upload="true"
-                 :limit="1"
-      >
-        <el-icon>
-          <Plus/>
-        </el-icon>
-      </el-upload>
-      <el-dialog v-model="dialogVisible">
-        <img w-full :src="dialogImageUrl" alt="Preview Image"/>
-      </el-dialog>
     </el-form-item>
 
     <el-form-item label="边框：颜色,宽度">
@@ -114,22 +112,10 @@
     props.klassObj.klass.set('right', parseInt(props.klassObj.right))
     props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
+    props.klassObj.klass.set('fill', props.klassObj.fill)
     props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
     useDesignStore.canvas.requestRenderAll();
   }
-
-  const dialogImageUrl = ref("");
-  const dialogVisible = ref(false);
-
-
-  const handleRemove = (file: UploadFile) => {
-
-  };
-
-  const handleSuccess = (file: UploadFile) => {
-    handleSuccess2(props.klassObj.klass, file.url);
-  };
-
 
 </script>
 
