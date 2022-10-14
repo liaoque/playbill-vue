@@ -74,6 +74,8 @@
           stroke: selected.stroke,
           strokeWidth: selected.strokeWidth,
           uuid: selected.uuid,
+          width: selected.getScaledWidth(),
+          height: selected.getScaledHeight(),
           klass: markRaw(selected),
         }
         console.log(selected.component_type)
@@ -101,8 +103,6 @@
             panelComponent.value = RectSettingVue
             klassObj.value = {
               fill: selected.fill,
-              width: selected.width,
-              height: selected.height,
               ...basePrototype
             };
             break;

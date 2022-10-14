@@ -35,7 +35,7 @@
       {
         id: 2,
         title: '22',
-        src: '/public/dragon.jpg'
+        src: '/dragon.jpg'
       },
     ]
   })

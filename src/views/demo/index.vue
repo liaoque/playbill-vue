@@ -12,7 +12,7 @@
 					,'shadows', 'solar-system', 'polygon-animation', 'patterns', 'bounding-rectangle'
 					, 'particles', 'per-pixel-drag-drop', 'many-objects', 'animation-easing'
 					,'interaction-with-objects-outside-canvas', 'quadratic-curve', 'static_canvas'
-					,'image-filters', 'controls', 'stickman','polaroid','opacity_mouse_move'
+					,'image-filters', '旋转，偏移,缩放，斜率 controls', 'stickman','polaroid','opacity_mouse_move'
 					,'ladybug', 'kitchensink', 'hovering', 'customization', 'cross'
                     ]" @click="setPanelName(item)">{{ item }}
         </el-button>
