@@ -54,6 +54,7 @@
   import {handleRemoveBackground, handleSuccessBackground, uploadApiUrl} from "../Tools/uploads"
   import {UploadFile} from "element-plus";
   import {Plus} from "@element-plus/icons-vue";
+  import {saveAction} from "/@/views/design/utils/Tools/stack";
 
   const useDesignStore = useDesignStoreHook()
   const props = defineProps({
@@ -71,6 +72,7 @@
     props.klassObj.klass.set('width', parseInt(useDesignStore.getCanvasMap.width))
     props.klassObj.klass.set('height', parseInt(useDesignStore.getCanvasMap.height))
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
 </script>

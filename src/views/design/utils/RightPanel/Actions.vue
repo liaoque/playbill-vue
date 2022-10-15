@@ -23,6 +23,7 @@
   import {Lock, Unlock, Delete, DocumentCopy} from "@element-plus/icons-vue";
   import {computed, defineProps, ref} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
+  import {saveAction} from "/@/views/design/utils/Tools/stack";
 
   const useDesignStore = useDesignStoreHook()
   const props = defineProps({
@@ -55,12 +56,14 @@
     props.klassObj.klass.set('selectable', Boolean(props.klassObj.selectable))
     useDesignStore.canvas.discardActiveObject();
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
   function visible() {
     // props.klassObj.selectable = !props.klassObj.visible
     props.klassObj.klass.set('visible', Boolean(props.klassObj.visible))
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
 </script>

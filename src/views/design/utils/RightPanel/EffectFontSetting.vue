@@ -125,6 +125,7 @@
   import FontFaceObserver from "fontfaceobserver";
   import "/@/assets/fonts/fonts.css"
   import {useDesignStoreHook} from "/@/store/modules/design";
+  import {saveAction} from "/@/views/design/utils/Tools/stack";
 
   const useDesignStore = useDesignStoreHook()
   const props = defineProps({
@@ -152,11 +153,13 @@
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
     props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
   function setColor(e) {
     props.klassObj.klass.set('fill', e)
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
   function loadAndUse(font) {

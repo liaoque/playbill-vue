@@ -98,6 +98,7 @@
   import {Plus} from "@element-plus/icons-vue";
   import {UploadFile} from "element-plus";
   import {uploadApiUrl, handleSuccess as handleSuccess2} from "../Tools/uploads"
+  import {saveAction} from "/@/views/design/utils/Tools/stack";
 
   const props = defineProps({
     klassObj: Object
@@ -116,6 +117,7 @@
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
     props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
     useDesignStore.canvas.requestRenderAll();
+    saveAction();
   }
 
   const dialogImageUrl = ref("");
