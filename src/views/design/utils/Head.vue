@@ -3,19 +3,23 @@
     <el-menu-item index="0">
 
     </el-menu-item>
-    <el-menu-item index="new">新建</el-menu-item>
+    <el-sub-menu index="">
+      <template #title>新建</template>
+      <el-menu-item index="addText" @click="addText">文字</el-menu-item>
+      <el-menu-item index="addPic" @click="addPic">图片</el-menu-item>
+      <el-sub-menu index="addRect">
+        <template #title>图形</template>
+        <el-menu-item index="addRect-1" @click="addRect">矩形</el-menu-item>
+        <el-menu-item index="addRect-2" @click="addCircular">圆形</el-menu-item>
+        <el-menu-item index="addRect-3" @click="addTriangle">三角形</el-menu-item>
+      </el-sub-menu>
+    </el-sub-menu>
+
     <el-menu-item index="prev" @click="undoAction">上一步</el-menu-item>
     <el-menu-item index="next" @click="redoAction">下一步</el-menu-item>
 
     <div class="flex-grow"/>
-    <el-menu-item index="addText" @click="addText">+文字</el-menu-item>
-    <el-menu-item index="addPic" @click="addPic">+图片</el-menu-item>
-    <el-sub-menu index="addRect">
-      <template #title>+图形</template>
-      <el-menu-item index="addRect-1" @click="addRect">+矩形</el-menu-item>
-      <el-menu-item index="addRect-2" @click="addCircular">+圆形</el-menu-item>
-      <el-menu-item index="addRect-3" @click="addTriangle">+三角形</el-menu-item>
-    </el-sub-menu>
+
     <el-menu-item index="shares">分享</el-menu-item>
     <el-menu-item index="preview">预览</el-menu-item>
     <el-sub-menu index="save">
