@@ -36,6 +36,7 @@
   import Menu from "./utils/Menu.vue"
   import Canvas from "./utils/Canvas.vue"
 
+
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
@@ -50,6 +51,7 @@
     RectSettingVue,
     // BackgroundSettingVue
   } from './utils/RightPanel/panel';
+  import {saveAction} from "./utils/Tools/stack"
 
   const useDesignStore = useDesignStoreHook()
   let panelComponent = shallowRef(CanvasSetting)
@@ -126,6 +128,9 @@
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
     useDesignStore.canvas.on('selection:cleared', selectionBackground)
+    useDesignStore.canvas.on('object:modified', saveAction)
+
+
     //设置宽高
     nextTick(() => {
       useDesignStore.setWh();

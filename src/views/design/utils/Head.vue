@@ -4,8 +4,8 @@
 
     </el-menu-item>
     <el-menu-item index="new">新建</el-menu-item>
-    <el-menu-item index="prev">上一步</el-menu-item>
-    <el-menu-item index="next">下一步</el-menu-item>
+    <el-menu-item index="prev" @click="undoAction">上一步</el-menu-item>
+    <el-menu-item index="next" @click="redoAction">下一步</el-menu-item>
 
     <div class="flex-grow"/>
     <el-menu-item index="addText" @click="addText">+文字</el-menu-item>
@@ -50,10 +50,12 @@
   } from "/@/store/modules/design";
   import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
   import {downloadImage, downloadSVG, toJSON} from "./Tools/save";
+  import {undoAction, redoAction} from "./Tools/stack";
 
   const useDesignStore = useDesignStoreHook();
 
   const activeIndex = ref("new");
+
 
 </script>
 
