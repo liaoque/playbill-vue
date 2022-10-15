@@ -43,7 +43,6 @@
   const useDesignStore = useDesignStoreHook()
 
   function changeElement(item: Object) {
-    useDesignStore.setBackground(item.src)
   }
 </script>
 

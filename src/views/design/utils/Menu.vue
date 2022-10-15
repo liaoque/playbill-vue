@@ -13,7 +13,8 @@
 
     </el-tab-pane>
     <el-tab-pane label="照片">
-      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement"/>
+      <PicList></PicList>
+      <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement"/>-->
       <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> -->
     </el-tab-pane>
 
@@ -32,25 +33,15 @@
 <script lang="ts" setup>
 
 
-  import {
-    ref,
-    defineEmits,
-    defineProps
-  } from 'vue'
-
+  import {ref, defineEmits, defineProps} from 'vue'
+  import {useDesignStoreHook} from "/@/store/modules/design";
   import CanvasStep from "./Menu-tab/CanvasStep.vue"
   import DesignFont from "./Menu-tab/DesignFont.vue"
   import CanvasLayer from "./Menu-tab/CanvasLayer.vue"
-  import {
-    useDesignStoreHook
-  } from "/@/store/modules/design";
+  import PicList from "./Menu-tab/PicList.vue"
+
 
   const useDesignStore = useDesignStoreHook()
-
-
-  let src = ref(
-    "https://img.tuguaishou.com/designer_upload_asset/16/44/32/62/68/70/704997b8ad30519510dd30032592466e.jpg!l2000?auth_key=1665021601-0-0-506e4ad834ccd639832efacca57367a6"
-  )
 
 
   let panelIndex = ref('6');
@@ -63,10 +54,6 @@
     }
   }
 
-  // elElement
-  function changeElement(e) {
-    useDesignStore.setBackground(e.path[0].currentSrc)
-  }
 
 </script>
 

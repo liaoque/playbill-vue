@@ -17,7 +17,7 @@ function saveAction(e?: any) {
   saveHandle = setTimeout(() => {
     undoStack.push(beforeAction)
     if (undoStack.length > maxLength) {
-      undoStack.unshift();
+      undoStack.shift();
     }
     undoStackLength.value = stackIndex.value = undoStack.length
     redoStack = [];

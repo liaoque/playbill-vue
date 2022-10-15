@@ -9,7 +9,7 @@
       </el-form-item>
 
       <el-form-item label="背景颜色">
-        <el-color-picker v-model="props.klassObj.backgroundColor" @change="useDesignStore.setBackgroundColor"/>
+        <el-color-picker v-model="props.klassObj.backgroundColor" @change="setBackgroundColor"/>
       </el-form-item>
 
       <el-form-item label="上传背景图">
@@ -74,6 +74,12 @@
     useDesignStore.canvas.requestRenderAll();
     saveAction();
   }
+
+  function setBackgroundColor(color) {
+    useDesignStore.setBackgroundColor(color);
+    saveAction();
+  }
+
 
 </script>
 

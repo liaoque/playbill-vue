@@ -47,6 +47,7 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
+  import {saveAction} from "/@/views/design/utils/Tools/stack";
 
 
   const useDesignStore = useDesignStoreHook();
@@ -75,7 +76,6 @@
         evented: true,
         component_type: clipboard.component_type
       });
-      console.log(clonedObj.component_type)
       if (clonedObj.type === 'activeSelection') {
         console.log("activeSelection")
         clonedObj.canvas = canvas;
@@ -90,6 +90,7 @@
       clonedObj.left += 10;
       canvas.setActiveObject(clonedObj);
       canvas.requestRenderAll();
+      saveAction()
     });
   }
 
@@ -101,6 +102,7 @@
     }
     canvas.remove(clipboard2);
     canvas.requestRenderAll();
+    saveAction()
   }
 
 </script>
