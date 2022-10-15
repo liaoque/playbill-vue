@@ -1,6 +1,9 @@
 import {fabric} from "/@/utils/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
+import {saveAction} from "/@/views/design/utils/Tools/stack";
+
+
 const useDesignStore = useDesignStoreHook();
 
 const addText = () => {
@@ -13,6 +16,7 @@ const addText = () => {
   fabricText.component_type = 'text'
   fabricText.uuid = uuidv4()
   useDesignStore.canvas.add(fabricText);
+  saveAction();
 }
 
 function addPic() {
@@ -20,13 +24,14 @@ function addPic() {
     image.set({
       scaleX: 0.5,
       scaleY: 0.5,
-      objectCaching: false,
+      // objectCaching: false,
       component_type: 'pic',
       // stroke: "lightgreen",
       strokeWidth: 1,
       uuid: uuidv4()
     });
     useDesignStore.canvas.add(image);
+    saveAction();
   });
 }
 
@@ -46,6 +51,7 @@ function addRect() {
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
+  saveAction();
 }
 
 function addCircular() {
@@ -61,6 +67,7 @@ function addCircular() {
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
+  saveAction();
 }
 
 
@@ -78,10 +85,8 @@ function addTriangle() {
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
+  saveAction();
 }
-
-
-
 
 
 export {

@@ -17,8 +17,8 @@
       <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> -->
     </el-tab-pane>
 
-    <el-tab-pane label="背景">
-      <Background></Background>
+    <el-tab-pane label="步骤">
+      <CanvasStep></CanvasStep>
     </el-tab-pane>
     <el-tab-pane label="画布">
       <CanvasLayer :componentSize="componentSize"></CanvasLayer>
@@ -38,7 +38,7 @@
     defineProps
   } from 'vue'
 
-  import Background from "./Menu-tab/Background.vue"
+  import CanvasStep from "./Menu-tab/CanvasStep.vue"
   import DesignFont from "./Menu-tab/DesignFont.vue"
   import CanvasLayer from "./Menu-tab/CanvasLayer.vue"
   import {
