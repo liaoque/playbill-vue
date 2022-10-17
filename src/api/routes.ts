@@ -1,4 +1,4 @@
-import { http } from "../utils/http";
+import {http} from "../utils/http";
 
 type Result = {
   code: number;
@@ -6,5 +6,11 @@ type Result = {
 };
 
 export const getAsyncRoutes = (params?: object) => {
-  return http.request<Result>("get", "/getAsyncRoutes", { params });
+  return http.request<Result>("get", "/getAsyncRoutes", {params});
 };
+
+export const Login = (params?: object) => {
+  console.log(params)
+  return http.post("/login", {data:params});
+};
+

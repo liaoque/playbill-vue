@@ -16,9 +16,13 @@ import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
 import { useTranslationLang } from "/@/layout/hooks/useTranslationLang";
 import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
 
+
 import dayIcon from "/@/assets/svg/day.svg?component";
 import darkIcon from "/@/assets/svg/dark.svg?component";
 import globalization from "/@/assets/svg/globalization.svg?component";
+import { Login } from "/@/api/routes";
+
+
 
 defineOptions({
   name: "Login"
@@ -46,16 +50,19 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       // 模拟请求，需根据实际开发进行修改
-      setTimeout(() => {
+      Login(ruleForm).then(()=>{
         loading.value = false;
-        storageSession.setItem("info", {
-          username: "admin",
-          accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
-        });
-        initRouter("admin").then(() => {});
-        message.success("登录成功");
-        router.push("/");
-      }, 2000);
+        // storageSession.setItem("info", {
+        //   username: "admin",
+        //   accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
+        // });
+        // initRouter("admin").then(() => {});
+        // message.success("登录成功");
+        // router.push("/");
+      }).catch(()=>{
+        loading.value = false;
+      });
+
     } else {
       loading.value = false;
       return fields;
