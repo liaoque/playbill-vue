@@ -15,6 +15,5 @@
   "SidebarStatus": true,
   "EpThemeColor": "#409EFF",
   "ShowLogo": true,
-  "ShowModel": "smart",
-  "UploadApiUrl": "http://localhost:8000/upload"
+  "ShowModel": "smart"
 }

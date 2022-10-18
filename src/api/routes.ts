@@ -10,7 +10,11 @@ export const getAsyncRoutes = (params?: object) => {
 };
 
 export const Login = (params?: object) => {
+  return http.post("/login", {data: params});
+};
+
+export const PlaybillSave = (params?: object) => {
   console.log(params)
-  return http.post("/login", {data:params});
+  return http.post("/playbill/save", {data: params});
 };
 

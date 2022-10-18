@@ -1,81 +1,85 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Motion from "./utils/motion";
-import { useRouter } from "vue-router";
-import { loginRules } from "./utils/rule";
-import { ref, reactive, toRaw } from "vue";
-import { initRouter } from "/@/router/utils";
-import { useNav } from "/@/layout/hooks/useNav";
-import { message } from "@pureadmin/components";
-import type { FormInstance } from "element-plus";
-import { storageSession } from "@pureadmin/utils";
-import { $t, transformI18n } from "/@/plugins/i18n";
-import { useLayout } from "/@/layout/hooks/useLayout";
-import { bg, avatar, illustration } from "./utils/static";
-import { useRenderIcon } from "/@/components/ReIcon/src/hooks";
-import { useTranslationLang } from "/@/layout/hooks/useTranslationLang";
-import { useDataThemeChange } from "/@/layout/hooks/useDataThemeChange";
+  import {useI18n} from "vue-i18n";
+  import Motion from "./utils/motion";
+  import {useRouter} from "vue-router";
+  import {loginRules} from "./utils/rule";
+  import {ref, reactive, toRaw} from "vue";
+  import {initRouter} from "/@/router/utils";
+  import {useNav} from "/@/layout/hooks/useNav";
+  import {message} from "@pureadmin/components";
+  import type {FormInstance} from "element-plus";
+  import {storageSession} from "@pureadmin/utils";
+  import {$t, transformI18n} from "/@/plugins/i18n";
+  import {useLayout} from "/@/layout/hooks/useLayout";
+  import {bg, avatar, illustration} from "./utils/static";
+  import {useRenderIcon} from "/@/components/ReIcon/src/hooks";
+  import {useTranslationLang} from "/@/layout/hooks/useTranslationLang";
+  import {useDataThemeChange} from "/@/layout/hooks/useDataThemeChange";
 
 
-import dayIcon from "/@/assets/svg/day.svg?component";
-import darkIcon from "/@/assets/svg/dark.svg?component";
-import globalization from "/@/assets/svg/globalization.svg?component";
-import { Login } from "/@/api/routes";
+  import dayIcon from "/@/assets/svg/day.svg?component";
+  import darkIcon from "/@/assets/svg/dark.svg?component";
+  import globalization from "/@/assets/svg/globalization.svg?component";
+  import {Login} from "/@/api/routes";
 
 
-
-defineOptions({
-  name: "Login"
-});
-const router = useRouter();
-const loading = ref(false);
-const ruleFormRef = ref<FormInstance>();
-
-const { initStorage } = useLayout();
-initStorage();
-
-const { t } = useI18n();
-const { dataTheme, dataThemeChange } = useDataThemeChange();
-const { title, getDropdownItemStyle, getDropdownItemClass } = useNav();
-const { locale, translationCh, translationEn } = useTranslationLang();
-
-const ruleForm = reactive({
-  username: "admin",
-  password: "admin123"
-});
-
-const onLogin = async (formEl: FormInstance | undefined) => {
-  loading.value = true;
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      // 模拟请求，需根据实际开发进行修改
-      Login(ruleForm).then(()=>{
-        loading.value = false;
-        // storageSession.setItem("info", {
-        //   username: "admin",
-        //   accessToken: "eyJhbGciOiJIUzUxMiJ9.test"
-        // });
-        // initRouter("admin").then(() => {});
-        // message.success("登录成功");
-        // router.push("/");
-      }).catch(()=>{
-        loading.value = false;
-      });
-
-    } else {
-      loading.value = false;
-      return fields;
-    }
+  defineOptions({
+    name: "Login"
   });
-};
+  const router = useRouter();
+  const loading = ref(false);
+  const ruleFormRef = ref<FormInstance>();
 
-dataThemeChange();
+  const {initStorage} = useLayout();
+  initStorage();
+
+  const {t} = useI18n();
+  const {dataTheme, dataThemeChange} = useDataThemeChange();
+  const {title, getDropdownItemStyle, getDropdownItemClass} = useNav();
+  const {locale, translationCh, translationEn} = useTranslationLang();
+
+  const ruleForm = reactive({
+    username: "admin",
+    password: "admin123"
+  });
+
+  const onLogin = async (formEl: FormInstance | undefined) => {
+    loading.value = true;
+    if (!formEl) return;
+    await formEl.validate((valid, fields) => {
+      if (valid) {
+        // 模拟请求，需根据实际开发进行修改
+        Login(ruleForm).then((data: any) => {
+          if (data.code != 0) {
+            return Promise.reject(data)
+          }
+          loading.value = false;
+
+          storageSession.setItem("info", {
+            username: ruleForm.username,
+            accessToken: data.info.token
+          });
+          initRouter("admin").then(() => {});
+          message.success("登录成功");
+          router.push("/");
+        }).catch((data) => {
+          loading.value = false;
+          data.message && message.error(data.message);
+        });
+
+      } else {
+        loading.value = false;
+        return fields;
+      }
+    });
+  };
+
+  dataThemeChange();
 </script>
 
 <template>
   <div class="select-none">
-    <img :src="bg" class="wave" />
+    <img :src="bg" class="wave"/>
     <div class="flex-c absolute right-5 top-3">
       <!-- 主题 -->
       <el-switch
@@ -110,7 +114,7 @@ dataThemeChange();
               @click="translationEn"
             >
               <span class="check-en" v-show="locale === 'en'">
-                <IconifyIconOffline icon="check" />
+                <IconifyIconOffline icon="check"/>
               </span>
               English
             </el-dropdown-item>
@@ -120,11 +124,11 @@ dataThemeChange();
     </div>
     <div class="login-container">
       <div class="img">
-        <component :is="toRaw(illustration)" />
+        <component :is="toRaw(illustration)"/>
       </div>
       <div class="login-box">
         <div class="login-form">
-          <avatar class="avatar" />
+          <avatar class="avatar"/>
           <Motion>
             <h2 class="outline-none">{{ title }}</h2>
           </Motion>
@@ -187,27 +191,27 @@ dataThemeChange();
 </template>
 
 <style scoped>
-@import url("/@/style/login.css");
+  @import url("/@/style/login.css");
 </style>
 
 <style lang="scss" scoped>
-:deep(.el-input-group__append, .el-input-group__prepend) {
-  padding: 0;
-}
-
-.translation {
-  ::v-deep(.el-dropdown-menu__item) {
-    padding: 5px 40px;
+  :deep(.el-input-group__append, .el-input-group__prepend) {
+    padding: 0;
   }
 
-  .check-zh {
-    position: absolute;
-    left: 20px;
-  }
+  .translation {
+    ::v-deep(.el-dropdown-menu__item) {
+      padding: 5px 40px;
+    }
 
-  .check-en {
-    position: absolute;
-    left: 20px;
+    .check-zh {
+      position: absolute;
+      left: 20px;
+    }
+
+    .check-en {
+      position: absolute;
+      left: 20px;
+    }
   }
-}
 </style>

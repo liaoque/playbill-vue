@@ -7,6 +7,7 @@ const warpperEnv = (envConf: Recordable): ViteEnv => {
     VITE_PROXY_DOMAIN: "",
     VITE_PROXY_DOMAIN_REAL: "",
     VITE_ROUTER_HISTORY: "",
+    VITE_UPLOAD_API_URL: "",
     VITE_LEGACY: false
   };
 

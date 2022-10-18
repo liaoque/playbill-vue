@@ -79,6 +79,7 @@ declare global {
     VITE_PROXY_DOMAIN: string;
     VITE_PROXY_DOMAIN_REAL: string;
     VITE_ROUTER_HISTORY: string;
+    VITE_UPLOAD_API_URL: string;
     VITE_LEGACY: boolean;
   }
 
