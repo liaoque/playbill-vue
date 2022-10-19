@@ -14,7 +14,13 @@ export const Login = (params?: object) => {
 };
 
 export const PlaybillSave = (params?: object) => {
-  console.log(params)
   return http.post("/playbill/save", {data: params});
 };
 
+
+export const PlaybillQuery = (params?: object) => {
+  return http.get("/playbill/query", {data: params});
+};
+
+
+export type {Result};

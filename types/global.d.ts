@@ -5,8 +5,8 @@ import type {
   FunctionalComponent,
   PropType as VuePropType
 } from "vue";
-import type { ECharts } from "echarts";
-import { type ResponsiveStorage } from "./index";
+import type {ECharts} from "echarts";
+import type {ResponsiveStorage} from "./index";
 
 // GlobalComponents for Volar
 declare module "vue" {
@@ -27,6 +27,7 @@ declare global {
     };
     lastBuildTime: string;
   };
+
   interface Window {
     // Global vue app instance
     __APP__: App<Element>;
@@ -69,6 +70,7 @@ declare global {
   interface WheelEvent {
     path?: EventTarget[];
   }
+
   interface ImportMetaEnv extends ViteEnv {
     __: unknown;
   }
@@ -126,12 +128,15 @@ declare global {
     type Element = VNode;
     // tslint:disable no-empty-interface
     type ElementClass = ComponentRenderProxy;
+
     interface ElementAttributesProperty {
       $props: any;
     }
+
     interface IntrinsicElements {
       [elem: string]: any;
     }
+
     interface IntrinsicAttributes {
       [elem: string]: any;
     }

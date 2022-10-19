@@ -36,6 +36,9 @@ export const useDesignStore = defineStore({
     },
   },
   actions: {
+    setId(id: string) {
+      this.id = id;
+    },
     setCanvas(canvas: Object) {
       this.canvas = markRaw(canvas);
     },
@@ -52,7 +55,7 @@ export const useDesignStore = defineStore({
     setBackground(src: string) {
       // this.removeBackground()
       let self = this
-      self.canvas.setBackgroundImage("http://localhost:8000/" + src, self.canvas.renderAll.bind(this.canvas), {
+      self.canvas.setBackgroundImage(src, self.canvas.renderAll.bind(this.canvas), {
         originX: 'left',
         originY: 'top',
         scaleX: 0.5,

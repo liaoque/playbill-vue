@@ -1,7 +1,9 @@
 import {fabric} from "/@/utils/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
-import {PlaybillSave} from "/@/api/routes";
+import {PlaybillSave, Result} from "/@/api/routes";
+import {ref} from "vue";
+import {message} from "@pureadmin/components";
 
 const useDesignStore = useDesignStoreHook();
 
@@ -33,38 +35,26 @@ function downloadSVG() {
   URL.revokeObjectURL(blobURL);
 }
 
+const loading = ref(false);
+
 function toJSON() {
+  loading.value = true;
   let canvas = useDesignStore.canvas;
   const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid"]);
   PlaybillSave({
     data: json
-  }).then((data) => {
-    console.log(data)
-  }).catch(() => {
-
+  }).then((data: any) => {
+    if (data.code != 0) {
+      return Promise.reject(data)
+    }
+    loading.value = false;
+    useDesignStore.setId(data.info.oid)
+  }).catch((data?: any) => {
+    loading.value = false;
+    loading.value = false;
+    data.message && message.error(data.message);
   })
 
-  // const out = JSON.stringify(json, null, "\t");
-  // const blob = new Blob([out], {
-  //   type: "text/plain"
-  // });
-  // const clipboardItemData = {
-  //   [blob.type]: blob
-  // };
-  // try {
-  //   navigator.clipboard &&
-  //   (navigator.clipboard.write([
-  //     new ClipboardItem(clipboardItemData)
-  //   ]));
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  // const blobURL = URL.createObjectURL(blob);
-  // const a = document.createElement("a");
-  // a.href = blobURL;
-  // a.download = "eraser_example.json";
-  // a.click();
-  // URL.revokeObjectURL(blobURL);
 }
 
 

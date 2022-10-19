@@ -61,5 +61,6 @@ export type designCanvasType = {
   background: designBackgroundType;
   canvasMap: designCanvasMapType;
   activeSelection?: any;
+  id?: string;
 
 }
