@@ -8,28 +8,28 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: "CanvasLayer"
-  }
+export default {
+  name: "CanvasLayer"
+};
 </script>
 
 <script lang="ts" setup>
-  import {computed, onActivated, defineProps} from "@vue/runtime-core";
-  import {useDesignStoreHook} from "/@/store/modules/design";
+import { computed, onActivated, defineProps } from "@vue/runtime-core";
+import { useDesignStoreHook } from "/@/store/modules/design";
 
-  const useDesignStore = useDesignStoreHook()
-  const props = defineProps({
-    componentSize: Number
-  })
-  let selection = (i) => {
-    useDesignStore.canvas.setActiveObject(useDesignStore.canvas.item(i - 1))
-    useDesignStore.canvas.requestRenderAll();
-  }
+const useDesignStore = useDesignStoreHook();
+const props = defineProps({
+  componentSize: Number
+});
+let selection = (i: Number) => {
+  useDesignStore.canvas.setActiveObject(useDesignStore.canvas.item(i - 1));
+  useDesignStore.canvas.requestRenderAll();
+};
 
-  let prefix = (i) => {
-    let klass = useDesignStore.canvas.item(i - 1)
-    return klass.component_type
-  }
+let prefix = (i: Number) => {
+  let klass = useDesignStore.canvas.item(i - 1);
+  return klass.component_type;
+};
 
 </script>
 

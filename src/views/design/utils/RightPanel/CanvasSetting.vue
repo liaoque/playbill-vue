@@ -25,10 +25,6 @@
           </el-icon>
         </el-upload>
 
-        <el-dialog v-model="dialogVisible">
-          <img w-full :src="props.klassObj.backgroundImage" alt="Preview Image"/>
-        </el-dialog>
-
       </el-form-item>
 
       <el-form-item label="删除背景图">
