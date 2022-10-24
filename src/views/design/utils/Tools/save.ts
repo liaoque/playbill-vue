@@ -13,7 +13,7 @@ function downloadImage() {
   const base64 = canvas.toDataURL({
     format: ext,
     enableRetinaScaling: true,
-    multiplier: 2
+    multiplier: 1
   });
   const link = document.createElement("a");
   link.href = base64;

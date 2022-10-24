@@ -75,7 +75,7 @@
     const base64 = canvas.toDataURL({
       format: "png",
       enableRetinaScaling: true,
-      multiplier: 2
+      multiplier: 1
     });
     url.value = base64
     dialogTableVisible.value = true
