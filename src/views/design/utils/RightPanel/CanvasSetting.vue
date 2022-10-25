@@ -39,7 +39,6 @@
 <script lang="ts" setup>
   import {
     ref,
-    defineProps,
     onMounted,
     nextTick, computed
   } from 'vue'

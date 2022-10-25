@@ -57,7 +57,7 @@
 
 
 <script lang="ts" setup>
-  import {ref, defineProps} from "vue";
+  import {ref} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
   import {downloadImage, downloadSVG, toJSON} from "./Tools/save";

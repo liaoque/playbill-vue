@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
   import {Lock, Unlock, Delete, DocumentCopy} from "@element-plus/icons-vue";
-  import {computed, defineProps, ref} from "vue";
+  import {computed,  ref} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {saveAction} from "/@/views/design/utils/Tools/stack";
 

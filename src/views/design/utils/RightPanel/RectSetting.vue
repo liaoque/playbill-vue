@@ -90,7 +90,7 @@
 
 <script lang="ts" setup>
 
-  import {defineProps, ref} from "vue";
+  import { ref} from "vue";
   import Actions from "./Actions.vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {Plus} from "@element-plus/icons-vue";

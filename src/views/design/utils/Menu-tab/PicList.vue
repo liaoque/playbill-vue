@@ -15,8 +15,6 @@
 <script lang="ts" setup>
   import {
     ref,
-    defineProps,
-    defineEmits,
     onMounted
   } from 'vue';
   import {

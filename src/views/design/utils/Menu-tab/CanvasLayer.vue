@@ -14,7 +14,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onActivated, defineProps } from "@vue/runtime-core";
+import { computed, onActivated } from "@vue/runtime-core";
 import { useDesignStoreHook } from "/@/store/modules/design";
 
 const useDesignStore = useDesignStoreHook();

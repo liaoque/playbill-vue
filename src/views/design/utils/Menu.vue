@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 
 
-  import {ref, defineEmits, defineProps} from 'vue'
+  import {ref} from 'vue'
   import {useDesignStoreHook} from "/@/store/modules/design";
   import CanvasStep from "./Menu-tab/CanvasStep.vue"
   import DesignFont from "./Menu-tab/DesignFont.vue"

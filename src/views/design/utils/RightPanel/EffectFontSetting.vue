@@ -120,7 +120,7 @@
     onMounted,
     onUnmounted,
     ref,
-    defineProps, nextTick
+     nextTick
   } from "vue";
   import FontFaceObserver from "fontfaceobserver";
   import "/@/assets/fonts/fonts.css"
