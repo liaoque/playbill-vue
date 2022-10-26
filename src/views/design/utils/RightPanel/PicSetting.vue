@@ -42,7 +42,7 @@
     </el-form-item>
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-slider v-model="props.klassObj.angle" @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
+      <el-slider v-model="props.klassObj.angle"  :max=360 @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
     <el-form-item label="上传">

@@ -75,7 +75,7 @@
           height: selected.getScaledHeight(),
           klass: markRaw(selected),
         }
-        console.log(selected.component_type)
+        console.log(selected)
         switch (selected.component_type) {
           case 'text':
             klassObj.value = {
