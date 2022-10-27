@@ -57,7 +57,7 @@
     </el-form-item>
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-slider v-model="props.klassObj.angle"  :max=360 @change="renderKlass" style="width: 90%;margin: 0 auto;"/>
+      <el-slider v-model="props.klassObj.angle"  :max=360 @change="renderRotate" style="width: 90%;margin: 0 auto;"/>
     </el-form-item>
 
     <el-form-item label="边框：颜色,宽度">
@@ -112,7 +112,7 @@
     props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity).toFixed(2))
     props.klassObj.klass.set('left', parseInt(props.klassObj.left))
     props.klassObj.klass.set('right', parseInt(props.klassObj.right))
-    props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
+    // props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
     props.klassObj.klass.set('fill', props.klassObj.fill)
     props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
@@ -120,6 +120,11 @@
     saveAction();
   }
 
+  function renderRotate() {
+    props.klassObj.klass.rotate(parseInt(props.klassObj.angle))
+    useDesignStore.canvas.requestRenderAll();
+    saveAction();
+  }
 </script>
 
 

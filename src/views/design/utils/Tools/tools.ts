@@ -12,6 +12,7 @@ const addText = () => {
     left: 20,
     // stroke: "#6F3636",
     strokeWidth: 1,
+    centeredRotation: true
   });
   fabricText.component_type = 'text'
   fabricText.uuid = uuidv4()
@@ -28,6 +29,7 @@ function addPic() {
       component_type: 'pic',
       // stroke: "lightgreen",
       strokeWidth: 1,
+      centeredRotation: true,
       uuid: uuidv4()
     });
     useDesignStore.canvas.add(image);
@@ -48,6 +50,7 @@ function addRect() {
     // stroke: "lightgreen",
     strokeWidth: 1,
     component_type: 'rect',
+    centeredRotation: true,
     uuid: uuidv4()
   });
   useDesignStore.canvas.add(rect);
@@ -63,6 +66,7 @@ function addCircular() {
     component_type: 'circle',
     // objectCaching: false,
     // stroke: "lightgreen",
+    centeredRotation: true,
     strokeWidth: 1,
     uuid: uuidv4()
   });
@@ -79,6 +83,7 @@ function addTriangle() {
     top: 50,
     fill: "#CBCD2A",
     component_type: 'triangle',
+    centeredRotation: true,
     // objectCaching: false,
     // stroke: "lightgreen",
     // strokeWidth: 1,
