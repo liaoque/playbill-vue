@@ -1,5 +1,5 @@
 import {RouteRecordName} from "vue-router";
-import {fabric} from "/@/utils/fabric";
+import {fabric} from "/@/utils/fabric/fabric";
 import {ref} from "@vue/runtime-core";
 
 export type cacheType = {

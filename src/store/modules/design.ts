@@ -1,7 +1,10 @@
 import {defineStore} from "pinia";
 import {store} from "/@/store";
 import {designCanvasType, designBackgroundType, designCanvasMapType, canvasLayer} from "./types";
-import {fabric, fabric2Method} from "/@/utils/fabric";
+import {fabric, getCanvas, setCanvas} from "/@/utils/fabric/fabric";
+import fabricBackground from "/@/utils/fabric/background";
+import fabricEl from "/@/utils/fabric/el";
+import fabricActiveEl from "/@/utils/fabric/activeEl";
 import {markRaw, ref} from "vue";
 import {any} from "vue-types";
 import {saveAction} from "/@/views/design/utils/Tools/stack";
@@ -33,26 +36,21 @@ export const useDesignStore = defineStore({
     getCanvasMap(): designCanvasMapType {
       return this.canvasMap;
     },
-    getActiveSelection() {
-      return this.activeSelection;
-    },
-    getCanvas() {
-      return this.canvas;
-    },
+    canvas(){
+      return getCanvas()
+    }
   },
   actions: {
     setId(id: string) {
       this.id = id;
     },
     setCanvas(canvas: Object) {
-      this.canvas = markRaw(canvas);
-    },
-    setActiveSelection(activeSelection?: any) {
-      this.activeSelection = markRaw(activeSelection || this.canvas.getActiveObject());
+      setCanvas(markRaw(canvas));
     },
     setWh() {
-      this.canvas.setWidth(parseInt(this.canvasMap.width));
-      this.canvas.setHeight(parseInt(this.canvasMap.height));
+      let canvas = getCanvas()
+      canvas.setWidth(parseInt(this.canvasMap.width));
+      canvas.setHeight(parseInt(this.canvasMap.height));
     },
     renderCanvasLayer() {
       let canvasLayer = this.canvasLayer
@@ -64,13 +62,22 @@ export const useDesignStore = defineStore({
       }
       let canvas = this.canvas
       hand = setTimeout(function () {
-        if(canvas){
+        if (canvas) {
           canvasLayer.componentSize = canvas.size()
         }
         hand = null
       }, 100);
     },
-    ...fabric2Method
+    removeSelection() {
+      let clipboard2 = this.getActiveObject()
+      if (!clipboard2) {
+        return;
+      }
+      this.remove(clipboard2);
+    },
+    ...fabricBackground,
+    ...fabricEl,
+    ...fabricActiveEl
   }
 });
 

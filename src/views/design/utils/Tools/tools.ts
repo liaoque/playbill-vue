@@ -1,4 +1,4 @@
-import {fabric} from "/@/utils/fabric";
+import {fabric} from "/@/utils/fabric/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
 import {saveAction} from "/@/views/design/utils/Tools/stack";

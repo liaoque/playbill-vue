@@ -31,7 +31,7 @@
   } from 'vue'
   import {
     fabric
-  } from "/@/utils/fabric"
+  } from "/@/utils/fabric/fabric"
   import Head from "./utils/Head.vue"
   import Menu from "./utils/Menu.vue"
   import Canvas from "./utils/Canvas.vue"
@@ -124,7 +124,7 @@
       };
     }
 
-    useDesignStore.canvas = markRaw(new fabric.Canvas('canvas'))
+    useDesignStore.setCanvas(markRaw(new fabric.Canvas('canvas')))
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
     useDesignStore.canvas.on('selection:cleared', selectionBackground)
