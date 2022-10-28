@@ -1,8 +1,7 @@
 <template>
   <ul class="list">
-    <li v-for="i in props.componentSize" :key="i" class="list-item">
+    <li v-for="i in useDesignStore.canvasLayer.componentSize" :key="i" class="list-item">
       <el-button style=" width: 100%;" @click="selection(i)">图层{{ i }}({{ prefix(i) }})</el-button>
-
     </li>
   </ul>
 </template>

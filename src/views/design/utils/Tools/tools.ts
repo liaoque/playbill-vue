@@ -16,7 +16,7 @@ const addText = () => {
   });
   fabricText.component_type = 'text'
   fabricText.uuid = uuidv4()
-  useDesignStore.canvas.add(fabricText);
+  useDesignStore.add(fabricText);
   saveAction();
 }
 
@@ -32,7 +32,7 @@ function addPic() {
       centeredRotation: true,
       uuid: uuidv4()
     });
-    useDesignStore.canvas.add(image);
+    useDesignStore.add(image);
     saveAction();
   });
 }
@@ -53,7 +53,7 @@ function addRect() {
     centeredRotation: true,
     uuid: uuidv4()
   });
-  useDesignStore.canvas.add(rect);
+  useDesignStore.add(rect);
   saveAction();
 }
 
@@ -70,7 +70,7 @@ function addCircular() {
     strokeWidth: 1,
     uuid: uuidv4()
   });
-  useDesignStore.canvas.add(rect);
+  useDesignStore.add(rect);
   saveAction();
 }
 
@@ -89,7 +89,7 @@ function addTriangle() {
     // strokeWidth: 1,
     uuid: uuidv4()
   });
-  useDesignStore.canvas.add(rect);
+  useDesignStore.add(rect);
   saveAction();
 }
 

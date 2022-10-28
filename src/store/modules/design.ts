@@ -1,9 +1,10 @@
 import {defineStore} from "pinia";
 import {store} from "/@/store";
-import {designCanvasType, designBackgroundType, designCanvasMapType} from "./types";
-import {fabric} from "/@/utils/fabric";
-import {markRaw} from "vue";
+import {designCanvasType, designBackgroundType, designCanvasMapType, canvasLayer} from "./types";
+import {fabric, fabric2Method} from "/@/utils/fabric";
+import {markRaw, ref} from "vue";
 import {any} from "vue-types";
+import {saveAction} from "/@/views/design/utils/Tools/stack";
 
 let background: designBackgroundType = {
   src: ""
@@ -14,12 +15,16 @@ let canvasMap: designCanvasMapType = {
   height: 667
 };
 
+let canvasLayer: canvasLayer = {
+  componentSize: 0
+}
 
 export const useDesignStore = defineStore({
   id: "design-setting",
   state: (): designCanvasType => ({
     background: background,
     canvasMap: canvasMap,
+    canvasLayer: canvasLayer,
   }),
   getters: {
     getBackground(): designBackgroundType {
@@ -49,23 +54,23 @@ export const useDesignStore = defineStore({
       this.canvas.setWidth(parseInt(this.canvasMap.width));
       this.canvas.setHeight(parseInt(this.canvasMap.height));
     },
-    setBackgroundColor(color: string) {
-      this.canvas.setBackgroundColor(color, this.canvas.renderAll.bind(this.canvas));
+    renderCanvasLayer() {
+      let canvasLayer = this.canvasLayer
+      canvasLayer.componentSize = 0;
+      let hand = null
+      if (hand) {
+        clearTimeout(hand);
+        hand = null
+      }
+      let canvas = this.canvas
+      hand = setTimeout(function () {
+        if(canvas){
+          canvasLayer.componentSize = canvas.size()
+        }
+        hand = null
+      }, 100);
     },
-    setBackground(src: string) {
-      // this.removeBackground()
-      let self = this
-      self.canvas.setBackgroundImage(src, self.canvas.renderAll.bind(this.canvas), {
-        originX: 'left',
-        originY: 'top',
-        scaleX: 0.5,
-        scaleY: 0.5,
-        crossOrigin: "anonymous"
-      });
-    },
-    removeBackground() {
-      this.canvas.setBackgroundImage(null, this.canvas.renderAll.bind(this.canvas));
-    }
+    ...fabric2Method
   }
 });
 

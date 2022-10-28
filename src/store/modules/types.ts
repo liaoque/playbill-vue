@@ -1,5 +1,6 @@
 import {RouteRecordName} from "vue-router";
 import {fabric} from "/@/utils/fabric";
+import {ref} from "@vue/runtime-core";
 
 export type cacheType = {
   mode: string;
@@ -54,6 +55,11 @@ export type designCanvasMapType = {
   height: number,
 }
 
+export type canvasLayer = {
+  componentSize: number,
+}
+
+
 
 export type designCanvasType = {
   // @ts-ignore
@@ -62,5 +68,6 @@ export type designCanvasType = {
   canvasMap: designCanvasMapType;
   activeSelection?: any;
   id?: string;
+  canvasLayer: canvasLayer;
 
 }

@@ -22,7 +22,7 @@
       <CanvasStep></CanvasStep>
     </el-tab-pane>
     <el-tab-pane label="画布">
-      <CanvasLayer :componentSize="componentSize"></CanvasLayer>
+      <CanvasLayer ></CanvasLayer>
     </el-tab-pane>
   </el-tabs>
 
@@ -45,12 +45,12 @@
 
 
   let panelIndex = ref('6');
-  let componentSize = ref(0);
+  // let componentSize = ref(0);
 
   function changePanle() {
     if (panelIndex.value == '6') {
-      componentSize.value = useDesignStore.canvas.size()
-      console.log(componentSize)
+      // componentSize.value = useDesignStore.canvas.size()
+      // console.log(componentSize)
     }
   }
 
