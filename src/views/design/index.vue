@@ -128,7 +128,10 @@
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
     useDesignStore.canvas.on('selection:cleared', selectionBackground)
-    useDesignStore.canvas.on('object:modified', saveAction)
+    useDesignStore.canvas.on('object:modified', (e) => {
+      selection({selected: [e.target]})
+      saveAction(e)
+    })
 
 
     //设置宽高
