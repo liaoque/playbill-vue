@@ -13,8 +13,8 @@ const handleRemove = (file: UploadFile) => {
 
 };
 
-const handleSuccess = (klass, file: UploadFile) => {
-  klass.setSrc(file, useDesignStore.canvas.renderAll.bind(useDesignStore.canvas), {crossOrigin: "anonymous"})
+const handleSuccess = (klass, src: string) => {
+  klass.setSrc(src, useDesignStore.canvas.renderAll.bind(useDesignStore.canvas), {crossOrigin: "anonymous"})
 };
 
 
