@@ -15,6 +15,7 @@
         <el-switch
           v-model="useDesignStore.canvasMap.opacity"
           size="large"
+          active-value=true
         />
       </el-form-item>
 
