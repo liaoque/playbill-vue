@@ -13,9 +13,12 @@
           <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
         </el-col>
         <el-col :span="12">
-          <el-input
+          <el-input-number
             v-model="props.klassObj.opacity"
             type="text"
+            step=0.1
+            max=1
+            min=0
             @change="renderKlass"
           />
         </el-col>
@@ -42,13 +45,13 @@
     <el-form-item label="位置：x，y">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-input
+          <el-input-number
             v-model="props.klassObj.left"
             type="text"
           />
         </el-col>
         <el-col :span="12">
-          <el-input
+          <el-input-number
             v-model="props.klassObj.top"
             type="text"
           />
@@ -66,7 +69,7 @@
           <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
         </el-col>
         <el-col :span="12">
-          <el-input
+          <el-input-number
             v-model="props.klassObj.strokeWidth"
             type="text"
             @change="renderKlass"
