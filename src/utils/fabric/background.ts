@@ -11,8 +11,6 @@ export default {
     canvas.setBackgroundImage(src, canvas.renderAll.bind(canvas), {
       originX: 'left',
       originY: 'top',
-      scaleX: 0.5,
-      scaleY: 0.5,
       crossOrigin: "anonymous"
     });
   },

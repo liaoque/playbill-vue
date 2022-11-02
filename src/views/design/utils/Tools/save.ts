@@ -40,9 +40,13 @@ const loading = ref(false);
 function toJSON() {
   loading.value = true;
   let canvas = useDesignStore.canvas;
+  console.log(canvas)
   const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid","aCoords"]);
   PlaybillSave({
-    data: json
+    data: {
+      ...json,
+      ...useDesignStore.canvasMap
+    }
   }).then((data: any) => {
     if (data.code != 0) {
       return Promise.reject(data)

@@ -23,8 +23,7 @@ const addText = () => {
 function addPic() {
   new fabric.Image.fromURL("./public/sun.png", function (image) {
     image.set({
-      scaleX: 0.5,
-      scaleY: 0.5,
+
       // objectCaching: false,
       component_type: 'pic',
       // stroke: "lightgreen",
@@ -44,8 +43,7 @@ function addRect() {
     fill: "#CBCD2A",
     width: 200,
     height: 100,
-    // scaleX: 0.5,
-    // scaleY: 0.5,
+
     // objectCaching: false,
     // stroke: "lightgreen",
     strokeWidth: 1,

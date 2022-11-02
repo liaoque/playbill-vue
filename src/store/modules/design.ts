@@ -15,7 +15,9 @@ let background: designBackgroundType = {
 
 let canvasMap: designCanvasMapType = {
   width: 375,
-  height: 667
+  height: 667,
+  zoom: 0.5,
+  opacity: false,
 };
 
 let canvasLayer: canvasLayer = {
@@ -30,12 +32,6 @@ export const useDesignStore = defineStore({
     canvasLayer: canvasLayer,
   }),
   getters: {
-    getBackground(): designBackgroundType {
-      return this.background;
-    },
-    getCanvasMap(): designCanvasMapType {
-      return this.canvasMap;
-    },
     canvas(){
       return getCanvas()
     }
@@ -51,6 +47,7 @@ export const useDesignStore = defineStore({
       let canvas = getCanvas()
       canvas.setWidth(parseInt(this.canvasMap.width));
       canvas.setHeight(parseInt(this.canvasMap.height));
+      canvas.setZoom(this.canvasMap.zoom);
     },
     renderCanvasLayer() {
       let canvasLayer = this.canvasLayer

@@ -2,10 +2,20 @@
   <div class="" style="background-color: #FFFFFF;padding: 5px;">
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item label="画布宽">
-        <el-input placeholder="宽" v-model="useDesignStore.getCanvasMap.width" @change="renderKlass"></el-input>
+        <el-input-number placeholder="宽" v-model="useDesignStore.canvasMap.width" @change="renderKlass"></el-input-number>
       </el-form-item>
       <el-form-item label="画布高">
-        <el-input placeholder="高" v-model="useDesignStore.getCanvasMap.height" @change="renderKlass"></el-input>
+        <el-input-number placeholder="高" v-model="useDesignStore.canvasMap.height" @change="renderKlass"></el-input-number>
+      </el-form-item>
+      <el-form-item label="画布缩放">
+        <el-input-number placeholder="缩放" v-model="useDesignStore.canvasMap.zoom" step=0.1 @change="renderKlass"></el-input-number>
+      </el-form-item>
+
+      <el-form-item label="背景透明">
+        <el-switch
+          v-model="useDesignStore.canvasMap.opacity"
+          size="large"
+        />
       </el-form-item>
 
       <el-form-item label="背景颜色">
@@ -64,8 +74,7 @@
   })
 
   function renderKlass() {
-    props.klassObj.klass.set('width', parseInt(useDesignStore.getCanvasMap.width))
-    props.klassObj.klass.set('height', parseInt(useDesignStore.getCanvasMap.height))
+    useDesignStore.setWh();
     useDesignStore.canvas.requestRenderAll();
     saveAction();
   }

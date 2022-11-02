@@ -3,71 +3,72 @@ import {fabric} from "/@/utils/fabric/fabric";
 import {ref} from "@vue/runtime-core";
 
 export type cacheType = {
-  mode: string;
-  name?: RouteRecordName;
+    mode: string;
+    name?: RouteRecordName;
 };
 
 export type positionType = {
-  startIndex?: number;
-  length?: number;
+    startIndex?: number;
+    length?: number;
 };
 
 export type appType = {
-  sidebar: {
-    opened: boolean;
-    withoutAnimation: boolean;
-    // 判断是否手动点击Collapse
-    isClickCollapse: boolean;
-  };
-  layout: string;
-  device: string;
+    sidebar: {
+        opened: boolean;
+        withoutAnimation: boolean;
+        // 判断是否手动点击Collapse
+        isClickCollapse: boolean;
+    };
+    layout: string;
+    device: string;
 };
 
 export type multiType = {
-  path: string;
-  parentPath: string;
-  name: string;
-  meta: any;
-  query?: object;
-  params?: object;
+    path: string;
+    parentPath: string;
+    name: string;
+    meta: any;
+    query?: object;
+    params?: object;
 };
 
 export type setType = {
-  title: string;
-  fixedHeader: boolean;
-  hiddenSideBar: boolean;
+    title: string;
+    fixedHeader: boolean;
+    hiddenSideBar: boolean;
 };
 
 export type userType = {
-  token: string;
-  name?: string;
-  verifyCode?: string;
-  currentPage?: number;
+    token: string;
+    name?: string;
+    verifyCode?: string;
+    currentPage?: number;
 };
 
 
 export type designBackgroundType = {
-  src: string;
+    src: string;
 }
 
 export type designCanvasMapType = {
-  width: number,
-  height: number,
+    width: number,
+    height: number,
+    zoom: number,
+    opacity: boolean,
 }
 
 export type canvasLayer = {
-  componentSize: number,
+    componentSize: number,
 }
 
 
-
 export type designCanvasType = {
-  // @ts-ignore
-  canvas?: fabric.Canvas;
-  background: designBackgroundType;
-  canvasMap: designCanvasMapType;
-  activeSelection?: any;
-  id?: string;
-  canvasLayer: canvasLayer;
+    // @ts-ignore
+    canvas?: fabric.Canvas;
+    background: designBackgroundType;
+    canvasMap: designCanvasMapType;
+    activeSelection?: any;
+    id?: string;
+    canvasLayer: canvasLayer;
 
 }

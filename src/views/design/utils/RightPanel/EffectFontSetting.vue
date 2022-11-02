@@ -8,13 +8,13 @@
       />
     </el-form-item>
 
-    <el-form-item label="内容">
-      <el-input
-        v-model="props.klassObj.text"
-        type="textarea"
-        @change="renderKlass"
-      />
-    </el-form-item>
+<!--    <el-form-item label="内容">-->
+<!--      <el-input-->
+<!--        v-model="props.klassObj.text"-->
+<!--        type="textarea"-->
+<!--        @change="renderKlass"-->
+<!--      />-->
+<!--    </el-form-item>-->
 
     <el-form-item label="字体">
       <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large">
