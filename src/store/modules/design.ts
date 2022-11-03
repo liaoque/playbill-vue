@@ -38,7 +38,7 @@ export const useDesignStore = defineStore({
   },
   actions: {
     setId(id: string) {
-      this.id = id;
+      this.canvasMap.oid = id;
     },
     setCanvas(canvas: Object) {
       setCanvas(markRaw(canvas));

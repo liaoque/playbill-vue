@@ -1,10 +1,10 @@
 <template>
   <div class="" style="background-color: #FFFFFF;padding: 5px;">
     <el-form :inline="true" class="demo-form-inline">
-      <el-form-item label="画布宽">
+      <el-form-item label="画布宽&nbsp;&nbsp;&nbsp;">
         <el-input-number placeholder="宽" v-model="useDesignStore.canvasMap.width" @change="renderKlass"></el-input-number>
       </el-form-item>
-      <el-form-item label="画布高">
+      <el-form-item label="画布高&nbsp;&nbsp;&nbsp;">
         <el-input-number placeholder="高" v-model="useDesignStore.canvasMap.height" @change="renderKlass"></el-input-number>
       </el-form-item>
       <el-form-item label="画布缩放">
@@ -23,7 +23,7 @@
         <el-color-picker v-model="props.klassObj.backgroundColor" @change="setBackgroundColor"/>
       </el-form-item>
 
-      <el-form-item label="上传背景图">
+      <el-form-item label="背景图&nbsp;&nbsp;&nbsp;">
         <el-upload :action="uploadApiUrl"
                    list-type="picture-card"
                    :on-success="handleSuccessBackground"
@@ -38,7 +38,7 @@
 
       </el-form-item>
 
-      <el-form-item label="删除背景图">
+      <el-form-item label="背景图&nbsp;&nbsp;&nbsp;">
         <el-button @click="handleRemoveBackground">删除</el-button>
       </el-form-item>
 

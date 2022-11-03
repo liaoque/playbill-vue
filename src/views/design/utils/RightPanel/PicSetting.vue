@@ -7,7 +7,7 @@
       />
     </el-form-item>
 
-    <el-form-item label="位置：宽，高">
+    <el-form-item label="位置：宽/高">
       <el-row :gutter="20">
         <el-col :span="12">
           <el-input-number
@@ -62,7 +62,7 @@
       </el-dialog>
     </el-form-item>
 
-    <el-form-item label="边框：颜色,宽度">
+    <el-form-item label="边框：颜色/宽度">
       <el-row :gutter="20">
         <el-col :span="12">
           <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
