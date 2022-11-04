@@ -29,7 +29,7 @@
     <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-label>X</el-label>
+          <label>X</label>
           <el-input-number
             v-model="props.klassObj.left"
             type="text"
@@ -37,7 +37,7 @@
           />
         </el-col>
         <el-col :span="12">
-          <el-label>Y</el-label>
+          <label>Y</label>
           <el-input-number
             v-model="props.klassObj.top"
             type="text"
@@ -50,7 +50,7 @@
     <el-form-item label="" style="display: block;width: 100%;">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-label>旋转</el-label>
+          <label>旋转</label>
           <el-input-number
             v-model="props.klassObj.angle"
             type="text"
@@ -58,13 +58,13 @@
           />
         </el-col>
         <el-col :span="12">
-          <el-label>透明度</el-label>
+          <label>透明度</label>
           <el-input-number
             v-model="props.klassObj.opacity"
             type="text"
-            step=0.1
-            max=1
-            min=0
+            :step=0.1
+            :max=1
+            :min=0
             @change="renderKlass"
           />
         </el-col>
@@ -75,15 +75,15 @@
     <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-label>填充色</el-label>
+          <label>填充色</label>
           <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
         </el-col>
         <el-col :span="6">
-          <el-label>边框色</el-label>
+          <label>边框色</label>
           <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke" style="display: block"/>
         </el-col>
         <el-col :span="12">
-          <el-label>边框宽度</el-label>
+          <label>边框宽度</label>
           <el-input-number
             v-model="props.klassObj.strokeWidth"
             type="text"

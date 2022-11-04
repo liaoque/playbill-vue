@@ -15,7 +15,7 @@
         </el-main>
 
         <el-aside  style="height: 100%;width:300px;">
-          <el-tabs v-model="panelTabs.name" class="demo-tabs" stretch="true" @tab-click="handleClick" style="background-color: #ffffff;">
+          <el-tabs v-model="panelTabs.name" class="demo-tabs" :stretch="true" style="background-color: #ffffff;">
             <el-tab-pane label="属性设置" name="first" :disabled="panelTabs.disabled" style="margin-left: 10px;">
               <KeepAlive>
                 <component :is="panelComponent" :klassObj="klassObj"></component>

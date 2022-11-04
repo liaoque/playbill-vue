@@ -14,7 +14,7 @@ export const Login = (params?: object) => {
 };
 
 export const PlaybillView = (params?: object) => {
-  return http.post("/playbill/save", {data: params});
+  return http.post("/playbill/view", {data: params});
 };
 
 

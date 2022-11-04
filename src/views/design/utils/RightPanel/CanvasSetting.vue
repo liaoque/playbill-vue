@@ -8,7 +8,7 @@
         <el-input-number placeholder="高" v-model="useDesignStore.canvasMap.height" @change="renderKlass"></el-input-number>
       </el-form-item>
       <el-form-item label="画布缩放">
-        <el-input-number placeholder="缩放" v-model="useDesignStore.canvasMap.zoom" step=0.1 @change="renderKlass"></el-input-number>
+        <el-input-number placeholder="缩放" v-model="useDesignStore.canvasMap.zoom" :step="0.1" @change="renderKlass"></el-input-number>
       </el-form-item>
 
       <el-form-item label="背景透明">

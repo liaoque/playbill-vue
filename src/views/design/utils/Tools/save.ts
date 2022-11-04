@@ -63,7 +63,7 @@ function toView() {
   loading.value = true;
   let canvas = useDesignStore.canvas;
   const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid","aCoords"]);
-  PlaybillView({
+  return PlaybillView({
     data: {
       ...json,
       ...useDesignStore.canvasMap
@@ -72,6 +72,7 @@ function toView() {
     if (data.code != 0) {
       return Promise.reject(data)
     }
+    return data.info
   }).catch((data?: any) => {
     data.message && message.error(data.message);
   }).finally(()=>{

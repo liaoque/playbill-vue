@@ -36,7 +36,7 @@
         <template #title>保存</template>
         <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>
         <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>
-        <el-menu-item index="save-3" @click="toView">保存到json</el-menu-item>
+        <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>
       </el-sub-menu>
 
     </el-menu>
@@ -70,6 +70,13 @@
 
   let url = ref("")
   let dialogTableVisible = ref(false)
+  const preview = () => {
+    let canvas = useDesignStore.canvas;
+    toView().then((data)=>{
+      url.value = data.src
+      dialogTableVisible.value = true
+    })
+  }
 
 
 </script>

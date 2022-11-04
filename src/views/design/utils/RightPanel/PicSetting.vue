@@ -28,7 +28,7 @@
     <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-label>X</el-label>
+          <label>X</label>
           <el-input-number
             v-model="props.klassObj.left"
             type="text"
@@ -36,7 +36,7 @@
           />
         </el-col>
         <el-col :span="12">
-          <el-label>Y</el-label>
+          <label>Y</label>
           <el-input-number
             v-model="props.klassObj.top"
             type="text"
