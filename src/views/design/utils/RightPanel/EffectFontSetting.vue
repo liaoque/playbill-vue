@@ -1,7 +1,7 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
 
-    <el-form-item label="唯一标识">
+    <el-form-item :label="'唯一标识(宽：' + props.klassObj.width.toFixed(0) + '高：'+ props.klassObj.height.toFixed(0)  + ')'">
       <el-input
         v-model="props.klassObj.uuid"
         type="text"
@@ -16,9 +16,10 @@
 <!--      />-->
 <!--    </el-form-item>-->
 
-    <el-form-item label="位置：x, y">
+    <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
+          <el-label>X</el-label>
           <el-input-number
             v-model="props.klassObj.left"
             type="text"
@@ -26,6 +27,7 @@
           />
         </el-col>
         <el-col :span="12">
+          <el-label>Y</el-label>
           <el-input-number
             v-model="props.klassObj.top"
             type="text"
@@ -35,43 +37,18 @@
       </el-row>
     </el-form-item>
 
-
-    <el-form-item label="字体">
-      <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large">
-        <el-option
-          v-for="(item, index) in options"
-          :key="index"
-          :label="item"
-          :value="item"
-        />
-      </el-select>
-    </el-form-item>
-
-    <el-form-item label="字体：颜色,粗细">
+    <el-form-item label="" style="display: block;width: 100%;">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
-        </el-col>
-        <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.fontWeight"
-            type="text"
-            @change="renderKlass"
-          />
-        </el-col>
-      </el-row>
-    </el-form-item>
-
-    <el-form-item label="字体: 大小,透明度">
-      <el-row :gutter="20">
-        <el-col :span="12">
+          <el-label>旋转</el-label>
           <el-input-number
-            v-model="props.klassObj.fontSize"
+            v-model="props.klassObj.angle"
             type="text"
-            @change="renderKlass"
+            @change="renderRotate"
           />
         </el-col>
         <el-col :span="12">
+          <el-label>透明度</el-label>
           <el-input-number
             v-model="props.klassObj.opacity"
             type="text"
@@ -85,21 +62,56 @@
     </el-form-item>
 
 
-
-    <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-input-number
-        v-model="props.klassObj.angle"
-        type="text"
-        @change="renderRotate"
-      />
-    </el-form-item>
-
-    <el-form-item label="边框：颜色,宽度">
+    <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
+          <el-label>字体</el-label>
+          <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large" style="    margin: 0;">
+            <el-option
+              v-for="(item, index) in options"
+              :key="index"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-col>
+
+      </el-row>
+    </el-form-item>
+
+    <el-form-item label="">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-label>大小</el-label>
+          <el-input-number
+            v-model="props.klassObj.fontSize"
+            type="text"
+            @change="renderKlass"
+          />
         </el-col>
         <el-col :span="12">
+          <el-label>粗细</el-label>
+          <el-input-number
+            v-model="props.klassObj.fontWeight"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+      </el-row>
+    </el-form-item>
+
+    <el-form-item label="">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-label>字体色</el-label>
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill" style="display: block"/>
+        </el-col>
+        <el-col :span="6">
+          <el-label>边框色</el-label>
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke" style="display: block"/>
+        </el-col>
+        <el-col :span="12">
+          <el-label>边框宽度</el-label>
           <el-input-number
             v-model="props.klassObj.strokeWidth"
             type="text"
@@ -155,7 +167,7 @@
     console.log(props.klassObj.angle)
     props.klassObj.klass.set('fill', props.klassObj.fill)
     props.klassObj.klass.set('fontSize', parseInt(props.klassObj.fontSize))
-    props.klassObj.klass.set('fontWeight', (parseFloat(props.klassObj.fontWeight) && parseFloat(props.klassObj.fontWeight).toFixed(2)) || 'normal')
+    props.klassObj.klass.set('fontWeight', (parseInt(props.klassObj.fontWeight)) || 700)
     props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity).toFixed(2))
     props.klassObj.klass.set('left', parseInt(props.klassObj.left))
     props.klassObj.klass.set('top', parseInt(props.klassObj.top))

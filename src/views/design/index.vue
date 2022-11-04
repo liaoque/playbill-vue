@@ -99,7 +99,7 @@
               fill: selected.fill,
               fontName: selected.fill,
               fontSize: selected.fontSize,
-              fontWeight: selected.fontWeight || 'normal',
+              fontWeight: parseInt(selected.fontWeight) || 700,
               text: selected.text,
               ...basePrototype
             };
@@ -143,6 +143,8 @@
     let selectionBackground = () => {
       let selected = useDesignStore.canvas
       panelComponent.value = CanvasSetting
+      panelTabs.value.name = "background";
+      panelTabs.value.disabled = true;
       klassObj.value = {
         backgroundColor: selected.backgroundColor,
         backgroundImage: selected.backgroundImage,

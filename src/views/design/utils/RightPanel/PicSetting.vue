@@ -1,41 +1,46 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
-    <el-form-item label="唯一标识">
+
+    <el-form-item :label="'唯一标识(宽：' + props.klassObj.width.toFixed(0) + '高：'+ props.klassObj.height.toFixed(0)  + ')'">
       <el-input
         v-model="props.klassObj.uuid"
         type="text"
       />
     </el-form-item>
 
-    <el-form-item label="位置：宽/高">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-input-number
-            v-model="props.klassObj.width" disabled
-            type="text"
-          />
-        </el-col>
-        <el-col :span="12">
-          <el-input-number
-            v-model="props.klassObj.height" disabled
-            type="text"
-          />
-        </el-col>
-      </el-row>
-    </el-form-item>
+<!--    <el-form-item label="位置：宽/高">-->
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="12">-->
+<!--          <el-input-number-->
+<!--            v-model="props.klassObj.width" disabled-->
+<!--            type="text"-->
+<!--          />-->
+<!--        </el-col>-->
+<!--        <el-col :span="12">-->
+<!--          <el-input-number-->
+<!--            v-model="props.klassObj.height" disabled-->
+<!--            type="text"-->
+<!--          />-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-form-item>-->
 
-    <el-form-item label="位置：x，y">
+    <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
+          <el-label>X</el-label>
           <el-input-number
             v-model="props.klassObj.left"
             type="text"
+            @change="renderKlass"
           />
         </el-col>
         <el-col :span="12">
+          <el-label>Y</el-label>
           <el-input-number
             v-model="props.klassObj.top"
             type="text"
+            @change="renderKlass"
           />
         </el-col>
       </el-row>

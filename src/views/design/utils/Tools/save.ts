@@ -1,7 +1,7 @@
 import {fabric} from "/@/utils/fabric/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
-import {PlaybillSave, Result} from "/@/api/routes";
+import {PlaybillSave, PlaybillView} from "/@/api/routes";
 import {ref} from "vue";
 import {message} from "@pureadmin/components";
 
@@ -50,19 +50,38 @@ function toJSON() {
     if (data.code != 0) {
       return Promise.reject(data)
     }
-    loading.value = false;
     useDesignStore.setId(data.info.oid)
   }).catch((data?: any) => {
-    loading.value = false;
-    loading.value = false;
     data.message && message.error(data.message);
+  }).finally(()=>{
+    loading.value = false;
   })
 
 }
 
+function toView() {
+  loading.value = true;
+  let canvas = useDesignStore.canvas;
+  const json = canvas.toDatalessJSON(["clipPath", "eraser", "component_type", "uuid","aCoords"]);
+  PlaybillView({
+    data: {
+      ...json,
+      ...useDesignStore.canvasMap
+    }
+  }).then((data: any) => {
+    if (data.code != 0) {
+      return Promise.reject(data)
+    }
+  }).catch((data?: any) => {
+    data.message && message.error(data.message);
+  }).finally(()=>{
+    loading.value = false;
+  })
+}
 
 export {
   downloadImage,
   downloadSVG,
-  toJSON
+  toJSON,
+  toView
 }

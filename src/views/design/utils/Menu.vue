@@ -1,20 +1,20 @@
 <template>
   <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-change="changePanle">
-    <el-tab-pane label="模版">
+<!--    <el-tab-pane label="模版">-->
 
-    </el-tab-pane>
+<!--    </el-tab-pane>-->
 
-    <el-tab-pane label="特效文字">
-      <DesignFont></DesignFont>
-    </el-tab-pane>
-    <el-tab-pane label="3D文字">
+<!--    <el-tab-pane label="特效文字">-->
+<!--      <DesignFont></DesignFont>-->
+<!--    </el-tab-pane>-->
+<!--    <el-tab-pane label="3D文字">-->
 
-    </el-tab-pane>
-    <el-tab-pane label="照片">
-      <PicList></PicList>
-      <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement"/>-->
-      <!--      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> -->
-    </el-tab-pane>
+<!--    </el-tab-pane>-->
+<!--    <el-tab-pane label="照片">-->
+<!--      <PicList></PicList>-->
+<!--      &lt;!&ndash;      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="changeElement"/>&ndash;&gt;-->
+<!--      &lt;!&ndash;      <el-image style="width: 100px; height: 100px" :src="src" fit="fill" @click="$emit('addElement', $event)" /> &ndash;&gt;-->
+<!--    </el-tab-pane>-->
 
     <el-tab-pane label="步骤">
       <CanvasStep></CanvasStep>

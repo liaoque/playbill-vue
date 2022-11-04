@@ -13,6 +13,11 @@ export const Login = (params?: object) => {
   return http.post("/login", {data: params});
 };
 
+export const PlaybillView = (params?: object) => {
+  return http.post("/playbill/save", {data: params});
+};
+
+
 export const PlaybillSave = (params?: object) => {
   return http.post("/playbill/save", {data: params});
 };

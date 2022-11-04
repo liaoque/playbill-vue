@@ -1,18 +1,64 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
-    <el-form-item label="唯一标识">
+
+    <el-form-item :label="'唯一标识(宽：' + props.klassObj.width.toFixed(0) + '高：'+ props.klassObj.height.toFixed(0)  + ')'">
       <el-input
         v-model="props.klassObj.uuid"
         type="text"
       />
     </el-form-item>
 
-    <el-form-item label="填充: 颜色,透明度">
+
+    <!--    <el-form-item label="位置：宽，高">-->
+    <!--      <el-row :gutter="20">-->
+    <!--        <el-col :span="12">-->
+    <!--          <el-input-->
+    <!--            v-model="props.klassObj.width" disabled-->
+    <!--            type="text"-->
+    <!--          />-->
+    <!--        </el-col>-->
+    <!--        <el-col :span="12">-->
+    <!--          <el-input-->
+    <!--            v-model="props.klassObj.height" disabled-->
+    <!--            type="text"-->
+    <!--          />-->
+    <!--        </el-col>-->
+    <!--      </el-row>-->
+    <!--    </el-form-item>-->
+
+    <el-form-item label="">
       <el-row :gutter="20">
         <el-col :span="12">
-          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
+          <el-label>X</el-label>
+          <el-input-number
+            v-model="props.klassObj.left"
+            type="text"
+            @change="renderKlass"
+          />
         </el-col>
         <el-col :span="12">
+          <el-label>Y</el-label>
+          <el-input-number
+            v-model="props.klassObj.top"
+            type="text"
+            @change="renderKlass"
+          />
+        </el-col>
+      </el-row>
+    </el-form-item>
+
+    <el-form-item label="" style="display: block;width: 100%;">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-label>旋转</el-label>
+          <el-input-number
+            v-model="props.klassObj.angle"
+            type="text"
+            @change="renderRotate"
+          />
+        </el-col>
+        <el-col :span="12">
+          <el-label>透明度</el-label>
           <el-input-number
             v-model="props.klassObj.opacity"
             type="text"
@@ -25,54 +71,19 @@
       </el-row>
     </el-form-item>
 
-    <el-form-item label="位置：宽，高">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.width" disabled
-            type="text"
-          />
-        </el-col>
-        <el-col :span="12">
-          <el-input
-            v-model="props.klassObj.height" disabled
-            type="text"
-          />
-        </el-col>
-      </el-row>
-    </el-form-item>
 
-    <el-form-item label="位置：x，y">
+    <el-form-item label="">
       <el-row :gutter="20">
-        <el-col :span="12">
-          <el-input-number
-            v-model="props.klassObj.left"
-            type="text"
-          />
+        <el-col :span="6">
+          <el-label>填充色</el-label>
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.fill"/>
+        </el-col>
+        <el-col :span="6">
+          <el-label>边框色</el-label>
+          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke" style="display: block"/>
         </el-col>
         <el-col :span="12">
-          <el-input-number
-            v-model="props.klassObj.top"
-            type="text"
-          />
-        </el-col>
-      </el-row>
-    </el-form-item>
-
-    <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-input-number
-        v-model="props.klassObj.angle"
-        type="text"
-        @change="renderRotate"
-      />
-    </el-form-item>
-
-    <el-form-item label="边框：颜色,宽度">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
-        </el-col>
-        <el-col :span="12">
+          <el-label>边框宽度</el-label>
           <el-input-number
             v-model="props.klassObj.strokeWidth"
             type="text"
@@ -97,7 +108,7 @@
 
 <script lang="ts" setup>
 
-  import { ref} from "vue";
+  import {ref} from "vue";
   import Actions from "./Actions.vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {Plus} from "@element-plus/icons-vue";
@@ -122,7 +133,7 @@
     // props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
     props.klassObj.klass.set('fill', props.klassObj.fill)
-    props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
+    props.klassObj.klass.set('strokeWidth', parseInt(props.klassObj.strokeWidth))
     useDesignStore.canvas.requestRenderAll();
     saveAction();
   }

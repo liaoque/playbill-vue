@@ -36,7 +36,7 @@
         <template #title>保存</template>
         <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>
         <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>
-        <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>
+        <el-menu-item index="save-3" @click="toView">保存到json</el-menu-item>
       </el-sub-menu>
 
     </el-menu>
@@ -60,7 +60,7 @@
   import {ref} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
-  import {downloadImage, downloadSVG, toJSON} from "./Tools/save";
+  import {downloadImage, downloadSVG, toJSON, toView} from "./Tools/save";
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
 
@@ -70,16 +70,7 @@
 
   let url = ref("")
   let dialogTableVisible = ref(false)
-  const preview = () => {
-    let canvas = useDesignStore.canvas;
-    const base64 = canvas.toDataURL({
-      format: "png",
-      enableRetinaScaling: true,
-      multiplier: 1
-    });
-    url.value = base64
-    dialogTableVisible.value = true
-  }
+
 
 </script>
 

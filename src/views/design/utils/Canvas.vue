@@ -1,25 +1,25 @@
 <template>
-
+<!--  <KeepAlive>-->
   <div class="d-centext">
 
-    <div style="" class="d-canvas" v-contextmenu:contextmenu>
-      <canvas style="" id="canvas"></canvas>
-    </div>
+      <div  class="d-canvas" v-contextmenu:contextmenu>
+        <canvas style="" id="canvas"></canvas>
+      </div>
 
-    <v-contextmenu ref="contextmenu">
-      <v-contextmenu-item @click="copySelection">复制</v-contextmenu-item>
-      <v-contextmenu-item @click="pasteSelection">黏贴</v-contextmenu-item>
-      <v-contextmenu-item @click="deleteSelection">删除</v-contextmenu-item>
-      <v-contextmenu-submenu title="图层">
-        <v-contextmenu-item @click="upSelection">往上一层</v-contextmenu-item>
-        <v-contextmenu-item @click="downSelection">往下一层</v-contextmenu-item>
-        <v-contextmenu-item @click="bottomSelection">置底</v-contextmenu-item>
-        <v-contextmenu-item @click="topSelection">置顶</v-contextmenu-item>
-      </v-contextmenu-submenu>
-    </v-contextmenu>
+      <v-contextmenu ref="contextmenu">
+        <v-contextmenu-item @click="copySelection">复制</v-contextmenu-item>
+        <v-contextmenu-item @click="pasteSelection">黏贴</v-contextmenu-item>
+        <v-contextmenu-item @click="deleteSelection">删除</v-contextmenu-item>
+        <v-contextmenu-submenu title="图层">
+          <v-contextmenu-item @click="upSelection">往上一层</v-contextmenu-item>
+          <v-contextmenu-item @click="downSelection">往下一层</v-contextmenu-item>
+          <v-contextmenu-item @click="bottomSelection">置底</v-contextmenu-item>
+          <v-contextmenu-item @click="topSelection">置顶</v-contextmenu-item>
+        </v-contextmenu-submenu>
+      </v-contextmenu>
 
   </div>
-
+<!--  </KeepAlive>-->
 </template>
 
 
