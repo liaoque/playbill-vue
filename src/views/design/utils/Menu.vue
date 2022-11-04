@@ -3,9 +3,7 @@
     <el-tab-pane label="模版">
 
     </el-tab-pane>
-    <el-tab-pane label="素材">
 
-    </el-tab-pane>
     <el-tab-pane label="特效文字">
       <DesignFont></DesignFont>
     </el-tab-pane>

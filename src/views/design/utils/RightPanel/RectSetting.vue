@@ -60,7 +60,11 @@
     </el-form-item>
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-slider v-model="props.klassObj.angle"  :max=360 @change="renderRotate" style="width: 90%;margin: 0 auto;"/>
+      <el-input-number
+        v-model="props.klassObj.angle"
+        type="text"
+        @change="renderRotate"
+      />
     </el-form-item>
 
     <el-form-item label="边框：颜色,宽度">

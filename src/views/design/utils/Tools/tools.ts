@@ -7,7 +7,7 @@ import {saveAction} from "/@/views/design/utils/Tools/stack";
 const useDesignStore = useDesignStoreHook();
 
 const addText = () => {
-  let fabricText = new fabric.IText("双击修改文字", {
+  let fabricText = new fabric.Textbox("双击修改文字", {
     top: 20,
     left: 20,
     // stroke: "#6F3636",

@@ -5,17 +5,29 @@
         <Head></Head>
       </el-header>
       <el-container>
+
         <el-aside width="360px">
           <Menu></Menu>
         </el-aside>
+
         <el-main>
           <Canvas></Canvas>
         </el-main>
-        <el-aside width="300px">
-          <KeepAlive>
-            <component :is="panelComponent" :klassObj="klassObj"></component>
-          </KeepAlive>
+
+        <el-aside  style="height: 100%;width:300px;">
+          <el-tabs v-model="panelTabs.name" class="demo-tabs" stretch="true" @tab-click="handleClick" style="background-color: #ffffff;">
+            <el-tab-pane label="属性设置" name="first" :disabled="panelTabs.disabled" style="margin-left: 10px;">
+              <KeepAlive>
+                <component :is="panelComponent" :klassObj="klassObj"></component>
+              </KeepAlive>
+            </el-tab-pane>
+            <el-tab-pane label="画布设置" name="background" style="margin-left: 10px;">
+                <canvas-setting :klassObj="klassObj"></canvas-setting>
+            </el-tab-pane>
+
+          </el-tabs>
         </el-aside>
+
       </el-container>
     </el-container>
   </div>
@@ -55,6 +67,10 @@
 
   const useDesignStore = useDesignStoreHook()
   let panelComponent = shallowRef(CanvasSetting)
+  let panelTabs = ref({
+    name: "background",
+    disabled: true
+  })
   let klassObj = ref({})
   onMounted(() => {
 
@@ -76,6 +92,7 @@
           klass: markRaw(selected),
         }
         console.log(selected)
+
         switch (selected.component_type) {
           case 'text':
             klassObj.value = {
@@ -86,12 +103,16 @@
               text: selected.text,
               ...basePrototype
             };
+            panelTabs.value.name = "first";
+            panelTabs.value.disabled = false;
             panelComponent.value = EffectFontSettingVue
             break;
           case 'pic':
             klassObj.value = {
               ...basePrototype
             };
+            panelTabs.value.name = "first";
+            panelTabs.value.disabled = false;
             panelComponent.value = PicSettingVue
             break;
           case 'rect':
@@ -102,12 +123,16 @@
               fill: selected.fill,
               ...basePrototype
             };
+            panelTabs.value.name = "first";
+            panelTabs.value.disabled = false;
             break;
           default:
             klassObj.value = {
               backgroundColor: selected.backgroundColor,
               backgroundImage: selected.backgroundImage,
             };
+            panelTabs.value.name = "background";
+            panelTabs.value.disabled = true;
             panelComponent.value = CanvasSetting
             break;
         }
@@ -141,6 +166,7 @@
     })
 
   })
+
 
   defineOptions({
     name: "design"

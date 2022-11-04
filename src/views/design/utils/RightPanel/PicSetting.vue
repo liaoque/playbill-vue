@@ -42,7 +42,11 @@
     </el-form-item>
 
     <el-form-item label="旋转" style="display: block;width: 100%;">
-      <el-slider v-model="props.klassObj.angle"  :max=360 @change="renderRotate" style="width: 90%;margin: 0 auto;"/>
+      <el-input-number
+        v-model="props.klassObj.angle"
+        type="text"
+        @change="renderRotate"
+      />
     </el-form-item>
 
     <el-form-item label="上传">
@@ -62,20 +66,20 @@
       </el-dialog>
     </el-form-item>
 
-    <el-form-item label="边框：颜色/宽度">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>
-        </el-col>
-        <el-col :span="12">
-          <el-input-number
-            v-model="props.klassObj.strokeWidth"
-            type="text"
-            @change="renderKlass"
-          />
-        </el-col>
-      </el-row>
-    </el-form-item>
+<!--    <el-form-item label="边框：颜色/宽度">-->
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="12">-->
+<!--          <el-color-picker @change="renderKlass" v-model="props.klassObj.stroke"/>-->
+<!--        </el-col>-->
+<!--        <el-col :span="12">-->
+<!--          <el-input-number-->
+<!--            v-model="props.klassObj.strokeWidth"-->
+<!--            type="text"-->
+<!--            @change="renderKlass"-->
+<!--          />-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--    </el-form-item>-->
 
     <Actions :klassObj="props.klassObj"></Actions>
 
