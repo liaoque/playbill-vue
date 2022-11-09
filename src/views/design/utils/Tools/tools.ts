@@ -2,7 +2,7 @@ import {fabric} from "/@/utils/fabric/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
 import {saveAction} from "/@/views/design/utils/Tools/stack";
-
+import FontFaceObserver from "fontfaceobserver";
 
 const useDesignStore = useDesignStoreHook();
 
@@ -12,6 +12,7 @@ const addText = () => {
     left: 20,
     // stroke: "#6F3636",
     strokeWidth: 1,
+    fontFamily: "QianTuBiFengShouXieTi",
     centeredRotation: true
   });
   fabricText.component_type = 'text'
@@ -91,11 +92,19 @@ function addTriangle() {
   saveAction();
 }
 
+function loadAndUse(font) {
+  let myfont = new FontFaceObserver(font);
+  return myfont.load().catch(function (e) {
+    alert("font loading failed " + font);
+  });
+}
+
 
 export {
   addText,
   addRect,
   addCircular,
   addTriangle,
-  addPic
+  addPic,
+  loadAndUse,
 }

@@ -25,6 +25,7 @@ import "@pureadmin/components/dist/dark.scss";
 // 导入字体图标
 import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
+import "./assets/fonts/fonts.css"
 
 import fabric from 'fabric-with-erasing';
 

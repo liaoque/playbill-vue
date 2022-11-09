@@ -63,3 +63,46 @@
   src: url(./sourcesanspro-regular.woff) format('woff'),
   url(./sourcesanspro-regular.ttf) format('truetype');
 }
+
+
+
+
+@font-face {
+  font-family: HongLeiXingShuJianTi-2;
+  src: url("./HongLeiXingShuJianTi/HongLeiXingShuJianTi-2.otf") format('opentype');
+}
+
+@font-face {
+  font-family: JingNanMaiYuanTi;
+  src: url("./JingNanMaiYuanTi/JingNanMaiYuanTi-2.otf") format('opentype');
+}
+
+@font-face {
+  font-family: KeShiLuYanTi;
+  src: url("./KeShiLuYanTi/I-Ngaan-2.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: QianTuBiFengShouXieTi;
+  src: url("./QianTuBiFengShouXieTi/QianTuBiFengShouXieTi-2.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: SanJiXingKaiJianTi-Cu;
+  src: url("./SanJiXingKaiJianTi-Cu/SanJiXingKaiJianTi-Cu-2.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: YuanYingHeiTi;
+  src: url("./YuanYingHeiTi/GenEi-P-Heavy-ver8-2.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: SiYuanHeiTi-Normal;
+  src: url("./SiYuanHeiTi-Normal/SourceHanSansSC-Normal-2.otf") format('opentype');
+}
+
+@font-face {
+  font-family: SiYuanHeiTiGoogleBan;
+  src: url("./SiYuanHeiTiGoogleBan/NotoSansCJK-Regular-1.otf") format('opentype');
+}

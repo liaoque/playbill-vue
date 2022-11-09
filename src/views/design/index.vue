@@ -64,6 +64,7 @@
     // BackgroundSettingVue
   } from './utils/RightPanel/panel';
   import {saveAction} from "./utils/Tools/stack"
+  import {loadAndUse} from "/@/views/design/utils/Tools/tools";
 
   const useDesignStore = useDesignStoreHook()
   let panelComponent = shallowRef(CanvasSetting)
@@ -97,7 +98,7 @@
           case 'text':
             klassObj.value = {
               fill: selected.fill,
-              fontName: selected.fill,
+              fontFamily: selected.fontFamily,
               fontSize: selected.fontSize,
               fontWeight: parseInt(selected.fontWeight) || 700,
               text: selected.text,
@@ -167,6 +168,8 @@
       selectionBackground();
     })
 
+
+    loadAndUse("QianTuBiFengShouXieTi")
   })
 
 

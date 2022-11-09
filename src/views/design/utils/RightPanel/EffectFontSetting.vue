@@ -8,13 +8,13 @@
       />
     </el-form-item>
 
-<!--    <el-form-item label="内容">-->
-<!--      <el-input-->
-<!--        v-model="props.klassObj.text"-->
-<!--        type="textarea"-->
-<!--        @change="renderKlass"-->
-<!--      />-->
-<!--    </el-form-item>-->
+    <!--    <el-form-item label="内容">-->
+    <!--      <el-input-->
+    <!--        v-model="props.klassObj.text"-->
+    <!--        type="textarea"-->
+    <!--        @change="renderKlass"-->
+    <!--      />-->
+    <!--    </el-form-item>-->
 
     <el-form-item label="">
       <el-row :gutter="20">
@@ -66,7 +66,7 @@
       <el-row :gutter="20">
         <el-col :span="12">
           <label>字体</label>
-          <el-select @change="loadAndUse" class="m-2" placeholder="Select" size="large" style="    margin: 0;">
+          <el-select @change="loadAndUse" v-model="props.klassObj.fontFamily" class="m-2" placeholder="Select" size="large" style="margin: 0;">
             <el-option
               v-for="(item, index) in options"
               :key="index"
@@ -122,7 +122,6 @@
     </el-form-item>
 
 
-
     <Actions :klassObj="props.klassObj"></Actions>
 
 
@@ -142,22 +141,24 @@
     onMounted,
     onUnmounted,
     ref,
-     nextTick
+    nextTick
   } from "vue";
-  import FontFaceObserver from "fontfaceobserver";
-  import "/@/assets/fonts/fonts.css"
+
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {saveAction} from "/@/views/design/utils/Tools/stack";
+  import {loadAndUse as loadAndUse2} from "/@/views/design/utils/Tools/tools";
 
   const useDesignStore = useDesignStoreHook()
   const props = defineProps({
     klassObj: Object
   });
 
-  const options = ["observer-test1", "unknown", "observer-test3", "observer-test4", "observer-test5",
-    "observer-test6", "observer-test7", "observer-test8", "Trebuchet W01 Regular", "Neue Frutiger 1450 W04"];
+  const options = [
+    "HongLeiXingShuJianTi-2", "JingNanMaiYuanTi", "KeShiLuYanTi",
+    "QianTuBiFengShouXieTi", "SanJiXingKaiJianTi-Cu", "YuanYingHeiTi",
+    "SiYuanHeiTi-Normal", "SiYuanHeiTiGoogleBan",
+  ];
 
-  let fontName = ref("");
   let text = ref("");
 
   onMounted(() => {
@@ -174,7 +175,7 @@
     // props.klassObj.klass.set('angle', parseInt(props.klassObj.angle))
     // props.klassObj.klass.set('text', props.klassObj.text)
     props.klassObj.klass.set('stroke', props.klassObj.stroke)
-    props.klassObj.klass.set('strokeWidth',parseInt( props.klassObj.strokeWidth))
+    props.klassObj.klass.set('strokeWidth', parseInt(props.klassObj.strokeWidth))
     //
     //
     // useDesignStore.canvas.requestRenderAll();
@@ -195,14 +196,11 @@
   }
 
   function loadAndUse(font) {
-    let myfont = new FontFaceObserver(font);
-    myfont.load().then(function () {
+    loadAndUse2(font).then(function () {
       // when font is loaded, use it.
       props.klassObj.klass.set("fontFamily", font);
       useDesignStore.canvas.requestRenderAll();
-    }).catch(function (e) {
-      alert("font loading failed " + font);
-    });
+    })
   }
 
 
