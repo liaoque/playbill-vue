@@ -8,6 +8,7 @@ import fabricActiveEl from "/@/utils/fabric/activeEl";
 import {markRaw, ref} from "vue";
 import {any} from "vue-types";
 import {saveAction} from "/@/views/design/utils/Tools/stack";
+import {v4 as uuidv4} from 'uuid';
 
 let background: designBackgroundType = {
   src: ""
@@ -18,6 +19,7 @@ let canvasMap: designCanvasMapType = {
   height: 667,
   zoom: 0.5,
   opacity: false,
+  filename: uuidv4(),
 };
 
 let canvasLayer: canvasLayer = {
@@ -32,7 +34,7 @@ export const useDesignStore = defineStore({
     canvasLayer: canvasLayer,
   }),
   getters: {
-    canvas(){
+    canvas() {
       return getCanvas()
     }
   },

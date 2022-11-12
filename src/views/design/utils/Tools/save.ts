@@ -75,6 +75,7 @@ function toView() {
     return data.info
   }).catch((data?: any) => {
     data.message && message.error(data.message);
+    return false;
   }).finally(()=>{
     loading.value = false;
   })

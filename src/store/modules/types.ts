@@ -56,6 +56,7 @@ export type designCanvasMapType = {
     zoom: number,
     opacity: boolean,
     oid?: string,
+    filename: string,
 }
 
 export type canvasLayer = {

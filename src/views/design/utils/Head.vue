@@ -32,12 +32,13 @@
 
       <!--    <el-menu-item index="shares">分享</el-menu-item>-->
       <el-menu-item index="preview" @click="preview">预览</el-menu-item>
-      <el-sub-menu index="save">
-        <template #title>保存</template>
-        <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>
-        <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>
-        <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>
-      </el-sub-menu>
+      <el-menu-item index="save" @click="toJSON">保存</el-menu-item>
+<!--      <el-sub-menu index="save">-->
+<!--        <template #title>保存</template>-->
+<!--        <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>-->
+<!--        <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>-->
+<!--        <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>-->
+<!--      </el-sub-menu>-->
 
     </el-menu>
 
@@ -73,8 +74,10 @@
   const preview = () => {
     let canvas = useDesignStore.canvas;
     toView().then((data)=>{
-      url.value = data.src
-      dialogTableVisible.value = true
+      if(data){
+        url.value = data.src
+        dialogTableVisible.value = true
+      }
     })
   }
 
