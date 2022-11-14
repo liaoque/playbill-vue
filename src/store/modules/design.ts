@@ -39,6 +39,9 @@ export const useDesignStore = defineStore({
     }
   },
   actions: {
+    amounted() {
+      return !!getCanvas()
+    },
     setId(id: string) {
       this.canvasMap.oid = id;
     },

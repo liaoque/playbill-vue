@@ -1,5 +1,5 @@
 <template>
-<!--  <KeepAlive>-->
+
   <div class="d-centext">
 
       <div  class="d-canvas" v-contextmenu:contextmenu>
@@ -19,7 +19,7 @@
       </v-contextmenu>
 
   </div>
-<!--  </KeepAlive>-->
+
 </template>
 
 

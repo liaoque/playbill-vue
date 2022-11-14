@@ -31,9 +31,7 @@ export default {
     let activeObject = canvas.getActiveObject()
     canvas.bringToFront(activeObject)
     this.renderCanvasLayer()
-
   },
-
   add(image) {
     let canvas = getCanvas()
     canvas.add(image);
