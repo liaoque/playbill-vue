@@ -25,7 +25,7 @@ let canvasMap: designCanvasMapType = {
 let canvasLayer: canvasLayer = {
   componentSize: 0
 }
-
+let canvasContainer: any;
 export const useDesignStore = defineStore({
   id: "design-setting",
   state: (): designCanvasType => ({
@@ -40,7 +40,14 @@ export const useDesignStore = defineStore({
   },
   actions: {
     amounted() {
-      return !!getCanvas()
+      let bool = !!canvasContainer
+      if (bool) {
+        document.querySelector('.d-canvas').innerHTML = ''
+        document.querySelector('.d-canvas').append(canvasContainer)
+      } else {
+        canvasContainer = document.querySelector('.d-canvas .canvas-container')
+      }
+      return bool
     },
     setId(id: string) {
       this.canvasMap.oid = id;
@@ -53,6 +60,7 @@ export const useDesignStore = defineStore({
       canvas.setWidth(parseInt(this.canvasMap.width));
       canvas.setHeight(parseInt(this.canvasMap.height));
       canvas.setZoom(this.canvasMap.zoom);
+      this.amounted()
     },
     renderCanvasLayer() {
       let canvasLayer = this.canvasLayer

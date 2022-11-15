@@ -14,18 +14,14 @@
           <Canvas></Canvas>
         </el-main>
 
-        <el-aside  style="height: 100%;width:300px;">
-          <el-tabs v-model="panelTabs.name" class="demo-tabs" :stretch="true" style="background-color: #ffffff;">
-            <el-tab-pane label="属性设置" name="first" :disabled="panelTabs.disabled" style="margin-left: 10px;">
-              <KeepAlive>
-                <component :is="panelComponent" :klassObj="klassObj"></component>
-              </KeepAlive>
-            </el-tab-pane>
-            <el-tab-pane label="画布设置" name="background" style="margin-left: 10px;">
-                <canvas-setting :klassObj="klassObj"></canvas-setting>
-            </el-tab-pane>
-
+        <el-aside  style="height: 100%;width:300px;background-color: #ffffff;">
+          <el-tabs v-model="panelTabs.name" class="demo-tabs" :stretch="true"  @tab-click="handleClick">
+            <el-tab-pane label="属性设置" name="first" :disabled="panelTabs.disabled" ></el-tab-pane>
+            <el-tab-pane label="画布设置" name="background" ></el-tab-pane>
           </el-tabs>
+          <KeepAlive >
+            <component :is="panelComponent" :klassObj="klassObj" style="margin-left: 10px;"></component>
+          </KeepAlive>
         </el-aside>
 
       </el-container>
@@ -73,6 +69,22 @@
     disabled: true
   })
   let klassObj = ref({})
+
+  let oldPanelComponent:any
+  let handleClick = ()=>{
+    console.log(panelTabs.value.disabled)
+    if(panelTabs.value.disabled){
+      return
+    }
+    let old = panelComponent.value
+    if(oldPanelComponent){
+      panelComponent.value = oldPanelComponent
+    }else{
+      panelComponent.value = CanvasSetting
+    }
+    oldPanelComponent = old
+  }
+
   onMounted(() => {
 
     let selection = (e) => {
@@ -152,7 +164,15 @@
       };
     }
 
-    useDesignStore.setCanvas(markRaw(new fabric.Canvas('canvas')))
+    if(!useDesignStore.amounted()){
+      useDesignStore.setCanvas(markRaw(new fabric.Canvas('canvas')))
+      //设置宽高
+      nextTick(() => {
+        useDesignStore.setWh();
+        selectionBackground();
+      })
+    }
+
     useDesignStore.canvas.on('selection:created', selection)
     useDesignStore.canvas.on('selection:updated', selection)
     useDesignStore.canvas.on('selection:cleared', selectionBackground)
@@ -161,15 +181,9 @@
       saveAction(e)
     })
 
-
-    //设置宽高
-    nextTick(() => {
-      useDesignStore.setWh();
-      selectionBackground();
-    })
-
-
     loadAndUse("QianTuBiFengShouXieTi")
+
+
   })
 
 

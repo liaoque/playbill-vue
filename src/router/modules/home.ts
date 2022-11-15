@@ -18,7 +18,8 @@ const homeRouter: RouteConfigsTable = {
       name: "Welcome",
       component: () => import("/@/views/welcome/index.vue"),
       meta: {
-        title: $t("menus.hshome")
+        title: $t("menus.hshome"),
+        keepAlive:true
       }
     },
     {
@@ -26,7 +27,8 @@ const homeRouter: RouteConfigsTable = {
       name: "Design",
       component: () => import("/@/views/design/index.vue"),
       meta: {
-        title: $t("menus.design")
+        title: $t("menus.design"),
+        keepAlive:true
       }
     },
     {

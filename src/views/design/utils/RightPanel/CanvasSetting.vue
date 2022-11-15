@@ -1,6 +1,9 @@
 <template>
   <div class="" style="background-color: #FFFFFF;padding: 5px;">
     <el-form :inline="true" class="demo-form-inline">
+      <el-form-item label="画布名&nbsp;&nbsp;&nbsp;">
+        <el-input  v-model="useDesignStore.canvasMap.filename" @change="renderKlass"></el-input>
+      </el-form-item>
       <el-form-item label="画布宽&nbsp;&nbsp;&nbsp;">
         <el-input-number placeholder="宽" v-model="useDesignStore.canvasMap.width" @change="renderKlass"></el-input-number>
       </el-form-item>
