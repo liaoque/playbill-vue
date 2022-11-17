@@ -23,8 +23,13 @@ export const PlaybillSave = (params?: object) => {
 };
 
 
-export const PlaybillQuery = (params?: object) => {
-  return http.get("/playbill/query", {data: params});
+export const PlaybillQuery = (id: string) => {
+  return http.get("/playbill/query/id/" + id);
+};
+
+
+export const PlaybillAll = (params?: object) => {
+  return http.get("/playbill/list", {data: params});
 };
 
 

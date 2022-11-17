@@ -1,8 +1,8 @@
 <template>
   <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-change="changePanle">
-<!--    <el-tab-pane label="模版">-->
-
-<!--    </el-tab-pane>-->
+    <el-tab-pane label="模版">
+      <Templates></Templates>
+    </el-tab-pane>
 
 <!--    <el-tab-pane label="特效文字">-->
 <!--      <DesignFont></DesignFont>-->
@@ -34,15 +34,16 @@
   import {ref} from 'vue'
   import {useDesignStoreHook} from "/@/store/modules/design";
   import CanvasStep from "./Menu-tab/CanvasStep.vue"
-  import DesignFont from "./Menu-tab/DesignFont.vue"
+  // import DesignFont from "./Menu-tab/DesignFont.vue"
   import CanvasLayer from "./Menu-tab/CanvasLayer.vue"
-  import PicList from "./Menu-tab/PicList.vue"
+  // import PicList from "./Menu-tab/PicList.vue"
+  import Templates from "./Menu-tab/Templates.vue"
 
 
   const useDesignStore = useDesignStoreHook()
 
 
-  let panelIndex = ref('6');
+  let panelIndex = ref('2');
   // let componentSize = ref(0);
 
   function changePanle() {

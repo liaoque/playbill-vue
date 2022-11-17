@@ -81,6 +81,7 @@ function toView() {
   })
 }
 
+
 export {
   downloadImage,
   downloadSVG,
