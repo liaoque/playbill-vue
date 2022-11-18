@@ -1,6 +1,6 @@
 <template>
   <el-tabs tab-position="left" v-model="panelIndex" class="demo-tabs" @tab-change="changePanle">
-    <el-tab-pane label="模版">
+    <el-tab-pane label="海报">
       <Templates></Templates>
     </el-tab-pane>
 

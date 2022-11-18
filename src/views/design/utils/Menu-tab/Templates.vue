@@ -21,6 +21,8 @@
     useDesignStoreHook
   } from "/@/store/modules/design";
   import {PlaybillAll, PlaybillQuery} from "/@/api/routes";
+  import { ElMessage, ElMessageBox } from 'element-plus'
+
 
   let picList = ref([])
   const useDesignStore = useDesignStoreHook()
@@ -50,10 +52,31 @@
   })
 
 
+
   function changeElement(item: any) {
+    let self =this;
     PlaybillQuery(item.id).then((data: any)=>{
       if (data.code == 0) {
-        useDesignStore.load(data.info.id, data.info.data)
+        ElMessageBox.confirm(
+          '载入该海报, 是否继续?',
+          '提示',
+          {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }
+        ).then(() => {
+            useDesignStore.load(data.info.id, data.info.data)
+            ElMessage({
+              type: 'success',
+              message: '载入成功!'
+            })
+          }).catch(() => {
+          // ElMessage({
+          //   type: 'info',
+          //   message: 'Delete canceled',
+          // })
+        })
         // useDesignStore.canvas.clear()
         // useDesignStore.canvas.loadFromJSON(data.info.data)
       }
