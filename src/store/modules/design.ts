@@ -52,7 +52,10 @@ export const useDesignStore = defineStore({
       // this.componentSize =
 
       getCanvas().clear()
-      getCanvas().loadFromJSON(data)
+      getCanvas().loadFromJSON(data, ()=>{
+        this.requestRenderAll()
+        this.renderCanvasLayer()
+      })
     },
     amounted() {
       let bool = !!canvasContainer

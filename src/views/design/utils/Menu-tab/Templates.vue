@@ -53,7 +53,7 @@
   function changeElement(item: any) {
     PlaybillQuery(item.id).then((data: any)=>{
       if (data.code == 0) {
-        useDesignStore.load(data.info.data)
+        useDesignStore.load(data.info.id, data.info.data)
         // useDesignStore.canvas.clear()
         // useDesignStore.canvas.loadFromJSON(data.info.data)
       }
