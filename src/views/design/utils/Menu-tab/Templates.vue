@@ -36,19 +36,6 @@
         })
       }
     })
-
-
-    // picList.value = [{
-    //     id: 1,
-    //     title: '11',
-    //     src: 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'
-    //   },
-    //   {
-    //     id: 2,
-    //     title: '22',
-    //     src: '/dragon.jpg'
-    //   },
-    // ]
   })
 
 
@@ -72,13 +59,11 @@
               message: '载入成功!'
             })
           }).catch(() => {
-          // ElMessage({
-          //   type: 'info',
-          //   message: 'Delete canceled',
-          // })
+            ElMessage({
+              type: 'info',
+              message: '载入失败',
+            })
         })
-        // useDesignStore.canvas.clear()
-        // useDesignStore.canvas.loadFromJSON(data.info.data)
       }
     })
 

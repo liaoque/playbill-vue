@@ -31,6 +31,7 @@
       <div class="flex-grow"/>
 
       <!--    <el-menu-item index="shares">分享</el-menu-item>-->
+      <el-menu-item index="api_code" @click="apiCodeView">api</el-menu-item>
       <el-menu-item index="preview" @click="preview">预览</el-menu-item>
       <el-menu-item index="save" @click="toJSON">保存</el-menu-item>
 <!--      <el-sub-menu index="save">-->
@@ -43,7 +44,11 @@
     </el-menu>
 
     <el-dialog v-model="dialogTableVisible" title="预览"  >
-      <div style="text-align: center"> <el-image :src="url" lazy/></div>
+      <div style="text-align: center" > <el-image :src="url" lazy/></div>
+    </el-dialog>
+
+    <el-dialog v-model="dialogTableVisibleCode" title="api"  >
+
     </el-dialog>
   </div>
 </template>
@@ -64,13 +69,16 @@
   import {downloadImage, downloadSVG, toJSON, toView} from "./Tools/save";
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
+  // import Prismjs from 'prismjs';
 
   const useDesignStore = useDesignStoreHook();
 
   const activeIndex = ref("new");
 
   let url = ref("")
+  let text = ref("")
   let dialogTableVisible = ref(false)
+  let dialogTableVisibleCode = ref(false)
   const preview = () => {
     let canvas = useDesignStore.canvas;
     toView().then((data)=>{
@@ -81,6 +89,11 @@
     })
   }
 
+  const apiCodeView = ()=>{
+    dialogTableVisibleCode.value = true
+    text.value = `body{background-color: red;}`
+    // Prismjs.highlightAll()
+  }
 
 </script>
 
