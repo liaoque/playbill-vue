@@ -57,14 +57,13 @@
   import {ref, onMounted, nextTick} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
-  import {downloadImage, downloadSVG, toJSON, toView} from "./Tools/save";
+  import {downloadImage, downloadSVG, toJSON, toView, apiBaseUrl} from "./Tools/save";
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
   import {highlightAll, highlight, languages} from 'prismjs';
   import {loadEnv} from "@build/index";
   import {array} from "vue-types";
-  // 加载环境变量 VITE_PROXY_DOMAIN（开发环境）  VITE_PROXY_DOMAIN_REAL（打包后的线上环境）
-  const { VITE_PROXY_DOMAIN, VITE_PROXY_DOMAIN_REAL } = loadEnv();
+
 
 
   const useDesignStore = useDesignStoreHook();
@@ -106,13 +105,13 @@
       return item
     }));
     let jsonContent = JSON.stringify(json)
-
+    let baseUrl= apiBaseUrl()
     let code = `
     #GET
-    curl http://yaf.mzq/playbill/view/id/${id}
+    curl ${baseUrl}/playbill/view/id/${id}
 
     #POST
-    curl http://yaf.mzq/playbill/view/id/${id} \\
+    curl ${baseUrl}/playbill/view/id/${id} \\
     --header 'Content-Type: application/json' \\
     --data-raw '${jsonContent}'
     `

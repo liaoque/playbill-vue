@@ -32,5 +32,8 @@ export const PlaybillAll = (params?: object) => {
   return http.get("/playbill/list", {data: params});
 };
 
+export const apiBaseUrl = () => {
+  return http.baseURL()
+};
 
 export type {Result};

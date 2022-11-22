@@ -44,6 +44,10 @@ class PureHttp {
   /** 保存当前Axios实例对象 */
   private static axiosInstance: AxiosInstance = Axios.create(defaultConfig);
 
+  public baseURL(){
+    return PureHttp.axiosInstance.defaults.baseURL;
+  }
+
   /** 请求拦截 */
   private httpInterceptorsRequest(): void {
     PureHttp.axiosInstance.interceptors.request.use(

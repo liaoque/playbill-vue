@@ -1,7 +1,7 @@
 import {fabric} from "/@/utils/fabric/fabric";
 import {v4 as uuidv4} from 'uuid';
 import {useDesignStoreHook} from "/@/store/modules/design";
-import {PlaybillSave, PlaybillView} from "/@/api/routes";
+import {PlaybillSave, PlaybillView, apiBaseUrl} from "/@/api/routes";
 import {ref} from "vue";
 import {message} from "@pureadmin/components";
 
@@ -85,6 +85,7 @@ function toView() {
 export {
   downloadImage,
   downloadSVG,
+  apiBaseUrl,
   toJSON,
   toView
 }
