@@ -61,10 +61,7 @@
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
   import {highlightAll, highlight, languages} from 'prismjs';
-  import {loadEnv} from "@build/index";
-  import {array} from "vue-types";
-
-
+  import { ElMessage, ElMessageBox } from 'element-plus'
 
   const useDesignStore = useDesignStoreHook();
 
@@ -84,8 +81,16 @@
   }
 
   const apiCodeView = () => {
-    dialogTableVisibleCode.value = true
     let id = useDesignStore.canvasMap.oid
+    if(!id){
+      ElMessage({
+        type: 'error',
+        message: '请先保存后再重试！',
+      })
+      return;
+    }
+
+    dialogTableVisibleCode.value = true
     let canvas = useDesignStore.canvas;
 
     const json = Object.assign({}, ...canvas.toDatalessJSON(['uuid', 'component_type']).objects.map((item)=>{
@@ -108,9 +113,17 @@
     let baseUrl= apiBaseUrl()
     let code = `
     #GET
+    doc:
+    #  url：${baseUrl}/playbill/view/海报id
+    example:
     curl ${baseUrl}/playbill/view/id/${id}
 
     #POST
+    doc:
+    #  url：${baseUrl}/playbill/view/海报id
+    #  参数：
+    #     组件id: 文本内容|图片地址
+    example:
     curl ${baseUrl}/playbill/view/id/${id} \\
     --header 'Content-Type: application/json' \\
     --data-raw '${jsonContent}'
