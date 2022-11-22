@@ -12,6 +12,7 @@ import removeConsole from "vite-plugin-remove-console";
 import themePreprocessorPlugin from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from "/@/layout/theme";
 import DefineOptions from "unplugin-vue-define-options/vite";
+import prismjs from "vite-plugin-prismjs";
 
 export function getPluginsList(command, VITE_LEGACY) {
   const prodMock = true;
@@ -57,6 +58,13 @@ export function getPluginsList(command, VITE_LEGACY) {
           setupProdMockServer();
         `,
       logger: false
+    }),
+    prismjs({
+      languages: ["css"],
+      //  languages: 'all',
+      plugins: ["line-numbers"], //配置显示行号插件
+      theme: "tomorrow", //主题名称
+      css: true,
     }),
     // 是否为打包后的文件提供传统浏览器兼容性支持
     VITE_LEGACY

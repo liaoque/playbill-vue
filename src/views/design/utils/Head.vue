@@ -34,42 +34,38 @@
       <el-menu-item index="api_code" @click="apiCodeView">api</el-menu-item>
       <el-menu-item index="preview" @click="preview">预览</el-menu-item>
       <el-menu-item index="save" @click="toJSON">保存</el-menu-item>
-<!--      <el-sub-menu index="save">-->
-<!--        <template #title>保存</template>-->
-<!--        <el-menu-item index="save-1" @click="downloadImage">保存到png</el-menu-item>-->
-<!--        <el-menu-item index="save-2" @click="downloadSVG">保存到svg</el-menu-item>-->
-<!--        <el-menu-item index="save-3" @click="toJSON">保存到json</el-menu-item>-->
-<!--      </el-sub-menu>-->
-
     </el-menu>
 
-    <el-dialog v-model="dialogTableVisible" title="预览"  >
-      <div style="text-align: center" > <el-image :src="url" lazy/></div>
+    <el-dialog v-model="dialogTableVisible" title="预览">
+      <div style="text-align: center">
+        <el-image :src="url" lazy/>
+      </div>
     </el-dialog>
 
-    <el-dialog v-model="dialogTableVisibleCode" title="api"  >
-
+    <el-dialog v-model="dialogTableVisibleCode" title="api">
+      <pre><code class="language-css" v-html="text"></code></pre>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-  // 普通 <script>, 在模块作用域下执行 (仅一次)
-  // runSideEffectOnce()
-
-  // 声明额外的选项
   export default {};
 </script>
 
 
 <script lang="ts" setup>
-  import {ref} from "vue";
+  import {ref, onMounted, nextTick} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
   import {downloadImage, downloadSVG, toJSON, toView} from "./Tools/save";
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
-  // import Prismjs from 'prismjs';
+  import {highlightAll, highlight, languages} from 'prismjs';
+  import {loadEnv} from "@build/index";
+  import {array} from "vue-types";
+  // 加载环境变量 VITE_PROXY_DOMAIN（开发环境）  VITE_PROXY_DOMAIN_REAL（打包后的线上环境）
+  const { VITE_PROXY_DOMAIN, VITE_PROXY_DOMAIN_REAL } = loadEnv();
+
 
   const useDesignStore = useDesignStoreHook();
 
@@ -80,19 +76,50 @@
   let dialogTableVisible = ref(false)
   let dialogTableVisibleCode = ref(false)
   const preview = () => {
-    let canvas = useDesignStore.canvas;
-    toView().then((data)=>{
-      if(data){
+    toView().then((data) => {
+      if (data) {
         url.value = data.src
         dialogTableVisible.value = true
       }
     })
   }
 
-  const apiCodeView = ()=>{
+  const apiCodeView = () => {
     dialogTableVisibleCode.value = true
-    text.value = `body{background-color: red;}`
-    // Prismjs.highlightAll()
+    let id = useDesignStore.canvasMap.oid
+    let canvas = useDesignStore.canvas;
+
+    const json = Object.assign({}, ...canvas.toDatalessJSON(['uuid', 'component_type']).objects.map((item)=>{
+
+      if(item.component_type == 'text' ){
+        return {
+          [item.uuid] : encodeURIComponent("你好,世界\nHello Word")
+        }
+      }
+      if(item.component_type == 'pic' ){
+        return {
+          [item.uuid] : "https://cn-assets.gitee.com/assets/giteego-6c61c00c7ee85e118ecfd749bb3b3c13.svg"
+        }
+      }
+      return {}
+    }).filter((item)=>{
+      return item
+    }));
+    let jsonContent = JSON.stringify(json)
+
+    let code = `
+    #GET
+    curl http://yaf.mzq/playbill/view/id/${id}
+
+    #POST
+    curl http://yaf.mzq/playbill/view/id/${id} \\
+    --header 'Content-Type: application/json' \\
+    --data-raw '${jsonContent}'
+    `
+    text.value = highlight(code, languages.css, 'css');
+    nextTick(() => {
+      highlightAll()
+    })
   }
 
 </script>

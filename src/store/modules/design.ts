@@ -40,14 +40,13 @@ export const useDesignStore = defineStore({
   },
   actions: {
     load(id, data){
-      this.id = id
-      // this.background =
       this.canvasMap = {
         width: data.width,
         height: data.height,
         zoom:data.zoom,
         opacity: data.opacity,
         filename: data.filename,
+        oid: id,
       }
       // this.componentSize =
 

@@ -56,7 +56,7 @@
     useDesignStoreHook
   } from "/@/store/modules/design";
   import {saveAction} from "/@/views/design/utils/Tools/stack";
-
+  import {v4 as uuidv4} from 'uuid';
 
   const useDesignStore = useDesignStoreHook();
 
@@ -82,7 +82,8 @@
         left: clonedObj.left + 10,
         top: clonedObj.top + 10,
         evented: true,
-        component_type: clipboard.component_type
+        component_type: clipboard.component_type,
+        uuid: uuidv4()
       });
       if (clonedObj.type === 'activeSelection') {
         console.log("activeSelection")
