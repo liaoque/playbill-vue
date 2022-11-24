@@ -112,7 +112,7 @@
               fill: selected.fill,
               fontFamily: selected.fontFamily,
               fontSize: selected.fontSize,
-              fontWeight: parseInt(selected.fontWeight) || 700,
+              fontWeight: parseInt(selected.fontWeight) || 400,
               text: selected.text,
               ...basePrototype
             };

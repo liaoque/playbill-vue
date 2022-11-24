@@ -1,7 +1,7 @@
 <template>
   <el-form :inline="true" class="demo-form-inline" label-position="top">
 
-    <el-form-item :label="'唯一标识(宽：' + props.klassObj.width.toFixed(0) + '高：'+ props.klassObj.height.toFixed(0)  + ')'">
+    <el-form-item :label="'组件id(宽：' + props.klassObj.width.toFixed(0) + '高：'+ props.klassObj.height.toFixed(0)  + ')'">
       <el-input
         v-model="props.klassObj.uuid"
         type="text"
