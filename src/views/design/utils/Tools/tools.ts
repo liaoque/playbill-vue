@@ -73,6 +73,32 @@ function addCircular() {
   saveAction();
 }
 
+function addPolygon() {
+  let points = [{
+    x: 100, y: 10
+  }, {
+    x: 40, y: 198
+  }, {
+    x: 190, y: 78
+  }, {
+    x: 10, y: 78
+  }, {
+    x: 160, y: 198
+  }]
+  let rect = new fabric.Polygon(points, {
+    left: 100,
+    top: 50,
+    fill: "#E41D1D",
+    component_type: 'polygon',
+    // objectCaching: false,
+    // stroke: "lightgreen",
+    centeredRotation: true,
+    strokeWidth: 1,
+    uuid: uuidv4()
+  });
+  useDesignStore.add(rect);
+  saveAction();
+}
 
 function addTriangle() {
   let rect = new fabric.Triangle({
@@ -105,6 +131,7 @@ export {
   addRect,
   addCircular,
   addTriangle,
+  addPolygon,
   addPic,
   loadAndUse,
 }

@@ -135,6 +135,7 @@
             panelComponent.value = RectSettingVue
             klassObj.value = {
               fill: selected.fill,
+              points: selected.points,
               ...basePrototype
             };
             panelTabs.value.name = "first";

@@ -93,6 +93,7 @@
       </el-row>
     </el-form-item>
 
+    <PolygonSetting :klassObj="props.klassObj" v-if="props.klassObj.points && props.klassObj.points.length"></PolygonSetting>
     <Actions :klassObj="props.klassObj"></Actions>
 
   </el-form>
@@ -110,6 +111,7 @@
 
   import {ref} from "vue";
   import Actions from "./Actions.vue";
+  import PolygonSetting from "./PolygonSetting.vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {Plus} from "@element-plus/icons-vue";
   import {UploadFile} from "element-plus";
@@ -120,11 +122,10 @@
     klassObj: Object
   });
 
-
   const useDesignStore = useDesignStoreHook()
 
   function renderKlass() {
-    console.log(props.klassObj.angle)
+    // console.log(props.klassObj.angle)
     props.klassObj.klass.set('width', parseInt(props.klassObj.width))
     props.klassObj.klass.set('height', parseInt(props.klassObj.height))
     props.klassObj.klass.set('opacity', parseFloat(props.klassObj.opacity).toFixed(2))
