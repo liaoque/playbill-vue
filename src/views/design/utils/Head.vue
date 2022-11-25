@@ -13,6 +13,7 @@
           <el-menu-item index="addRect-1" @click="addRect">矩形</el-menu-item>
           <el-menu-item index="addRect-2" @click="addCircular">圆形</el-menu-item>
           <el-menu-item index="addRect-3" @click="addTriangle">三角形</el-menu-item>
+          <el-menu-item index="addRect-4" @click="addPolygon">多边形</el-menu-item>
         </el-sub-menu>
       </el-sub-menu>
 
@@ -56,7 +57,7 @@
 <script lang="ts" setup>
   import {ref, onMounted, nextTick} from "vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
-  import {addText, addPic, addRect, addCircular, addTriangle} from "./Tools/tools";
+  import {addText, addPic, addRect, addCircular, addTriangle, addPolygon} from "./Tools/tools";
   import {downloadImage, downloadSVG, toJSON, toView, apiBaseUrl} from "./Tools/save";
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";

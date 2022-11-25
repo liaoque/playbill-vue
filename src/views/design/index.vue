@@ -131,6 +131,7 @@
           case 'rect':
           case 'circle':
           case 'triangle':
+          case 'polygon':
             panelComponent.value = RectSettingVue
             klassObj.value = {
               fill: selected.fill,
