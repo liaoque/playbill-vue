@@ -92,7 +92,9 @@ function addPolygon() {
     component_type: 'polygon',
     // objectCaching: false,
     // stroke: "lightgreen",
-    centeredRotation: true,
+    // centeredRotation: true,
+    objectCaching: false,
+    transparentCorners: false,
     strokeWidth: 1,
     uuid: uuidv4()
   });
