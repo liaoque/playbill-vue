@@ -64,6 +64,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       include: ["pinia", "vue-i18n", "lodash-es", "@vueuse/core", "dayjs"],
       exclude: ["@pureadmin/theme/dist/browser-utils"]
     },
+    assetsInclude: ['**/*.ogv'],
     build: {
       sourcemap: false,
       // 消除打包大小超过500kb警告
