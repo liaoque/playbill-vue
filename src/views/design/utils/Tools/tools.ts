@@ -123,7 +123,7 @@ function addTriangle() {
 function loadAndUse(font) {
   let myfont = new FontFaceObserver(font);
   return myfont.load().catch(function (e) {
-    alert("font loading failed " + font);
+    console.log("font loading failed " + font);
   });
 }
 
