@@ -4,12 +4,12 @@
 
     <el-row :gutter="24" v-for="(item, index) in props.klassObj.points" :key="index">
       <el-col :span="9">
-        <el-input v-model="item.x" :placeholder="'第' + index + '个点的x坐标'" @change="renderPoints">
+        <el-input v-model="item.x" :placeholder="'第' + index + '个点的x坐标'" @change="renderPoints(index)">
           <template #prepend>X</template>
         </el-input>
       </el-col>
       <el-col :span="9">
-        <el-input v-model="item.y" :placeholder="'第' + index + '个点的y坐标'" @change="renderPoints">
+        <el-input v-model="item.y" :placeholder="'第' + index + '个点的y坐标'" @change="renderPoints(index)">
           <template #prepend>Y</template>
         </el-input>
       </el-col>
@@ -52,16 +52,16 @@
 
   const useDesignStore = useDesignStoreHook()
 
-  function renderPoints() {
+  function renderPoints(anchorIndex) {
     props.klassObj.klass.set('points', props.klassObj.points.map((item) => {
       return {x: parseInt(item.x), y: parseInt(item.y)}
     }))
+
     useDesignStore.canvas.requestRenderAll();
     saveAction();
   }
 
   function addPoints(index) {
-    console.log(index)
     nextTick(() => {
       props.klassObj.points = [...props.klassObj.points.slice(0, index + 1), {
         x: 0,
@@ -78,6 +78,7 @@
 
   function editPoints() {
     let poly = props.klassObj.klass
+    useDesignStore.canvas.setActiveObject(poly);
     if(edited.value == false){
       // poly.cornerColor = 'blue';
       poly.cornerStyle = 'rect';
@@ -120,7 +121,7 @@
           y: (fabricObject.points[anchorIndex].y - fabricObject.pathOffset.y),
         }, fabricObject.calcTransformMatrix()),
         actionPerformed = fn(eventData, transform, x, y),
-        // newDim = fabricObject._setPositionDimensions({}),
+        newDim = fabricObject._setPositionDimensions({}),
         polygonBaseSize = getObjectSizeWithStroke(fabricObject),
         newX = (fabricObject.points[anchorIndex].x - fabricObject.pathOffset.x) / polygonBaseSize.x,
         newY = (fabricObject.points[anchorIndex].y - fabricObject.pathOffset.y) / polygonBaseSize.y;

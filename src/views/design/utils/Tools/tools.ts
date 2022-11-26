@@ -75,13 +75,13 @@ function addCircular() {
 
 function addPolygon() {
   let points = [{
-    x: 100, y: 10
+    x: 100, y: 0
   }, {
     x: 40, y: 198
   }, {
     x: 190, y: 78
   }, {
-    x: 10, y: 78
+    x: 0, y: 78
   }, {
     x: 160, y: 198
   }]
