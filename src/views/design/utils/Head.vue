@@ -100,10 +100,13 @@
         return {
           [item.uuid] : encodeURIComponent("你好,世界\nHello Word")
         }
-      }
-      if(item.component_type == 'pic' ){
+      }else if(item.component_type == 'pic' ){
         return {
           [item.uuid] : "https://cn-assets.gitee.com/assets/giteego-6c61c00c7ee85e118ecfd749bb3b3c13.svg"
+        }
+      }else if(item.component_type == 'polygon' ){
+        return {
+          [item.uuid] :item.points
         }
       }
       return {}

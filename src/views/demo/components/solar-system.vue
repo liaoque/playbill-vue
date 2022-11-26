@@ -18,7 +18,7 @@
 
 
 			// load sun and center it
-			fabric.Image.fromURL('/public/sun.png', function(sunImg) {
+			fabric.Image.fromURL('/sun.png', function(sunImg) {
 				canvas.add(sunImg);
 				sunImg.center();
 			});

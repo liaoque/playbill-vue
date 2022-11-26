@@ -22,7 +22,7 @@ const addText = () => {
 }
 
 function addPic() {
-  new fabric.Image.fromURL("./public/sun.png", function (image) {
+  new fabric.Image.fromURL("/sun.png", function (image) {
     image.set({
 
       // objectCaching: false,
