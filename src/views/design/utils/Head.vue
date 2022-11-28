@@ -116,16 +116,18 @@
     let jsonContent = JSON.stringify(json)
     let baseUrl= apiBaseUrl()
     let code = `
-    #GET
-    doc:
+    # title：获取图片
+    # method：GET
+    # doc:
     #  url：${baseUrl}/playbill/view/海报id
     example:
     curl ${baseUrl}/playbill/view/id/${id}
 
-    #POST
-    doc:
+    # title：获取图片并替换图片中某个组件内容，支持图片|文字|多边形
+    # method：GET
+    # doc:
     #  url：${baseUrl}/playbill/view/海报id
-    #  参数：
+    #  params：
     #     组件id: 文本内容|图片地址
     example:
     curl ${baseUrl}/playbill/view/id/${id} \\
