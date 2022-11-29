@@ -2,7 +2,7 @@
 
   <div class="d-centext">
 
-      <div  class="d-canvas" v-contextmenu:contextmenu>
+      <div  class="d-canvas" :style="{width: useDesignStore.canvasMap.width+'px', height: useDesignStore.canvasMap.height +'px'}" v-contextmenu:contextmenu >
         <canvas style="" id="canvas"></canvas>
       </div>
 
