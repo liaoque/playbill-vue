@@ -43,6 +43,7 @@ pnpm install
 ### 修改环境配置
 
 vim .env.development
+api接口域名：VITE_PROXY_DOMAIN
 
 ### 执行
 
