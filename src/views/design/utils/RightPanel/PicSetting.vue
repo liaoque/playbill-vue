@@ -105,7 +105,7 @@
   import Actions from "./Actions.vue";
   import {useDesignStoreHook} from "/@/store/modules/design";
   import {Plus} from "@element-plus/icons-vue";
-  import {UploadFile} from "element-plus";
+  import {ElMessage, UploadFile} from "element-plus";
   import {uploadApiUrl, handleSuccess as handleSuccess2} from "../Tools/uploads"
   import {saveAction} from "/@/views/design/utils/Tools/stack";
 
@@ -145,6 +145,13 @@
   };
 
   const handleSuccess = (file: UploadFile) => {
+    if(file.code){
+      ElMessage({
+        type: 'error',
+        message: file.message,
+      })
+      return;
+    }
     handleSuccess2(props.klassObj.klass, file.url);
   };
 

@@ -49,16 +49,16 @@ export function getPluginsList(command, VITE_LEGACY) {
     svgLoader(),
     // ElementPlus({}),
     // mock支持
-    viteMockServe({
-      mockPath: "mock",
-      localEnabled: command === "serve",
-      prodEnabled: command !== "serve" && prodMock,
-      injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
-          setupProdMockServer();
-        `,
-      logger: false
-    }),
+    // viteMockServe({
+    //   mockPath: "mock",
+    //   localEnabled: command === "serve",
+    //   prodEnabled: command !== "serve" && prodMock,
+    //   injectCode: `
+    //       import { setupProdMockServer } from './mockProdServer';
+    //       setupProdMockServer();
+    //     `,
+    //   logger: false
+    // }),
     prismjs({
       languages: ["css"],
       //  languages: 'all',

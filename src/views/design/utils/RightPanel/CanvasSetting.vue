@@ -29,7 +29,7 @@
       <el-form-item label="背景图&nbsp;&nbsp;&nbsp;">
         <el-upload :action="uploadApiUrl"
                    list-type="picture-card"
-                   :on-success="handleSuccessBackground"
+                   :on-success="handleSuccess"
                    :on-remove="handleRemoveBackground"
                    :auto-upload="true"
                    :limit="1"
@@ -60,10 +60,16 @@
   import {
     useDesignStoreHook
   } from "/@/store/modules/design";
-  import {handleRemoveBackground, handleSuccessBackground, uploadApiUrl} from "../Tools/uploads"
+  import {
+    handleRemoveBackground,
+    handleSuccess as handleSuccess2,
+    handleSuccessBackground,
+    uploadApiUrl
+  } from "../Tools/uploads"
   import {UploadFile} from "element-plus";
   import {Plus} from "@element-plus/icons-vue";
   import {saveAction} from "/@/views/design/utils/Tools/stack";
+  import { ElMessage, ElMessageBox } from 'element-plus'
 
   const useDesignStore = useDesignStoreHook()
   const props = defineProps({
@@ -88,6 +94,17 @@
     saveAction();
   }
 
+
+  const handleSuccess = (file: any) => {
+    if(file.code){
+      ElMessage({
+        type: 'error',
+        message: file.message,
+      })
+      return;
+    }
+    handleSuccessBackground(file);
+  };
 
 </script>
 
