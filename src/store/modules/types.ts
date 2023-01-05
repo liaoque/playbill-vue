@@ -57,6 +57,7 @@ export type designCanvasMapType = {
     opacity: boolean,
     oid?: string,
     filename: string,
+    title?: string,
 }
 
 export type canvasLayer = {

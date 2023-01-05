@@ -1,4 +1,4 @@
-import {http} from "../utils/http";
+import { http } from "../utils/http";
 
 type Result = {
   code: number;
@@ -6,20 +6,20 @@ type Result = {
 };
 
 export const getAsyncRoutes = (params?: object) => {
-  return http.request<Result>("get", "/getAsyncRoutes", {params});
+  return http.request<Result>("get", "/getAsyncRoutes", { params });
 };
 
 export const Login = (params?: object) => {
-  return http.post("/login", {data: params});
+  return http.post("/login", { data: params });
 };
 
 export const PlaybillView = (params?: object) => {
-  return http.post("/playbill/view", {data: params});
+  return http.post("/playbill/view", { data: params });
 };
 
 
 export const PlaybillSave = (params?: object) => {
-  return http.post("/playbill/save", {data: params});
+  return http.post("/playbill/save", { data: params });
 };
 
 
@@ -29,11 +29,11 @@ export const PlaybillQuery = (id: string) => {
 
 
 export const PlaybillAll = (params?: object) => {
-  return http.get("/playbill/list", {data: params});
+  return http.get("/playbill/list", { params });
 };
 
 export const apiBaseUrl = () => {
-  return http.baseURL()
+  return http.baseURL();
 };
 
-export type {Result};
+export type { Result };
