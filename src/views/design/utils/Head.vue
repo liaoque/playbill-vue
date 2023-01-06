@@ -34,7 +34,7 @@
       <!--    <el-menu-item index="shares">分享</el-menu-item>-->
       <el-menu-item index="api_code" @click="apiCodeView">api</el-menu-item>
       <el-menu-item index="preview" @click="preview">预览</el-menu-item>
-      <el-menu-item index="save" @click="toJSON">保存</el-menu-item>
+      <el-menu-item index="save" @click="dialogVisible=true">保存</el-menu-item>
     </el-menu>
 
     <el-dialog v-model="dialogTableVisible" title="预览">
@@ -46,6 +46,20 @@
     <el-dialog v-model="dialogTableVisibleCode" title="api">
       <pre><code class="language-css" v-html="text"></code></pre>
     </el-dialog>
+
+
+    <el-dialog v-model="dialogVisible" title="请问要保存吗？" width="30%">
+      <el-input v-model="useDesignStore.canvasMap.title" placeholder="请输入海报的名字" />
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="preSave">
+            确认
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -72,6 +86,7 @@
   let text = ref("")
   let dialogTableVisible = ref(false)
   let dialogTableVisibleCode = ref(false)
+  let dialogVisible = ref(false)
   const preview = () => {
     toView().then((data) => {
       if (data) {
@@ -80,6 +95,20 @@
       }
     })
   }
+
+  const preSave = () => {
+    if (useDesignStore.canvasMap.title.length < 1){
+      ElMessage({
+        type: 'error',
+        message: '请先输入标题！',
+      })
+      return;
+    }
+
+    toJSON()
+    dialogVisible.value = false
+  }
+
 
   const apiCodeView = () => {
     let id = useDesignStore.canvasMap.oid

@@ -64,7 +64,7 @@
   let clipboard: any = null;
 
   function copySelection() {
-    let activeObject = useDesignStore.canvas.getActiveObject()
+    let activeObject = useDesignStore.getActiveObject()
     activeObject.clone(function (cloned) {
       clipboard = cloned;
       clipboard.component_type = activeObject.component_type;

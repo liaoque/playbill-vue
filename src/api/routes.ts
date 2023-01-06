@@ -1,4 +1,4 @@
-import {http} from "../utils/http";
+import { http } from "../utils/http";
 
 type Result = {
   code: number;
@@ -29,11 +29,11 @@ export const PlaybillQuery = (id: string) => {
 
 
 export const PlaybillAll = (params?: object) => {
-  return http.get("/api/playbill/list", {data: params});
+  return http.get("/api/playbill/list", { params });
 };
 
 export const apiBaseUrl = () => {
-  return http.baseURL()
+  return http.baseURL();
 };
 
-export type {Result};
+export type { Result };

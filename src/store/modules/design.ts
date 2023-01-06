@@ -1,14 +1,14 @@
-import {defineStore} from "pinia";
-import {store} from "/@/store";
-import {designCanvasType, designBackgroundType, designCanvasMapType, canvasLayer} from "./types";
-import {fabric, getCanvas, setCanvas} from "/@/utils/fabric/fabric";
+import { defineStore } from "pinia";
+import { store } from "/@/store";
+import { designCanvasType, designBackgroundType, designCanvasMapType, canvasLayer } from "./types";
+import { fabric, getCanvas, setCanvas } from "/@/utils/fabric/fabric";
 import fabricBackground from "/@/utils/fabric/background";
 import fabricEl from "/@/utils/fabric/el";
 import fabricActiveEl from "/@/utils/fabric/activeEl";
-import {markRaw, ref} from "vue";
-import {any} from "vue-types";
-import {saveAction} from "/@/views/design/utils/Tools/stack";
-import {v4 as uuidv4} from 'uuid';
+import { markRaw, ref } from "vue";
+import { any } from "vue-types";
+import { saveAction } from "/@/views/design/utils/Tools/stack";
+import { v4 as uuidv4 } from "uuid";
 
 let background: designBackgroundType = {
   src: ""
@@ -20,51 +20,53 @@ let canvasMap: designCanvasMapType = {
   zoom: 0.5,
   opacity: false,
   filename: uuidv4(),
+  title: ""
 };
 
 let canvasLayer: canvasLayer = {
   componentSize: 0
-}
+};
 let canvasContainer: any;
 export const useDesignStore = defineStore({
   id: "design-setting",
   state: (): designCanvasType => ({
     background: background,
     canvasMap: canvasMap,
-    canvasLayer: canvasLayer,
+    canvasLayer: canvasLayer
   }),
   getters: {
     canvas() {
-      return getCanvas()
+      return getCanvas();
     }
   },
   actions: {
-    load(id, data){
+    load(id, data) {
       this.canvasMap = {
         width: data.width,
         height: data.height,
-        zoom:data.zoom,
+        zoom: data.zoom,
         opacity: data.opacity,
         filename: data.filename,
         oid: id,
-      }
+        title: data.title ?? ""
+      };
       // this.componentSize =
 
-      getCanvas().clear()
-      getCanvas().loadFromJSON(data, ()=>{
-        this.requestRenderAll()
-        this.renderCanvasLayer()
-      })
+      getCanvas().clear();
+      getCanvas().loadFromJSON(data, () => {
+        this.requestRenderAll();
+        this.renderCanvasLayer();
+      });
     },
     amounted() {
-      let bool = !!canvasContainer
+      let bool = !!canvasContainer;
       if (bool) {
-        document.querySelector('.d-canvas').innerHTML = ''
-        document.querySelector('.d-canvas').append(canvasContainer)
+        document.querySelector(".d-canvas").innerHTML = "";
+        document.querySelector(".d-canvas").append(canvasContainer);
       } else {
-        canvasContainer = document.querySelector('.d-canvas .canvas-container')
+        canvasContainer = document.querySelector(".d-canvas .canvas-container");
       }
-      return bool
+      return bool;
     },
     setId(id: string) {
       this.canvasMap.oid = id;
@@ -73,30 +75,30 @@ export const useDesignStore = defineStore({
       setCanvas(markRaw(canvas));
     },
     setWh() {
-      let canvas = getCanvas()
+      let canvas = getCanvas();
       canvas.setWidth(parseInt(this.canvasMap.width));
       canvas.setHeight(parseInt(this.canvasMap.height));
       canvas.setZoom(this.canvasMap.zoom);
-      this.amounted()
+      this.amounted();
     },
     renderCanvasLayer() {
-      let canvasLayer = this.canvasLayer
+      let canvasLayer = this.canvasLayer;
       canvasLayer.componentSize = 0;
-      let hand = null
+      let hand = null;
       if (hand) {
         clearTimeout(hand);
-        hand = null
+        hand = null;
       }
-      let canvas = this.canvas
-      hand = setTimeout(function () {
+      let canvas = this.canvas;
+      hand = setTimeout(function() {
         if (canvas) {
-          canvasLayer.componentSize = canvas.size()
+          canvasLayer.componentSize = canvas.size();
         }
-        hand = null
+        hand = null;
       }, 100);
     },
     removeSelection() {
-      let clipboard2 = this.getActiveObject()
+      let clipboard2 = this.getActiveObject();
       if (!clipboard2) {
         return;
       }
