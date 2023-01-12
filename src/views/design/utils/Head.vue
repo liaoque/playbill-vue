@@ -32,6 +32,7 @@
       <div class="flex-grow"/>
 
       <!--    <el-menu-item index="shares">分享</el-menu-item>-->
+      <el-menu-item index="new_canvas" @click="newCanvas">新建画布</el-menu-item>
       <el-menu-item index="api_code" @click="apiCodeView">api</el-menu-item>
       <el-menu-item index="preview" @click="preview">预览</el-menu-item>
       <el-menu-item index="save" @click="dialogVisible=true">保存</el-menu-item>
@@ -49,7 +50,7 @@
 
 
     <el-dialog v-model="dialogVisible" title="请问要保存吗？" width="30%">
-      <el-input v-model="useDesignStore.canvasMap.title" placeholder="请输入海报的名字" />
+      <el-input v-model="useDesignStore.canvasMap.title" placeholder="请输入海报的名字"/>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
@@ -76,7 +77,7 @@
   import {undoAction, redoAction} from "./Tools/stack";
   import {Back, Right} from "@element-plus/icons-vue";
   import {highlightAll, highlight, languages} from 'prismjs';
-  import { ElMessage, ElMessageBox } from 'element-plus'
+  import {ElMessage, ElMessageBox} from 'element-plus'
 
   const useDesignStore = useDesignStoreHook();
 
@@ -97,7 +98,7 @@
   }
 
   const preSave = () => {
-    if (useDesignStore.canvasMap.title.length < 1){
+    if (useDesignStore.canvasMap.title.length < 1) {
       ElMessage({
         type: 'error',
         message: '请先输入标题！',
@@ -112,7 +113,7 @@
 
   const apiCodeView = () => {
     let id = useDesignStore.canvasMap.oid
-    if(!id){
+    if (!id) {
       ElMessage({
         type: 'error',
         message: '请先保存后再重试！',
@@ -123,27 +124,27 @@
     dialogTableVisibleCode.value = true
     let canvas = useDesignStore.canvas;
 
-    const json = Object.assign({}, ...canvas.toDatalessJSON(['uuid', 'component_type']).objects.map((item)=>{
+    const json = Object.assign({}, ...canvas.toDatalessJSON(['uuid', 'component_type']).objects.map((item) => {
 
-      if(item.component_type == 'text' ){
+      if (item.component_type == 'text') {
         return {
-          [item.uuid] : encodeURIComponent("你好,世界\nHello Word")
+          [item.uuid]: encodeURIComponent("你好,世界\nHello Word")
         }
-      }else if(item.component_type == 'pic' ){
+      } else if (item.component_type == 'pic') {
         return {
-          [item.uuid] : "https://cn-assets.gitee.com/assets/giteego-6c61c00c7ee85e118ecfd749bb3b3c13.svg"
+          [item.uuid]: "https://cn-assets.gitee.com/assets/giteego-6c61c00c7ee85e118ecfd749bb3b3c13.svg"
         }
-      }else if(item.component_type == 'polygon' ){
+      } else if (item.component_type == 'polygon') {
         return {
-          [item.uuid] :item.points
+          [item.uuid]: item.points
         }
       }
       return {}
-    }).filter((item)=>{
+    }).filter((item) => {
       return item
     }));
     let jsonContent = JSON.stringify(json)
-    let baseUrl= apiBaseUrl()
+    let baseUrl = apiBaseUrl()
     let code = `
     # title：获取图片
     # method：GET
@@ -165,6 +166,10 @@
     nextTick(() => {
       highlightAll()
     })
+  }
+
+  const newCanvas = () => {
+    useDesignStore.newCanvas();
   }
 
 </script>
