@@ -5,7 +5,7 @@ import {fabric, getCanvas, setCanvas} from "/@/utils/fabric/fabric";
 import fabricBackground from "/@/utils/fabric/background";
 import fabricEl from "/@/utils/fabric/el";
 import fabricActiveEl from "/@/utils/fabric/activeEl";
-import {markRaw, ref} from "vue";
+import {markRaw, nextTick, ref} from "vue";
 import {any} from "vue-types";
 import {saveAction} from "/@/views/design/utils/Tools/stack";
 import {v4 as uuidv4} from "uuid";
@@ -52,22 +52,23 @@ export const useDesignStore = defineStore({
             getCanvas().clear();
         },
         load(id, data) {
-            this.canvasMap = {
-                width: data.width,
-                height: data.height,
-                zoom: data.zoom,
-                opacity: data.opacity,
-                filename: data.filename,
-                oid: id,
-                title: data.title ?? "",
-                mime_type: data.mime_type ?? ".png"
-            };
+          this.canvasMap = {
+            width: data.width,
+            height: data.height,
+            zoom: data.zoom,
+            opacity: data.opacity,
+            filename: data.filename,
+            oid: id,
+            title: data.title ?? "",
+            mime_type: data.mime_type ?? ".png"
+          };
+          this.setWh();
+          getCanvas().clear();
+          getCanvas().loadFromJSON(data, () => {
+            this.requestRenderAll();
+            this.renderCanvasLayer();
+          });
 
-            getCanvas().clear();
-            getCanvas().loadFromJSON(data, () => {
-                this.requestRenderAll();
-                this.renderCanvasLayer();
-            });
         },
         amounted() {
             let bool = !!canvasContainer;
