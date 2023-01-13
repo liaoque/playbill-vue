@@ -163,12 +163,15 @@
     curl ${baseUrl}/api/view/id/${id}
 
     # title：获取图片并替换图片中某个组件内容，支持图片|文字|多边形
-    # method：GET
-    # url：${baseUrl}/api/view/海报id
-    # params：
+    # method：POST
+    # url：${baseUrl}/api/view/id/海报id/base64/0
+    # query：
+    #   id：海报id
+    #   base64：1返回base64编码的图片内容
+    # body：
     #     组件id: 文本内容|图片地址
     example:
-    curl ${baseUrl}/api/view/id/${id} \\
+    curl ${baseUrl}/api/view/id/${id}/base64/0 \\
     --header 'Content-Type: application/json' \\
     --data-raw '${jsonContent}'
     `
