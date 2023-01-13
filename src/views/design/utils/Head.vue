@@ -158,17 +158,17 @@
     let code = `
     # title：获取图片
     # method：GET
-    # url：${baseUrl}/playbill/view/海报id
+    # url：${baseUrl}/api/view/id/海报id
     example:
-    curl ${baseUrl}/playbill/view/id/${id}
+    curl ${baseUrl}/api/view/id/${id}
 
     # title：获取图片并替换图片中某个组件内容，支持图片|文字|多边形
     # method：GET
-    # url：${baseUrl}/playbill/view/海报id
+    # url：${baseUrl}/api/view/海报id
     # params：
     #     组件id: 文本内容|图片地址
     example:
-    curl ${baseUrl}/playbill/view/id/${id} \\
+    curl ${baseUrl}/api/view/id/${id} \\
     --header 'Content-Type: application/json' \\
     --data-raw '${jsonContent}'
     `

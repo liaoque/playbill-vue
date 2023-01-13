@@ -22,7 +22,7 @@ let canvasMap: designCanvasMapType = {
     zoom: 0.5,
     opacity: false,
     filename: uuidv4(),
-    mime_type: '.jpg',
+    mime_type: '.png',
     title: ""
 };
 
@@ -59,7 +59,8 @@ export const useDesignStore = defineStore({
                 opacity: data.opacity,
                 filename: data.filename,
                 oid: id,
-                title: data.title ?? ""
+                title: data.title ?? "",
+                mime_type: data.mime_type ?? ".png"
             };
 
             getCanvas().clear();
