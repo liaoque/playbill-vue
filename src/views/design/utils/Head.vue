@@ -172,6 +172,7 @@
     #     组件id: 文本内容|图片地址
     example:
     curl ${baseUrl}/api/view/id/${id}/base64/0 \\
+    -X POST \\
     --header 'Content-Type: application/json' \\
     --data-raw '${jsonContent}'
     `
