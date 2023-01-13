@@ -22,6 +22,7 @@ let canvasMap: designCanvasMapType = {
     zoom: 0.5,
     opacity: false,
     filename: uuidv4(),
+    mime_type: '.jpg',
     title: ""
 };
 

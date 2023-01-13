@@ -50,7 +50,17 @@
 
 
     <el-dialog v-model="dialogVisible" title="请问要保存吗？" width="30%">
-      <el-input v-model="useDesignStore.canvasMap.title" placeholder="请输入海报的名字"/>
+      <el-form label-width="120px">
+        <el-form-item label="海报名字">
+          <el-input v-model="useDesignStore.canvasMap.title" placeholder="海报名字"/>
+        </el-form-item>
+        <el-form-item label="图片类型">
+          <el-select v-model="useDesignStore.canvasMap.mime_type" placeholder="图片类型">
+            <el-option key="jpg" label="jpg" value=".jpg"/>
+            <el-option key="png" label="png" value=".png"/>
+          </el-select>
+        </el-form-item>
+      </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>

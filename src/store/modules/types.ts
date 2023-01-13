@@ -58,6 +58,7 @@ export type designCanvasMapType = {
     oid?: string,
     filename: string,
     title?: string,
+    mime_type: string,
 }
 
 export type canvasLayer = {
